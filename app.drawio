@@ -1,0 +1,63 @@
+<mxfile host="65bd71144e">
+    <diagram id="9_D0lEmpQT5bIofAeF1x" name="Page-1">
+        <mxGraphModel dx="1955" dy="612" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="6" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="2" target="5">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" style="edgeStyle=none;html=1;" edge="1" parent="1" source="2" target="9">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="-406.2631064967104" y="228.52634791324022" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="10" style="edgeStyle=none;html=1;" edge="1" parent="1" source="2" target="11">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="-378.78951223273" y="239.47370990953948" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="2" value="User" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="-539" y="102" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="student" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="-740" y="233" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="teacher" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="-603" y="236.52999999999997" width="120" height="56.47" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="Admin" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="-434.99951223273" y="233.00370990953945" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="13" target="14">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" style="edgeStyle=none;html=1;" edge="1" parent="1" source="13">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="-69.52623869243416" y="231.57897306743428" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="19" style="edgeStyle=none;html=1;" edge="1" parent="1" source="13">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="42.47378700657896" y="218.10526958264802" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="13" value="student" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" vertex="1" parent="1">
+                    <mxGeometry x="-198" y="83" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="student" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="-267" y="218" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="Guardian/Parent" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="-128" y="228" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="Erollment" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="14" y="221" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="List of Accessment result (id)s&lt;br&gt;List of payment(id)s&lt;br&gt;user(id)&lt;br&gt;List of classAttended" style="whiteSpace=wrap;html=1;aspect=fixed;align=left;" vertex="1" parent="1">
+                    <mxGeometry x="-211" y="293" width="257" height="257" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
