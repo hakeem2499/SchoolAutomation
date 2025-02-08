@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "qk+SClvLO9c=",
+  "dgSpecHash": "Iyzcp4Yr+70=",
   "success": true,
   "projectFilePath": "C:\\Users\\Emmanuel\\SchoolAutomation\\Ndeal\\Ndeal.Api\\Ndeal.Api.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Emmanuel\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.1\\microsoft.aspnetcore.openapi.9.0.1.nupkg.sha512",
+    "C:\\Users\\Emmanuel\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
   "logs": []
 }
