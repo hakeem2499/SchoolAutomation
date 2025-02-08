@@ -1,0 +1,12 @@
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Application\bin\Debug\net9.0\Ndeal.Application.deps.json
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Application\bin\Debug\net9.0\Ndeal.Application.dll
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Application\bin\Debug\net9.0\Ndeal.Application.pdb
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Application\obj\Debug\net9.0\Ndeal.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Application\obj\Debug\net9.0\Ndeal.Application.AssemblyInfoInputs.cache
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Application\obj\Debug\net9.0\Ndeal.Application.AssemblyInfo.cs
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Application\obj\Debug\net9.0\Ndeal.Application.csproj.CoreCompileInputs.cache
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Application\obj\Debug\net9.0\Ndeal.Application.sourcelink.json
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Application\obj\Debug\net9.0\Ndeal.Application.dll
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Application\obj\Debug\net9.0\refint\Ndeal.Application.dll
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Application\obj\Debug\net9.0\Ndeal.Application.pdb
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Application\obj\Debug\net9.0\ref\Ndeal.Application.dll

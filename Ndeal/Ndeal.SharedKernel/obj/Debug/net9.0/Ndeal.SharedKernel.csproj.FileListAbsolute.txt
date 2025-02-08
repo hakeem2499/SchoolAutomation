@@ -1,0 +1,12 @@
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.SharedKernel\bin\Debug\net9.0\Ndeal.SharedKernel.deps.json
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.SharedKernel\bin\Debug\net9.0\Ndeal.SharedKernel.dll
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.SharedKernel\bin\Debug\net9.0\Ndeal.SharedKernel.pdb
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.SharedKernel\obj\Debug\net9.0\Ndeal.SharedKernel.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.SharedKernel\obj\Debug\net9.0\Ndeal.SharedKernel.AssemblyInfoInputs.cache
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.SharedKernel\obj\Debug\net9.0\Ndeal.SharedKernel.AssemblyInfo.cs
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.SharedKernel\obj\Debug\net9.0\Ndeal.SharedKernel.csproj.CoreCompileInputs.cache
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.SharedKernel\obj\Debug\net9.0\Ndeal.SharedKernel.sourcelink.json
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.SharedKernel\obj\Debug\net9.0\Ndeal.SharedKernel.dll
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.SharedKernel\obj\Debug\net9.0\refint\Ndeal.SharedKernel.dll
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.SharedKernel\obj\Debug\net9.0\Ndeal.SharedKernel.pdb
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.SharedKernel\obj\Debug\net9.0\ref\Ndeal.SharedKernel.dll

@@ -21,22 +21,17 @@ export default function Sidebar({ children }: SidebarProps) {
     const [expanded, setExpanded] = useState(true);
 
     return (
-        <aside className="h-screen  bg-amber-50">
-            <div className=" flex bg-transparent  justify-between items-center">
-                {/* <img
-                        src="https://img.logoipsum.com/243.svg"
-                        className={`overflow-hidden transition-all ${expanded ? "w-32" : "w-0"
-                            }`}
-                        alt=""
-                    /> */}
-                <button
-                    onClick={() => setExpanded((curr) => !curr)}
-                    className="px-8 py-4 bg-white rounded-none"
-                >
-                    {expanded ? <ChevronFirst scale={4} color='black' /> : <ChevronLast color='black' />}
-                </button>
-            </div>
+        <aside className="h-screen">
             <nav className="h-full flex flex-col bg-white  border-r shadow-sm">
+                <div className="p-4 pb-2 flex justify-between items-center">
+                    
+                    <button
+                        onClick={() => setExpanded((curr) => !curr)}
+                        className="p-1.5  bg-white rounded-none"
+                    >
+                        {expanded ? <ChevronFirst  color='black' /> : <ChevronLast color='black' />}
+                    </button>
+                </div>
 
                 <SidebarContext.Provider value={{ expanded }}>
                     <ul className="flex-1 px-3">{children}</ul>
@@ -80,11 +75,11 @@ export function SidebarItem({ icon, text, active, alert }: SidebarItemProps) {
     return (
         <li
             className={`
-        relative flex items-center py-2 px-3 my-4 md:text-xl
-        font-medium rounded-md cursor-pointer
+        relative flex  items-center py-2 px-3 my-4
+        font-medium md:text-lg rounded-md cursor-pointer
         transition-colors group
         ${active
-                    ? "bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-800"
+                    ? "bg-gradient-to-tr from-indigo-200  to-indigo-100 text-indigo-800"
                     : "hover:bg-indigo-50 text-gray-600"
                 }
     `}

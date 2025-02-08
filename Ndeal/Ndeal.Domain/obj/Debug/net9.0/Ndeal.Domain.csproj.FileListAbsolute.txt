@@ -1,0 +1,12 @@
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Domain\bin\Debug\net9.0\Ndeal.Domain.deps.json
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Domain\bin\Debug\net9.0\Ndeal.Domain.dll
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Domain\bin\Debug\net9.0\Ndeal.Domain.pdb
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Domain\obj\Debug\net9.0\Ndeal.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Domain\obj\Debug\net9.0\Ndeal.Domain.AssemblyInfoInputs.cache
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Domain\obj\Debug\net9.0\Ndeal.Domain.AssemblyInfo.cs
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Domain\obj\Debug\net9.0\Ndeal.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Domain\obj\Debug\net9.0\Ndeal.Domain.sourcelink.json
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Domain\obj\Debug\net9.0\Ndeal.Domain.dll
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Domain\obj\Debug\net9.0\refint\Ndeal.Domain.dll
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Domain\obj\Debug\net9.0\Ndeal.Domain.pdb
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Domain\obj\Debug\net9.0\ref\Ndeal.Domain.dll
