@@ -10,3 +10,7 @@ C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Domain\obj\Debug\net9.0\Ndeal.Dom
 C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Domain\obj\Debug\net9.0\refint\Ndeal.Domain.dll
 C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Domain\obj\Debug\net9.0\Ndeal.Domain.pdb
 C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Domain\obj\Debug\net9.0\ref\Ndeal.Domain.dll
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Domain\bin\Debug\net9.0\Ndeal.SharedKernel.dll
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Domain\bin\Debug\net9.0\Ndeal.SharedKernel.pdb
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Domain\obj\Debug\net9.0\Ndeal.Domain.csproj.AssemblyReference.cache
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Domain\obj\Debug\net9.0\Ndeal.Do.6119E40E.Up2Date

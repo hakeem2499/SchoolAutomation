@@ -10,3 +10,4 @@ C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.SharedKernel\obj\Debug\net9.0\Nde
 C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.SharedKernel\obj\Debug\net9.0\refint\Ndeal.SharedKernel.dll
 C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.SharedKernel\obj\Debug\net9.0\Ndeal.SharedKernel.pdb
 C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.SharedKernel\obj\Debug\net9.0\ref\Ndeal.SharedKernel.dll
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.SharedKernel\obj\Debug\net9.0\Ndeal.SharedKernel.csproj.AssemblyReference.cache

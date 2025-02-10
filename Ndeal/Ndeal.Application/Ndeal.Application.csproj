@@ -4,6 +4,12 @@
     <ProjectReference Include="..\Ndeal.Domain\Ndeal.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0-preview1" />
+    <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="10.6.0.109712" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>

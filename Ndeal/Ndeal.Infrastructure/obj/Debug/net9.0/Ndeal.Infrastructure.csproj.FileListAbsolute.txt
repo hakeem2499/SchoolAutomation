@@ -10,3 +10,11 @@ C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Infrastructure\obj\Debug\net9.0\N
 C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Infrastructure\obj\Debug\net9.0\refint\Ndeal.Infrastructure.dll
 C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Infrastructure\obj\Debug\net9.0\Ndeal.Infrastructure.pdb
 C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Infrastructure\obj\Debug\net9.0\ref\Ndeal.Infrastructure.dll
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Infrastructure\bin\Debug\net9.0\Ndeal.Application.dll
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Infrastructure\bin\Debug\net9.0\Ndeal.Domain.dll
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Infrastructure\bin\Debug\net9.0\Ndeal.SharedKernel.dll
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Infrastructure\bin\Debug\net9.0\Ndeal.Application.pdb
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Infrastructure\bin\Debug\net9.0\Ndeal.Domain.pdb
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Infrastructure\bin\Debug\net9.0\Ndeal.SharedKernel.pdb
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Infrastructure\obj\Debug\net9.0\Ndeal.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\Emmanuel\SchoolAutomation\Ndeal\Ndeal.Infrastructure\obj\Debug\net9.0\Ndeal.In.22AEA3D8.Up2Date
