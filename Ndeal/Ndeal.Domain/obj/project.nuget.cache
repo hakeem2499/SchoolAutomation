@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "iuOx0gyjHJE=",
+  "dgSpecHash": "0QZuHgsLqwo=",
   "success": true,
   "projectFilePath": "C:\\Users\\Emmanuel\\SchoolAutomation\\Ndeal\\Ndeal.Domain\\Ndeal.Domain.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Emmanuel\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
+    "C:\\Users\\Emmanuel\\.nuget\\packages\\sonaranalyzer.csharp\\10.6.0.109712\\sonaranalyzer.csharp.10.6.0.109712.nupkg.sha512"
+  ],
   "logs": []
 }

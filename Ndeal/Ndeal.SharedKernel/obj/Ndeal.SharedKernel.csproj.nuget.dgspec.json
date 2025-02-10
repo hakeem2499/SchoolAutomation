@@ -50,6 +50,16 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
+          "dependencies": {
+            "MediatR.Contracts": {
+              "target": "Package",
+              "version": "[2.0.1, )"
+            },
+            "SonarAnalyzer.CSharp": {
+              "target": "Package",
+              "version": "[10.6.0.109712, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

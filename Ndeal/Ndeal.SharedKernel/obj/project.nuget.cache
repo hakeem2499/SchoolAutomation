@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "qpJrSvoo1lk=",
+  "dgSpecHash": "Jty744C4Rqg=",
   "success": true,
   "projectFilePath": "C:\\Users\\Emmanuel\\SchoolAutomation\\Ndeal\\Ndeal.SharedKernel\\Ndeal.SharedKernel.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Emmanuel\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
+    "C:\\Users\\Emmanuel\\.nuget\\packages\\sonaranalyzer.csharp\\10.6.0.109712\\sonaranalyzer.csharp.10.6.0.109712.nupkg.sha512"
+  ],
   "logs": []
 }
