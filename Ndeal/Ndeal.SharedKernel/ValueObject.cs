@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Ndeal.SharedKernel; // Or your shared kernel namespace
+namespace Ndeal.SharedKernel; 
 
 public abstract class ValueObject : IEquatable<ValueObject>
 {

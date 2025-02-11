@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Ndeal.SharedKernel")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2c49b7a2095d22a56744d2e4265ebdf676059ec8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9c8ac227a1a93de4c75718e1c177147112d0937d")]
 [assembly: System.Reflection.AssemblyProductAttribute("Ndeal.SharedKernel")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Ndeal.SharedKernel")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
