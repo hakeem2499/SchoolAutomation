@@ -1,3 +1,6 @@
+using Ndeal.Domain.AssessmentAggregate.ValueObjects;
+using Ndeal.Domain.CourseAggregate.ValueObjects;
+using Ndeal.Domain.ResourceAggregate.ValueObjects;
 using Ndeal.Domain.TeacherAggregate.Entities;
 using Ndeal.Domain.TeacherAggregate.ValueObjects;
 using Ndeal.Domain.UserAggregate.ValueObjects;
@@ -8,6 +11,10 @@ namespace Ndeal.Domain.TeacherAggregate;
 public class Teacher : AggregateRoot<TeacherId>
 {
     private readonly List<Qualification> _qualifications = new();
+    private readonly List<CourseId> _courseIds = new();
+
+    private readonly List<AssessmentId> _assessmentIds = new();
+    private readonly List<ResourceId> _resourceIds = new();
 
     public Teacher(
         TeacherId id,
@@ -36,6 +43,9 @@ public class Teacher : AggregateRoot<TeacherId>
     public string LastName { get; private set; }
 
     public IReadOnlyCollection<Qualification> Qualifications => _qualifications.AsReadOnly();
+    public IReadOnlyCollection<CourseId> CourseIds => _courseIds.AsReadOnly();
+    public IReadOnlyCollection<AssessmentId> AssessmentIds => _assessmentIds.AsReadOnly();
+    public IReadOnlyCollection<ResourceId> ResourceIds => _resourceIds.AsReadOnly();
 
     public static Teacher Create(
         UserId userId,

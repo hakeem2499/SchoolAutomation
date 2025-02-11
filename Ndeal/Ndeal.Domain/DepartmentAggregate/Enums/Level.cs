@@ -1,4 +1,4 @@
-namespace Ndeal.SharedKernel;
+namespace Ndeal.Domain.DepartmentAggregate;
 
 public enum Level
 {
