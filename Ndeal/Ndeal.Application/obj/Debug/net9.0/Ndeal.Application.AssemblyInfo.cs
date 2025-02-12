@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Ndeal.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+efb462643cead89e200ec4800298166d4cffeb0e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d551a42af2d7b5de0dc740c9b9dc7596bcbd1ed8")]
 [assembly: System.Reflection.AssemblyProductAttribute("Ndeal.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Ndeal.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

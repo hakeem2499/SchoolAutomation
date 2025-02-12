@@ -1,6 +1,6 @@
 using Ndeal.SharedKernel;
 
-namespace Ndeal.Domain.AttendanceAggregate.ValueObjects;
+namespace Ndeal.Domain.CourseSessionAggregate.ValueObjects;
 
 public class AttendanceId : ValueObject
 {
