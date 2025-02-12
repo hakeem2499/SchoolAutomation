@@ -191,27 +191,45 @@
                 <mxCell id="73" value="" style="edgeStyle=none;html=1;" parent="1" source="76" target="77" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="74" style="edgeStyle=none;html=1;" parent="1" source="76" edge="1">
+                <mxCell id="74" style="edgeStyle=none;html=1;" parent="1" source="76" edge="1" target="78">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="1300.4737613075658" y="211.57897306743428" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="75" style="edgeStyle=none;html=1;" parent="1" source="76" edge="1">
+                <mxCell id="75" style="edgeStyle=none;html=1;" parent="1" source="76" edge="1" target="79">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="1412.4737870065792" y="198.10526958264802" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="98" style="edgeStyle=none;html=1;" edge="1" parent="1" source="76" target="99">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1476" y="194" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="100" style="edgeStyle=none;html=1;" edge="1" parent="1" source="76" target="101">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1568.1376215616865" y="155.61256917317723" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="102" style="edgeStyle=none;html=1;" edge="1" parent="1" source="76">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1602" y="235" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="1512" y="52"/>
+                        </Array>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="76" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;Courses&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" parent="1" vertex="1">
                     <mxGeometry x="1242" y="34" width="120" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="77" value="Course" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="1103" y="198" width="120" height="60" as="geometry"/>
+                    <mxGeometry x="1016" y="204" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="78" value="Prerequisite&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="1242" y="208" width="120" height="60" as="geometry"/>
+                <mxCell id="78" value="CourseOutline" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="1151" y="204" width="120" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="79" value="StudentErollment" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="1384" y="201" width="120" height="60" as="geometry"/>
+                    <mxGeometry x="1278" y="204" width="120" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="80" value="" style="edgeStyle=none;html=1;" parent="1" source="83" target="84" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
@@ -261,6 +279,15 @@
                 </mxCell>
                 <mxCell id="97" value="schedule" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
                     <mxGeometry x="949" y="113" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="99" value="TeacherAssignment" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="1412" y="204.00000000000023" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="101" value="Assignment" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="1508.1376215616865" y="125.61256917317723" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="103" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="1568" y="236.53" width="120" height="60" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>

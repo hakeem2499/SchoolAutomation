@@ -25,7 +25,7 @@ public class AssignmentScore : Entity<AssignmentScoreId>
     public AssignmentId AssignmentId { get; private set; }
     public StudentId StudentId { get; private set; }
     public AssessmentScore Score { get; private set; }
-    public decimal MaxScore { get; private set; }
+    public int MaxScore { get; private set; }
 
     internal static AssignmentScore Create(Assignment assignment, StudentId studentId, int score)
     {
@@ -36,5 +36,10 @@ public class AssignmentScore : Entity<AssignmentScoreId>
             studentId,
             assessmentScore
         );
+    }
+
+    internal void UpdateScore(int score)
+    {
+        Score = new AssessmentScore(score, MaxScore);
     }
 }
