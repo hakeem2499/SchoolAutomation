@@ -1,4 +1,3 @@
-using Ndea.Domain.CourseAggregate.Entities;
 using Ndeal.Domain.AssessmentAggregate.ValueObjects;
 using Ndeal.Domain.AttendanceAggregate.ValueObjects;
 using Ndeal.Domain.CourseAggregate.Entities;
@@ -78,34 +77,32 @@ public class Course : AggregateRoot<CourseId>
         CourseUnitRating = courseUnitRating;
     }
 
-    // This is a method for adding a course outline to a course
-    public void AddCourseOutline(
-        string CourseOutlineTitle,
-        string CourseOutlineDescription,
-        string duration
-    )
+    public void AddCourseOutline(string title, string description, string duration)
     {
-        var courseOutline = CourseOutline.Create(
-            CourseOutlineTitle,
-            CourseOutlineDescription,
-            duration
-        );
+        // Add validation here (e.g., check for duplicate titles, valid duration format)
+        if (_courseOutlines.Any(co => co.CourseOutlineTitle == title))
+        {
+            throw new InvalidOperationException("A course outline with that title already exists.");
+        }
+
+        var courseOutline = CourseOutline.Create(Id, title, description, duration); //  pass courseId directly which is gotten from then entity class
         _courseOutlines.Add(courseOutline);
+
+        Raise(new CourseOutlineAddedEvent(Id, courseOutline.Id, title)); // Raise Domain Event
     }
 
-    // This is a method for removing a course outline from a course
     public void RemoveCourseOutline(CourseOutlineId courseOutlineId)
     {
-        CourseOutline? courseOutline = _courseOutlines.FirstOrDefault(co =>
+        CourseOutline? courseOutline = _courseOutlines.SingleOrDefault(co =>
             co.Id == courseOutlineId
-        );
-        if (courseOutline is not null)
+        ); // Or RemoveAll if needed
+        if (courseOutline != null)
         {
             _courseOutlines.Remove(courseOutline);
+            Raise(new CourseOutlineRemovedEvent(Id, courseOutlineId)); // Raise Domain Event
         }
     }
 
-    // This is a method for adding an assignment to a course
     public void AddAssignment(
         string title,
         string description,
@@ -114,31 +111,46 @@ public class Course : AggregateRoot<CourseId>
         int maxScore
     )
     {
-        var assignment = Assignment.Create(title, description, dueDate, this, teacherId, maxScore);
+        // Add validation (e.g., maxScore > 0, dueDate in the future)
+
+        var assignment = Assignment.Create(title, description, dueDate, Id, teacherId, maxScore); // No need to pass courseId
         _assignments.Add(assignment);
+
+        Raise(new AssignmentAddedEvent(Id, assignment.Id, title)); // Raise Domain Event
     }
 
-    // This is a method for removing an assignment from a course
-    public void RemoveAssignment(AssignmentId assignmentId)
-    {
-        Assignment? assignment = _assignments.FirstOrDefault(a => a.Id == assignmentId);
-        if (assignment is not null)
-        {
-            _assignments.Remove(assignment);
-        }
-    }
+    // ... other methods (similar improvements)
 
-    // This is a method for registering a student to a course
     public void RegisterStudent(StudentId studentId, DepartmentId departmentId)
     {
-        var studentRegistration = StudentRegistration.Create(studentId, this, departmentId);
+        // ... any other validation logic (e.g., checking prerequisites, course capacity)
+
+        var studentRegistration = StudentRegistration.Create(studentId, Id, departmentId); // Use this.Id
         _studentRegistrations.Add(studentRegistration);
+
+        Raise(new StudentRegisteredEvent(Id, studentId)); // Raise Domain Event
     }
 
-    // This is a method for removing a student from a course
+    public void AssignTeacher(TeacherId teacherId)
+    {
+        var teacherAssignment = TeacherAssignment.Create(teacherId, Id); // Use this.Id
+        _teacherAssignments.Add(teacherAssignment);
+
+        Raise(new TeacherAssignedEvent(Id, teacherId)); // Raise Domain Event
+    }
+
+    // ... other methods
+
+    // Example Domain Events
+    public record CourseOutlineAddedEvent(
+        CourseId CourseId,
+        CourseOutlineId CourseOutlineId,
+        string Title
+    ) : IDomainEvent;
+
     public void RemoveStudent(StudentId studentId)
     {
-        StudentRegistration? studentRegistration = _studentRegistrations.FirstOrDefault(sr =>
+        StudentRegistration? studentRegistration = _studentRegistrations.SingleOrDefault(sr =>
             sr.StudentId == studentId
         );
         if (studentRegistration is not null)
@@ -147,18 +159,10 @@ public class Course : AggregateRoot<CourseId>
         }
     }
 
-    // This is a method for assigning a teacher to a course
-
-    public void AssignTeacher(TeacherId teacherId)
-    {
-        var teacherAssignment = TeacherAssignment.Create(teacherId, this);
-        _teacherAssignments.Add(teacherAssignment);
-    }
-
     // This is a method for removing a teacher from a course
     public void RemoveTeacher(TeacherId teacherId)
     {
-        TeacherAssignment? teacherAssignment = _teacherAssignments.FirstOrDefault(ta =>
+        TeacherAssignment? teacherAssignment = _teacherAssignments.SingleOrDefault(ta =>
             ta.TeacherId == teacherId
         );
         if (teacherAssignment is not null)
@@ -179,5 +183,69 @@ public class Course : AggregateRoot<CourseId>
         _attendanceIds.Add(attendanceId);
     }
 
-    // This is a method for removing an attendance from a course
+    // For assignment Scores
+
+    public void AddAssignmentScoreToAssignment(
+        StudentId studentId,
+        AssignmentId assignmentId,
+        int score
+    )
+    {
+        Assignment? assignment =
+            _assignments.FirstOrDefault(x => x.Id == assignmentId)
+            ?? throw new InvalidOperationException(
+                $"Assignment {assignmentId} not found for this course."
+            );
+
+        var assignmentScore = AssignmentScore.Create(assignment, studentId, score);
+        assignment.AddAssignmentScore(assignmentScore); // call the assignment instance to add the assignment not the assignment class
+
+        //Consider raising a domain event here.
+    }
+
+    public void UpdateAssignmentScore(StudentId studentId, AssignmentId assignmentId, int score)
+    {
+        Assignment? assignment =
+            _assignments.FirstOrDefault(x => x.Id == assignmentId)
+            ?? throw new InvalidOperationException(
+                $"Assignment {assignmentId} not found for this course."
+            );
+
+        AssignmentScore? assignmentScore =
+            assignment.AssignmentScores.FirstOrDefault(x => x.StudentId == studentId)
+            ?? throw new InvalidOperationException(
+                $"Score for student {studentId} not found for this assignment."
+            );
+
+        assignmentScore.UpdateScore(score);
+        // raise a domain event here.
+    }
+
+    public void RemoveAssignmentScore(StudentId studentId, AssignmentId assignmentId)
+    {
+        Assignment? assignment =
+            _assignments.FirstOrDefault(x => x.Id == assignmentId)
+            ?? throw new InvalidOperationException(
+                $"Assignment {assignmentId} not found for this course."
+            );
+
+        AssignmentScore? assignmentScore =
+            assignment.AssignmentScores.FirstOrDefault(x => x.StudentId == studentId)
+            ?? throw new InvalidOperationException(
+                $"Score for student {studentId} not found for this assignment."
+            );
+
+        assignment.RemoveAssignmentScore(assignmentScore);
+        // raise a domain event here.
+    }
+
+    public record CourseOutlineRemovedEvent(CourseId CourseId, CourseOutlineId CourseOutlineId)
+        : IDomainEvent;
+
+    public record AssignmentAddedEvent(CourseId CourseId, AssignmentId AssignmentId, string Title)
+        : IDomainEvent;
+
+    public record StudentRegisteredEvent(CourseId CourseId, StudentId StudentId) : IDomainEvent;
+
+    public record TeacherAssignedEvent(CourseId CourseId, TeacherId TeacherId) : IDomainEvent;
 }

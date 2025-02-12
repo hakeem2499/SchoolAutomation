@@ -11,23 +11,23 @@ public class StudentRegistration : Entity<StudentRegistrationId>
         StudentRegistrationId id,
         StudentId studentId,
         DepartmentId departmentId,
-        Course course
+        CourseId courseId
     )
         : base(id)
     {
         StudentId = studentId;
-        Course = course;
+        CourseId = courseId;
         DepartmentId = departmentId;
     }
 
     public StudentId StudentId { get; private set; }
-    public Course Course { get; private set; }
-    public CourseId CourseId => Course.Id;
+    public CourseId CourseId { get; private set; }
+
     public DepartmentId DepartmentId { get; private set; }
 
     internal static StudentRegistration Create(
         StudentId studentId,
-        Course course,
+        CourseId courseId,
         DepartmentId departmentId
     )
     {
@@ -35,7 +35,7 @@ public class StudentRegistration : Entity<StudentRegistrationId>
             StudentRegistrationId.NewStudentRegistrationId(),
             studentId,
             departmentId,
-            course
+            courseId
         );
 
         return studentRegistration;

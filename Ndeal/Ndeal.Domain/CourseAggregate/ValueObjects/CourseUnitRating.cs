@@ -12,7 +12,7 @@ public class CourseUnitRating : ValueObject
 
     public CourseUnit CourseUnit { get; private set; }
 
-    // Optional: Get numeric representation (if needed)
+    // Optional: Get numeric representation (if needed)g
     public int GetNumericValue() => (int)CourseUnit;
 
     public override string ToString()

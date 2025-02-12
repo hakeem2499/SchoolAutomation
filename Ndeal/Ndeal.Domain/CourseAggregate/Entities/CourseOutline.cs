@@ -1,30 +1,32 @@
 using Ndeal.Domain.CourseAggregate.ValueObjects;
 using SharedKernel;
 
-namespace Ndea.Domain.CourseAggregate.Entities;
+namespace Ndeal.Domain.CourseAggregate.Entities;
 
 public class CourseOutline : Entity<CourseOutlineId>
 {
     public CourseOutline(
         CourseOutlineId courseOutlineId,
+        CourseId courseId,
         string courseOutlineTitle,
         string courseOutlineDescription,
         string duration
     )
         : base(courseOutlineId)
     {
-        CourseOutlineId = courseOutlineId;
+        CourseId = courseId;
         CourseOutlineTitle = courseOutlineTitle;
         CourseOutlineDescription = courseOutlineDescription;
         Duration = duration;
     }
 
-    public CourseOutlineId CourseOutlineId { get; private set; }
+    public CourseId CourseId { get; private set; }
     public string CourseOutlineTitle { get; private set; }
     public string CourseOutlineDescription { get; private set; }
     public string Duration { get; private set; }
 
     internal static CourseOutline Create(
+        CourseId courseId,
         string courseOutlineTitle,
         string courseOutlineDescription,
         string duration
@@ -32,6 +34,7 @@ public class CourseOutline : Entity<CourseOutlineId>
     {
         var courseOutline = new CourseOutline(
             CourseOutlineId.NewCourseOutlineId(),
+            courseId,
             courseOutlineTitle,
             courseOutlineDescription,
             duration

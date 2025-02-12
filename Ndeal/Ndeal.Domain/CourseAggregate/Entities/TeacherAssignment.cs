@@ -6,24 +6,23 @@ namespace Ndeal.Domain.CourseAggregate.Entities;
 
 public class TeacherAssignment : Entity<TeacherAssignmentId>
 {
-    public TeacherAssignment(TeacherAssignmentId id, TeacherId teacherId, Course course)
+    public TeacherAssignment(TeacherAssignmentId id, TeacherId teacherId, CourseId courseId)
         : base(id)
     {
         TeacherId = teacherId;
-        Course = course;
+        CourseId = courseId;
     }
 
     public TeacherId TeacherId { get; private set; }
 
-    public Course Course { get; private set; }
-    public CourseId CourseId => Course.Id;
+    public CourseId CourseId { get; private set; }
 
-    internal static TeacherAssignment Create(TeacherId teacherId, Course course)
+    internal static TeacherAssignment Create(TeacherId teacherId, CourseId courseId)
     {
         var teacherAssignment = new TeacherAssignment(
             TeacherAssignmentId.NewTeacherAssignmentId(),
             teacherId,
-            course
+            courseId
         );
         return teacherAssignment;
     }
