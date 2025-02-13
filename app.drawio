@@ -17,7 +17,7 @@
                         <mxPoint x="-378.78951223273" y="239.47370990953948" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="2" value="User" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                <mxCell id="2" value="User" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" parent="1" vertex="1">
                     <mxGeometry x="-539" y="102" width="120" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="5" value="student" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
@@ -112,8 +112,13 @@
                         <mxPoint x="120" y="758" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="48" value="Assessment" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" parent="1" vertex="1">
-                    <mxGeometry x="-128" y="714" width="120" height="60" as="geometry"/>
+                <mxCell id="120" value="" style="edgeStyle=none;html=1;fontColor=#FF6666;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="48" target="121">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="-36" y="806" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="48" value="CourseAccessment" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" parent="1" vertex="1">
+                    <mxGeometry x="-128" y="714" width="168" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="105" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="49" target="104">
                     <mxGeometry relative="1" as="geometry"/>
@@ -143,8 +148,8 @@
                         <mxPoint x="148.48509216308594" y="941.0549926757812" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="51" value="StudentResult" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="17" y="804" width="120" height="60" as="geometry"/>
+                <mxCell id="51" value="AssessmentResult" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="63" y="814" width="120" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="52" value="" style="edgeStyle=none;html=1;" parent="1" source="55" target="56" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
@@ -276,24 +281,6 @@
                 <mxCell id="87" value="School Management System Domain Driven Design Model" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
                     <mxGeometry x="434" y="-141" width="756" height="54" as="geometry"/>
                 </mxCell>
-                <mxCell id="88" value="&lt;font size=&quot;3&quot;&gt;Firstname&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
-                    <mxGeometry x="-267" y="281" width="98" height="32" as="geometry"/>
-                </mxCell>
-                <mxCell id="89" value="&lt;font size=&quot;3&quot;&gt;Lastname&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
-                    <mxGeometry x="-267" y="310" width="98" height="32" as="geometry"/>
-                </mxCell>
-                <mxCell id="90" value="&lt;font size=&quot;3&quot;&gt;UserId&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
-                    <mxGeometry x="-267" y="340" width="98" height="32" as="geometry"/>
-                </mxCell>
-                <mxCell id="91" value="&lt;font size=&quot;3&quot;&gt;List&amp;lt;Guardian&amp;gt; Parent&amp;nbsp;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
-                    <mxGeometry x="-303" y="372" width="170" height="35" as="geometry"/>
-                </mxCell>
-                <mxCell id="93" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Firstname&lt;br&gt;Lastname&lt;br&gt;Relationship&lt;br&gt;&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontSize=14;strokeWidth=12;" parent="1" vertex="1">
-                    <mxGeometry x="-122" y="305" width="85" height="97" as="geometry"/>
-                </mxCell>
-                <mxCell id="95" value="&lt;font size=&quot;3&quot;&gt;Department(id)&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" parent="1" vertex="1">
-                    <mxGeometry x="-267" y="416" width="98" height="32" as="geometry"/>
-                </mxCell>
                 <mxCell id="97" value="schedule" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="949" y="113" width="120" height="60" as="geometry"/>
                 </mxCell>
@@ -316,16 +303,19 @@
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="111" value="TestResult" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
-                    <mxGeometry x="-50" y="920" width="120" height="60" as="geometry"/>
+                    <mxGeometry x="-33" y="905" width="120" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="118" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="114" target="116">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="114" value="ExamResult" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="88.48509216308594" y="911.0549926757812" width="120" height="60" as="geometry"/>
+                    <mxGeometry x="128.99509216308593" y="901.0049926757813" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="116" value="Total SemesterGrade" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+                <mxCell id="116" value="CourseGrade" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
                     <mxGeometry x="32" y="1044" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="121" value="&lt;font color=&quot;#000000&quot;&gt;CourseAccessment&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontColor=#FF6666;" vertex="1" parent="1">
+                    <mxGeometry x="-119" y="811" width="168" height="60" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
