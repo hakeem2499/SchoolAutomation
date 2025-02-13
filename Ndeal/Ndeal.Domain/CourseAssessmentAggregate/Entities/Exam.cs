@@ -6,29 +6,35 @@ namespace Ndeal.Domain.CourseAssessmentAggregate.Entities;
 
 public class Exam : Entity<ExamId>
 {
-    public Exam(ExamId id, AssessmentId assessmentId, int resultWeight, int maxScore, string name)
+    public Exam(
+        ExamId id,
+        CourseAssessmentId courseAssessmentId,
+        int resultWeight,
+        int maxScore,
+        string name
+    )
         : base(id)
     {
-        AssessmentId = assessmentId;
+        CourseAssessmentId = courseAssessmentId;
         MaxScore = maxScore;
         Name = name;
         ResultWeight = resultWeight;
     }
 
-    public AssessmentId AssessmentId { get; private set; }
+    public CourseAssessmentId CourseAssessmentId { get; private set; }
     public int MaxScore { get; private set; }
     public string Name { get; private set; }
 
     public int ResultWeight { get; private set; }
 
     internal static Exam CreateExam(
-        AssessmentId assessmentId,
+        CourseAssessmentId courseAssessmentId,
         int resultWeight,
         int maxScore,
         string name
     )
     {
-        return new Exam(ExamId.NewExamId(), assessmentId, resultWeight, maxScore, name);
+        return new Exam(ExamId.NewExamId(), courseAssessmentId, resultWeight, maxScore, name);
     }
 
     internal void UpdateExam(int resultWeight, int maxScore, string name)

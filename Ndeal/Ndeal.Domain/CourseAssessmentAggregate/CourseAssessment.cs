@@ -38,20 +38,30 @@ public class CourseAssessment(
         );
     }
 
-    public void AddTest(AssessmentId assessmentId, int resultWeight, int maxScore, string name)
+    public void AddTest(
+        CourseAssessmentId courseAssessmentId,
+        int resultWeight,
+        int maxScore,
+        string name
+    )
     {
-        var test = Test.CreateTest(assessmentId, resultWeight, maxScore, name);
+        var test = Test.CreateTest(courseAssessmentId, resultWeight, maxScore, name);
         _tests.Add(test);
     }
 
-    public void AddExam(AssessmentId assessmentId, int resultWeight, int maxScore, string name)
+    public void AddExam(
+        CourseAssessmentId courseAssessmentId,
+        int resultWeight,
+        int maxScore,
+        string name
+    )
     {
         if (Exam is not null)
         {
             throw new InvalidOperationException("Exam already exists.");
         }
 
-        var exam = Exam.CreateExam(assessmentId, resultWeight, maxScore, name);
+        var exam = Exam.CreateExam(courseAssessmentId, resultWeight, maxScore, name);
         Exam = exam;
     }
 

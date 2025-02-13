@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Ndeal.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8eb438589923c2b5806f9fc24c2d6d3ef7f2ecab")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c7b4f681e701dd22ae7de6052c5847d6c3ee014a")]
 [assembly: System.Reflection.AssemblyProductAttribute("Ndeal.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Ndeal.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

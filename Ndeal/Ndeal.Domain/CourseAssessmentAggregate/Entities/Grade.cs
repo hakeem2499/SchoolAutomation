@@ -1,0 +1,1 @@
+namespace Ndeal.Domain.CourseAssessmentAggregate.Entities;
