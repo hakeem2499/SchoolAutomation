@@ -107,27 +107,44 @@
                 <mxCell id="45" value="" style="edgeStyle=none;html=1;" parent="1" source="48" target="49" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="46" style="edgeStyle=none;html=1;" parent="1" source="48" edge="1">
+                <mxCell id="47" style="edgeStyle=none;html=1;" parent="1" source="48" edge="1" target="51">
                     <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="-69.52623869243416" y="891.5789730674343" as="targetPoint"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="47" style="edgeStyle=none;html=1;" parent="1" source="48" edge="1">
-                    <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="42.47378700657919" y="878.105269582648" as="targetPoint"/>
+                        <mxPoint x="120" y="758" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="48" value="Assessment" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" parent="1" vertex="1">
                     <mxGeometry x="-128" y="714" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="49" value="Accessment" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="-267" y="878" width="120" height="60" as="geometry"/>
+                <mxCell id="105" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="49" target="104">
+                    <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="50" value="Grade" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="-128" y="888" width="120" height="60" as="geometry"/>
+                <mxCell id="106" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="49" target="104">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="107" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="49" target="104">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="108" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="49" target="104">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="109" style="edgeStyle=none;html=1;" edge="1" parent="1" source="49" target="110">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="-71" y="911" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="49" value="Assessment" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="-263" y="808" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="112" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="51" target="111">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="113" style="edgeStyle=none;html=1;" edge="1" parent="1" source="51" target="114">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="148.48509216308594" y="941.0549926757812" as="targetPoint"/>
+                    </mxGeometry>
                 </mxCell>
                 <mxCell id="51" value="StudentResult" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="14" y="881" width="120" height="60" as="geometry"/>
+                    <mxGeometry x="17" y="804" width="120" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="52" value="" style="edgeStyle=none;html=1;" parent="1" source="55" target="56" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
@@ -288,6 +305,27 @@
                 </mxCell>
                 <mxCell id="103" value="AssignmentScore" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="1568" y="236.53" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="104" value="Test" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="-329" y="916" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="110" value="Exam" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="-188" y="922" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="117" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="111" target="116">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="111" value="TestResult" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="-50" y="920" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="118" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="114" target="116">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="114" value="ExamResult" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="88.48509216308594" y="911.0549926757812" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="116" value="Total SemesterGrade" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="32" y="1044" width="120" height="60" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
