@@ -1,5 +1,3 @@
-using Ndeal.Domain.AssessmentAggregate.ValueObjects;
-using Ndeal.Domain.AttendanceAggregate.ValueObjects;
 using Ndeal.Domain.CourseAggregate.Entities;
 using Ndeal.Domain.CourseAggregate.ValueObjects;
 using Ndeal.Domain.DepartmentAggregate.ValueObjects;
@@ -15,8 +13,6 @@ public class Course : AggregateRoot<CourseId>
     private readonly List<Assignment> _assignments = new();
     private readonly List<StudentRegistration> _studentRegistrations = new();
     private readonly List<TeacherAssignment> _teacherAssignments = new();
-    private readonly List<AssessmentId> _assessmentIds = new();
-    private readonly List<AttendanceId> _attendanceIds = new();
 
     public Course(
         CourseId id,
@@ -42,8 +38,6 @@ public class Course : AggregateRoot<CourseId>
     public IReadOnlyList<StudentRegistration> StudentRegistrations =>
         _studentRegistrations.AsReadOnly();
     public IReadOnlyList<TeacherAssignment> TeacherAssignments => _teacherAssignments.AsReadOnly();
-    public IReadOnlyList<AssessmentId> AssessmentIds => _assessmentIds.AsReadOnly();
-    public IReadOnlyList<AttendanceId> AttendanceIds => _attendanceIds.AsReadOnly();
 
     public static Course Create(
         string courseCode,
@@ -169,18 +163,6 @@ public class Course : AggregateRoot<CourseId>
         {
             _teacherAssignments.Remove(teacherAssignment);
         }
-    }
-
-    // This is a method for adding an assessment to a course
-    public void AddAssessment(AssessmentId assessmentId)
-    {
-        _assessmentIds.Add(assessmentId);
-    }
-
-    // This is a method for adding an attendance to a course
-    public void AddAttendance(AttendanceId attendanceId)
-    {
-        _attendanceIds.Add(attendanceId);
     }
 
     // For assignment Scores
