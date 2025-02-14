@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Ndeal.Domain.PaymentAggregate.Enums;
 using Ndeal.Domain.PaymentAggregate.ValueObjects;
 using Ndeal.Domain.StudentAggregate.ValueObjects;
@@ -17,57 +20,144 @@ public class StudentPayment : Entity<StudentPaymentId>
     )
         : base(studentPaymentId)
     {
-        StudentPaymentId = studentPaymentId;
-        StudentId = studentId;
-        PaymentId = paymentId;
+        StudentPaymentId =
+            studentPaymentId ?? throw new ArgumentNullException(nameof(studentPaymentId));
+        StudentId = studentId ?? throw new ArgumentNullException(nameof(studentId));
+        PaymentId = paymentId ?? throw new ArgumentNullException(nameof(paymentId));
     }
 
     public StudentPaymentId StudentPaymentId { get; }
     public StudentId StudentId { get; }
     public PaymentId PaymentId { get; }
 
-    public IReadOnlyList<Invoice> Invoices => _invoices;
-    public IReadOnlyList<Receipt> Receipts => _receipts;
+    public IReadOnlyCollection<Invoice> Invoices => _invoices.AsReadOnly();
+    public IReadOnlyCollection<Receipt> Receipts => _receipts.AsReadOnly();
 
-    internal static StudentPayment Create(StudentId studentId, PaymentId paymentId)
+    public static StudentPayment Create(StudentId studentId, PaymentId paymentId)
     {
+        if (studentId == null)
+        {
+            throw new ArgumentNullException(nameof(studentId));
+        }
+
+        if (paymentId == null)
+        {
+            throw new ArgumentNullException(nameof(paymentId));
+        }
+
         return new StudentPayment(StudentPaymentId.NewStudentPaymentId(), studentId, paymentId);
     }
 
-    internal void AddInvoice(Money amount, DateTime dueDate)
+    public void AddInvoice(Money amount, DateTime dueDate)
     {
+        if (amount == null)
+        {
+            throw new ArgumentNullException(nameof(amount));
+        }
+
+        if (dueDate == default)
+        {
+            throw new ArgumentException("Due date must be provided.", nameof(dueDate));
+        }
+
         var invoice = Invoice.Create(Id, amount, dueDate);
         _invoices.Add(invoice);
     }
 
-    internal void UpdateInvoice(InvoiceId invoiceId, Money amount, DateTime dueDate)
+    public void UpdateInvoice(InvoiceId invoiceId, Money amount, DateTime dueDate)
     {
-        Invoice? invoice = _invoices.Single(x => x.Id == invoiceId);
+        if (invoiceId == null)
+        {
+            throw new ArgumentNullException(nameof(invoiceId));
+        }
+
+        if (amount == null)
+        {
+            throw new ArgumentNullException(nameof(amount));
+        }
+
+        if (dueDate == default)
+        {
+            throw new ArgumentException("Due date must be provided.", nameof(dueDate));
+        }
+
+        Invoice invoice =
+            _invoices.SingleOrDefault(x => x.Id == invoiceId)
+            ?? throw new InvalidOperationException($"Invoice with ID {invoiceId} not found.");
+
         invoice.Update(amount, dueDate);
     }
 
-    internal void AddReceipt(
-        Money amount,
-        DateTime paymentDate,
-        PaymentMethodType paymentMethodType
-    )
+    public void AddReceipt(Money amount, DateTime paymentDate, PaymentMethodType paymentMethodType)
     {
+        if (amount == null)
+        {
+            throw new ArgumentNullException(nameof(amount));
+        }
+
+        if (paymentDate == default)
+        {
+            throw new ArgumentException("Payment date must be provided.", nameof(paymentDate));
+        }
+
         var receipt = Receipt.Create(Id, amount, paymentDate, paymentMethodType);
         _receipts.Add(receipt);
     }
 
-    internal void UpdateReceipt(
+    public void UpdateReceipt(
         ReceiptId receiptId,
         Money amount,
         DateTime paymentDate,
         PaymentMethodType paymentMethodType
     )
     {
-        Receipt? receipt = _receipts.Single(x => x.Id == receiptId);
+        if (receiptId == null)
+        {
+            throw new ArgumentNullException(nameof(receiptId));
+        }
+
+        if (amount == null)
+        {
+            throw new ArgumentNullException(nameof(amount));
+        }
+
+        if (paymentDate == default)
+        {
+            throw new ArgumentException("Payment date must be provided.", nameof(paymentDate));
+        }
+
+        Receipt receipt =
+            _receipts.SingleOrDefault(x => x.Id == receiptId)
+            ?? throw new InvalidOperationException($"Receipt with ID {receiptId} not found.");
+
         receipt.Update(amount, paymentDate, paymentMethodType);
     }
 
-    internal void RemoveInvoice(
-        
-    )
+    public void DeleteReceipt(ReceiptId receiptId)
+    {
+        if (receiptId == null)
+        {
+            throw new ArgumentNullException(nameof(receiptId));
+        }
+
+        Receipt receipt =
+            _receipts.SingleOrDefault(x => x.Id == receiptId)
+            ?? throw new InvalidOperationException($"Receipt with ID {receiptId} not found.");
+
+        _receipts.Remove(receipt);
+    }
+
+    public void DeleteInvoice(InvoiceId invoiceId)
+    {
+        if (invoiceId == null)
+        {
+            throw new ArgumentNullException(nameof(invoiceId));
+        }
+
+        Invoice invoice =
+            _invoices.SingleOrDefault(x => x.Id == invoiceId)
+            ?? throw new InvalidOperationException($"Invoice with ID {invoiceId} not found.");
+
+        _invoices.Remove(invoice);
+    }
 }

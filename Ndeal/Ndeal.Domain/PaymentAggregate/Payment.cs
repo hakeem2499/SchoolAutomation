@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Ndeal.Domain.DepartmentAggregate.ValueObjects;
 using Ndeal.Domain.PaymentAggregate.Entities;
 using Ndeal.Domain.PaymentAggregate.Enums;
@@ -20,17 +23,27 @@ public class Payment : Entity<PaymentId>
     )
         : base(paymentId)
     {
-        DepartmentId = departmentId;
-        Amount = amount;
+        DepartmentId = departmentId ?? throw new ArgumentNullException(nameof(departmentId));
+        Amount = amount ?? throw new ArgumentNullException(nameof(amount));
         DueDate = dueDate;
         CreatedDate = createdDate;
+
+        if (dueDate == default)
+        {
+            throw new ArgumentException("Due date must be provided.", nameof(dueDate));
+        }
+
+        if (createdDate == default)
+        {
+            throw new ArgumentException("Created date must be provided.", nameof(createdDate));
+        }
     }
 
     public DepartmentId DepartmentId { get; private set; }
     public Money Amount { get; private set; }
     public DateTime DueDate { get; private set; }
     public DateTime CreatedDate { get; private set; }
-    public IReadOnlyList<StudentPayment> StudentPayments => _studentPayments;
+    public IReadOnlyCollection<StudentPayment> StudentPayments => _studentPayments.AsReadOnly();
 
     public static Payment Create(
         DepartmentId departmentId,
@@ -44,13 +57,23 @@ public class Payment : Entity<PaymentId>
 
     public void AddStudentPayment(StudentId studentId)
     {
+        if (studentId == null)
+        {
+            throw new ArgumentNullException(nameof(studentId));
+        }
+
         var studentPayment = StudentPayment.Create(studentId, Id);
         _studentPayments.Add(studentPayment);
     }
 
     public void AddInvoice(StudentPaymentId studentPaymentId, Money amount, DateTime dueDate)
     {
-        StudentPayment studentPayment = _studentPayments.Single(x => x.Id == studentPaymentId);
+        if (studentPaymentId == null)
+        {
+            throw new ArgumentNullException(nameof(studentPaymentId));
+        }
+
+        StudentPayment studentPayment = GetStudentPayment(studentPaymentId);
         studentPayment.AddInvoice(amount, dueDate);
     }
 
@@ -61,7 +84,17 @@ public class Payment : Entity<PaymentId>
         DateTime dueDate
     )
     {
-        StudentPayment studentPayment = _studentPayments.Single(x => x.Id == studentPaymentId);
+        if (studentPaymentId == null)
+        {
+            throw new ArgumentNullException(nameof(studentPaymentId));
+        }
+
+        if (invoiceId == null)
+        {
+            throw new ArgumentNullException(nameof(invoiceId));
+        }
+
+        StudentPayment studentPayment = GetStudentPayment(studentPaymentId);
         studentPayment.UpdateInvoice(invoiceId, amount, dueDate);
     }
 
@@ -72,7 +105,12 @@ public class Payment : Entity<PaymentId>
         PaymentMethodType paymentMethodType
     )
     {
-        StudentPayment studentPayment = _studentPayments.Single(x => x.Id == studentPaymentId);
+        if (studentPaymentId == null)
+        {
+            throw new ArgumentNullException(nameof(studentPaymentId));
+        }
+
+        StudentPayment studentPayment = GetStudentPayment(studentPaymentId);
         studentPayment.AddReceipt(amount, paymentDate, paymentMethodType);
     }
 
@@ -84,13 +122,74 @@ public class Payment : Entity<PaymentId>
         PaymentMethodType paymentMethodType
     )
     {
-        StudentPayment studentPayment = _studentPayments.Single(x => x.Id == studentPaymentId);
+        if (studentPaymentId == null)
+        {
+            throw new ArgumentNullException(nameof(studentPaymentId));
+        }
+
+        if (receiptId == null)
+        {
+            throw new ArgumentNullException(nameof(receiptId));
+        }
+
+        StudentPayment studentPayment = GetStudentPayment(studentPaymentId);
         studentPayment.UpdateReceipt(receiptId, amount, paymentDate, paymentMethodType);
     }
 
     public void RemoveStudentPayment(StudentPaymentId studentPaymentId)
     {
-        StudentPayment studentPayment = _studentPayments.Single(x => x.Id == studentPaymentId);
+        if (studentPaymentId == null)
+        {
+            throw new ArgumentNullException(nameof(studentPaymentId));
+        }
+
+        StudentPayment studentPayment = GetStudentPayment(studentPaymentId);
         _studentPayments.Remove(studentPayment);
+    }
+
+    public void RemoveInvoiceFromStudentPayment(
+        StudentPaymentId studentPaymentId,
+        InvoiceId invoiceId
+    )
+    {
+        if (studentPaymentId == null)
+        {
+            throw new ArgumentNullException(nameof(studentPaymentId));
+        }
+
+        if (invoiceId == null)
+        {
+            throw new ArgumentNullException(nameof(invoiceId));
+        }
+
+        StudentPayment studentPayment = GetStudentPayment(studentPaymentId);
+        studentPayment.DeleteInvoice(invoiceId);
+    }
+
+    public void RemoveReceiptFromStudentPayment(
+        StudentPaymentId studentPaymentId,
+        ReceiptId receiptId
+    )
+    {
+        if (studentPaymentId == null)
+        {
+            throw new ArgumentNullException(nameof(studentPaymentId));
+        }
+
+        if (receiptId == null)
+        {
+            throw new ArgumentNullException(nameof(receiptId));
+        }
+
+        StudentPayment studentPayment = GetStudentPayment(studentPaymentId);
+        studentPayment.DeleteReceipt(receiptId);
+    }
+
+    private StudentPayment GetStudentPayment(StudentPaymentId studentPaymentId)
+    {
+        return _studentPayments.SingleOrDefault(x => x.Id == studentPaymentId)
+            ?? throw new InvalidOperationException(
+                $"StudentPayment with ID {studentPaymentId} not found."
+            );
     }
 }
