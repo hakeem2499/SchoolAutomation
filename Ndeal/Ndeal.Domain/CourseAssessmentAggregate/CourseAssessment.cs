@@ -2,6 +2,7 @@ using Ndeal.Domain.AcademicAggregate.ValueObjects;
 using Ndeal.Domain.CourseAggregate.ValueObjects;
 using Ndeal.Domain.CourseAssessmentAggregate.Entities;
 using Ndeal.Domain.CourseAssessmentAggregate.ValueObjects;
+using Ndeal.Domain.DepartmentAggregate.ValueObjects;
 using Ndeal.SharedKernel;
 
 namespace Ndeal.Domain.CourseAssessmentAggregate;
@@ -14,7 +15,6 @@ public class CourseAssessment(
 ) : AggregateRoot<CourseAssessmentId>(id)
 {
     private readonly List<Test> _tests = new();
-    private readonly List<AssessmentResult> _assessmentResults = new();
 
     public CourseId CourseId { get; private set; } = courseId;
     public SemesterId SemesterId { get; private set; } = semesterId;
@@ -22,7 +22,8 @@ public class CourseAssessment(
 
     public IReadOnlyList<Test> Tests => _tests.AsReadOnly();
     public Exam? Exam { get; private set; }
-    public IReadOnlyList<AssessmentResult> AssessmentResults => _assessmentResults.AsReadOnly();
+
+    public AssessmentResult? AssessmentResult { get; private set; }
 
     public static CourseAssessment CreateCourseAssessment(
         CourseId courseId,
@@ -82,5 +83,21 @@ public class CourseAssessment(
             ?? throw new InvalidOperationException("Test does not exist.");
 
         test.UpdateTest(resultWeight, maxScore, name);
+    }
+
+    public void AddAssessmentResult(DepartmentId departmentId, int maxScore, string name)
+    {
+        if (AssessmentResult is not null)
+        {
+            throw new InvalidOperationException("Assessment result already exists.");
+        }
+
+        var assessmentResult = AssessmentResult.CreateAssessmentResult(
+            Id,
+            departmentId,
+            maxScore,
+            name
+        );
+        AssessmentResult = assessmentResult;
     }
 }

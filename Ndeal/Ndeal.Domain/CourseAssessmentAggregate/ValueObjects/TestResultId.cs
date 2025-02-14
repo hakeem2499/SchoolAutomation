@@ -1,6 +1,6 @@
 using Ndeal.SharedKernel;
 
-namespace Ndeal.Domain.AssessmentAggregate.ValueObjects;
+namespace Ndeal.Domain.CourseAssessmentAggregate.ValueObjects;
 
 public class TestResultId : ValueObject
 {

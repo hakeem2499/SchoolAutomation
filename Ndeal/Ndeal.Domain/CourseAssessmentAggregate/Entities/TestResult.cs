@@ -1,5 +1,4 @@
 using Ndeal.Domain.AcademicAggregate.ValueObjects;
-using Ndeal.Domain.AssessmentAggregate.ValueObjects;
 using Ndeal.Domain.CourseAssessmentAggregate.ValueObjects;
 using Ndeal.Domain.StudentAggregate.ValueObjects;
 using SharedKernel;
@@ -45,7 +44,7 @@ public class TestResult : Entity<TestResultId>
         );
     }
 
-    internal void UpdateTestResult(int score)
+    internal void UpdateTestResult(decimal score)
     {
         Score = score;
     }

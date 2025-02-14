@@ -44,7 +44,7 @@ public class ExamResult : Entity<ExamResultId>
         );
     }
 
-    internal void UpdateExamResult(int score)
+    internal void UpdateExamResult(decimal score)
     {
         Score = score;
     }
