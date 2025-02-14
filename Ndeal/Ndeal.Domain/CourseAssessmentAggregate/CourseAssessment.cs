@@ -3,6 +3,7 @@ using Ndeal.Domain.CourseAggregate.ValueObjects;
 using Ndeal.Domain.CourseAssessmentAggregate.Entities;
 using Ndeal.Domain.CourseAssessmentAggregate.ValueObjects;
 using Ndeal.Domain.DepartmentAggregate.ValueObjects;
+using Ndeal.Domain.StudentAggregate.ValueObjects;
 using Ndeal.SharedKernel;
 
 namespace Ndeal.Domain.CourseAssessmentAggregate;
@@ -99,5 +100,46 @@ public class CourseAssessment(
             name
         );
         AssessmentResult = assessmentResult;
+    }
+
+    public void AddTestResult(StudentId studentId, TestId testId, decimal score)
+    {
+        if (AssessmentResult is null)
+        {
+            throw new InvalidOperationException("Assessment result does not exist.");
+        }
+        Test test =
+            _tests.FirstOrDefault(t => t.Id == testId)
+            ?? throw new InvalidOperationException("Test does not exist.");
+        decimal testMarkObtained = score / test.MaxScore * test.ResultWeight;
+
+        AssessmentResult.AddTestResult(studentId, testId, testMarkObtained);
+    }
+
+    public void AddExamResult(StudentId studentId, decimal score)
+    {
+        if (AssessmentResult is null)
+        {
+            throw new InvalidOperationException("Assessment result does not exist.");
+        }
+
+        if (Exam is null)
+        {
+            throw new InvalidOperationException("Exam does not exist.");
+        }
+
+        decimal examMarkObtained = score / Exam.MaxScore * Exam.ResultWeight;
+
+        AssessmentResult.AddExamResult(studentId, Exam.Id, examMarkObtained);
+    }
+
+    public void AddStudentGrade(StudentId studentId)
+    {
+        if (AssessmentResult is null)
+        {
+            throw new InvalidOperationException("Assessment result does not exist.");
+        }
+
+        AssessmentResult.AddStudentGrade(studentId);
     }
 }

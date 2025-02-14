@@ -112,11 +112,6 @@
                         <mxPoint x="120" y="758" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="120" value="" style="edgeStyle=none;html=1;fontColor=#FF6666;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="48" target="121">
-                    <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="-36" y="806" as="targetPoint"/>
-                    </mxGeometry>
-                </mxCell>
                 <mxCell id="48" value="CourseAccessment" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" parent="1" vertex="1">
                     <mxGeometry x="-128" y="714" width="168" height="60" as="geometry"/>
                 </mxCell>
@@ -137,7 +132,7 @@
                         <mxPoint x="-71" y="911" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="49" value="Assessment" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                <mxCell id="49" value="CourseAssessment" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="-263" y="808" width="120" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="112" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="51" target="111">
@@ -311,11 +306,8 @@
                 <mxCell id="114" value="ExamResult" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
                     <mxGeometry x="128.99509216308593" y="901.0049926757813" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="116" value="CourseGrade" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
-                    <mxGeometry x="32" y="1044" width="120" height="60" as="geometry"/>
-                </mxCell>
-                <mxCell id="121" value="&lt;font color=&quot;#000000&quot;&gt;CourseAccessment&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontColor=#FF6666;" vertex="1" parent="1">
-                    <mxGeometry x="-119" y="811" width="168" height="60" as="geometry"/>
+                <mxCell id="116" value="StudentGrade" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="59" y="948" width="120" height="60" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
