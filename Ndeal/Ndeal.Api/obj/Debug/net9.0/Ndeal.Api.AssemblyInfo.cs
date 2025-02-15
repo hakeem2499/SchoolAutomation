@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Ndeal.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b6496d2ff842d7805318ccb8fe69d65c4f3b8a9f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2bc8bf2a9a557df4cb99beb9853598553ce697eb")]
 [assembly: System.Reflection.AssemblyProductAttribute("Ndeal.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Ndeal.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
