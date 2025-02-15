@@ -5,4 +5,10 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Style", "IDE0003:Remove qualification", Justification = "<Pending>", Scope = "member", Target = "~M:Ndeal.Domain.CourseAggregate.Course.AddCourseOutline(System.String,System.String,System.String)")]
+[assembly: SuppressMessage(
+    "Style",
+    "IDE0003:Remove qualification",
+    Justification = "<Pending>",
+    Scope = "member",
+    Target = "~M:Ndeal.Domain.CourseAggregate.Course.AddCourseOutline(System.String,System.String,System.String)"
+)]
