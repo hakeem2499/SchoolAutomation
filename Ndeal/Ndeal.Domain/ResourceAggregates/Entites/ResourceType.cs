@@ -3,7 +3,7 @@ using SharedKernel;
 
 namespace Ndeal.Domain.ResourceAggregate.Entities;
 
-public class ResourceType : Entity<ResourceTypeId>
+public sealed class ResourceType : Entity<ResourceTypeId>
 {
     public ResourceType(ResourceTypeId resourceTypeId, string name, string description)
         : base(resourceTypeId)
