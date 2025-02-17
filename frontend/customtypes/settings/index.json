@@ -1,0 +1,101 @@
+{
+  "format": "custom",
+  "id": "settings",
+  "label": "Settings",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "our_services": {
+        "type": "Group",
+        "config": {
+          "label": "Our Services",
+          "repeat": true,
+          "fields": {
+            "label": {
+              "type": "Text",
+              "config": {
+                "label": "label",
+                "placeholder": ""
+              }
+            },
+            "link_to_services": {
+              "type": "Link",
+              "config": {
+                "label": "Link to services",
+                "placeholder": "",
+                "select": null,
+                "allowTargetBlank": true,
+                "allowText": true,
+                "repeat": false
+              }
+            },
+            "heading": {
+              "type": "StructuredText",
+              "config": {
+                "label": "Heading",
+                "placeholder": "",
+                "allowTargetBlank": true,
+                "multi": "paragraph,strong"
+              }
+            }
+          }
+        }
+      },
+      "company": {
+        "type": "Group",
+        "config": {
+          "label": "Company",
+          "repeat": true,
+          "fields": {
+            "label": {
+              "type": "Text",
+              "config": {
+                "label": "label",
+                "placeholder": ""
+              }
+            },
+            "link_to_company": {
+              "type": "Link",
+              "config": {
+                "label": "link to company",
+                "placeholder": "",
+                "select": null,
+                "allowTargetBlank": true,
+                "allowText": true,
+                "repeat": false
+              }
+            }
+          }
+        }
+      },
+      "policies": {
+        "type": "Group",
+        "config": {
+          "label": "Policies",
+          "repeat": true,
+          "fields": {
+            "label": {
+              "type": "Text",
+              "config": {
+                "label": "label",
+                "placeholder": ""
+              }
+            },
+            "link_to_policies": {
+              "type": "Link",
+              "config": {
+                "label": "link to policies",
+                "placeholder": "",
+                "select": null,
+                "allowTargetBlank": true,
+                "allowText": true,
+                "repeat": false
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
