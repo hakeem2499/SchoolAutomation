@@ -26,19 +26,21 @@ public class ResourceAssignment : Entity<ResourceAssignmentId>
     public DateTime StartDate { get; private set; }
     public DateTime EndDate { get; private set; }
 
-    public static ResourceAssignment Create(
+    internal static Result<ResourceAssignment> Create(
         ResourceId resourceId,
         StudentId studentId,
         DateTime startDate,
         DateTime endDate
     )
     {
-        return new ResourceAssignment(
+        var result = new ResourceAssignment(
             ResourceAssignmentId.NewResourceAssignmentId(),
             resourceId,
             studentId,
             startDate,
             endDate
         );
+
+        return result;
     }
 }

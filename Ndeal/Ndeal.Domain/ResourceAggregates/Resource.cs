@@ -49,16 +49,22 @@ public class Resource : Entity<ResourceId>
         );
     }
 
-    public void AssignResource(StudentId studentId, DateTime startDate, DateTime endDate)
+    public Result AssignResource(StudentId studentId, DateTime startDate, DateTime endDate)
     {
         if (Status != ResourceStatus.Available)
         {
-            throw new InvalidOperationException("Resource is not available for assignment.");
+            return Result.Failure<Resource>(ResourceErrors.ResourceUnavailable(this));
         }
 
-        var assignment = ResourceAssignment.Create(Id, studentId, startDate, endDate);
-        _assignments.Add(assignment);
+        Result<ResourceAssignment> assignment = ResourceAssignment.Create(
+            Id,
+            studentId,
+            startDate,
+            endDate
+        );
+        _assignments.Add(assignment.Value);
         Status = ResourceStatus.Assigned;
+        return Result.Success();
     }
 
     public void ReserveResource(TeacherId teacherId, DateTime startDate, DateTime endDate)
