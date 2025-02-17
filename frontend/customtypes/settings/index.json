@@ -29,15 +29,6 @@
                 "allowText": true,
                 "repeat": false
               }
-            },
-            "heading": {
-              "type": "StructuredText",
-              "config": {
-                "label": "Heading",
-                "placeholder": "",
-                "allowTargetBlank": true,
-                "multi": "paragraph,strong"
-              }
             }
           }
         }

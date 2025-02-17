@@ -33,16 +33,6 @@ export interface SettingsDocumentDataOurServicesItem {
     prismic.FieldState,
     never
   >;
-
-  /**
-   * Heading field in *Settings → Our Services*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: settings.our_services[].heading
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  heading: prismic.RichTextField;
 }
 
 /**
