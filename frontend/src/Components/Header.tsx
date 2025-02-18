@@ -12,7 +12,7 @@ export default async function Header () {
 
 
   return (
-    <header>
+    <header className='bg-black'>
     <NavBar settings={settings}/>
     </header>
   )

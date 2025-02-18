@@ -14,7 +14,7 @@ export default {
         brand: "#15b815",
         brandWhite: "#f8f8f8",
         primary:"#0c0c0c",
-        secodary:"#171717"
+        secondary:"#171717"
       },
     },
   },

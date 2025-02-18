@@ -1,10 +1,11 @@
 "use client";
 import { FC } from "react";
 import { Content, isFilled } from "@prismicio/client";
-import { PrismicText, SliceComponentProps } from "@prismicio/react";
+import { PrismicRichText, PrismicText, SliceComponentProps } from "@prismicio/react";
 import { CldVideoPlayer } from 'next-cloudinary';
 import 'next-cloudinary/dist/cld-video-player.css';
 import Bounded from "@/Components/Bounded";
+import ControlledSwitches from "@/Components/ui/ThemeSwitch";
 
 /**
  * Props for `Hero`.
@@ -33,10 +34,15 @@ const Hero: FC<HeroProps> = ({ slice }) => {
       data-slice-variation={slice.variation}
     >
        {isFilled.richText(slice.primary.heading) && (
-        <h1 className="hero__heading  text-balance text-5xl font-medium  md:text-7xl">
+        <h1 className="  text-balance text-4xl font-medium  md:text-7xl">
           <PrismicText field={slice.primary.heading} />
         </h1>
+        
       )}
+      <p className="text-5xl font-medium text-primary">
+        are you with us
+      </p>
+      <ControlledSwitches/>
       </Bounded></>
   );
 };

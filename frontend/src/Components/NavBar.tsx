@@ -8,6 +8,7 @@ import { PrismicNextLink } from '@prismicio/next';
 import SideBar from './SideBar';
 import Image from "next/image";
 
+
 type Props = {
     settings: Content.SettingsDocument;
 };
@@ -44,15 +45,15 @@ const NavBar: React.FC<Props> = ({ settings }) => {
     };
 
     return (
-        <nav className='md:py-6 px-4 py-2' aria-label='Main'>
+        <nav className='md:py-4 px-4 ' aria-label='Main'>
             <div className="mx-auto z-50 flex max-w-8xl flex-col justify-between font-medium text-white md:flex-row md:items-center">
                 {/* Logo and Mobile Menu Button */}
-                <div className="flex items-center justify-between">
+                <div className="flex items-center  justify-between">
                     <Link className="z-50" onClick={() => setOpen(false)} href="/">
                         <Image
                             src="/NdealNextBlack.svg"
                             alt="NdealLogo logo"
-                            width={200}
+                            width={180}
                             height={38}
                             priority
                         />
@@ -61,12 +62,13 @@ const NavBar: React.FC<Props> = ({ settings }) => {
                     <button className="block p-2 z-50 text-hidden text-3xl text-white md:hidden" onClick={toggleOpen}>
                         <span className={clsx('burger burger-3', open ? 'is-closed' : '')}></span>
                     </button>
+                    
                 </div>
 
                 {/* Mobile Navigation */}
                 <div className={clsx(" fixed bottom-0 left-0 right-0 my-auto top-0 pt-14 z-40 md:hidden")}>
                     <div className="grid gap-8">
-                        <SideBar className='bg-secondary glass-container text-white' showPopup={open} onClose={toggleOpen}>
+                        <SideBar className='bg-secondary text-white' showPopup={open} onClose={toggleOpen}>
                             {/* Services Section */}
                             <div>
                                 <button onClick={() => setShowServices(true)} className="block text-2xl px-2 mt-10">
