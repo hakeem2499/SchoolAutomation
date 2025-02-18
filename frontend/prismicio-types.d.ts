@@ -170,6 +170,21 @@ export interface SettingsDocumentDataPoliciesItem {
 }
 
 /**
+ * Item in *Settings → Contact Information*
+ */
+export interface SettingsDocumentDataContactInformationItem {
+  /**
+   * information field in *Settings → Contact Information*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.contact_information[].information
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  information: prismic.RichTextField;
+}
+
+/**
  * Content for Settings documents
  */
 interface SettingsDocumentData {
@@ -207,6 +222,30 @@ interface SettingsDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#group
    */
   policies: prismic.GroupField<Simplify<SettingsDocumentDataPoliciesItem>>;
+
+  /**
+   * Contact Information field in *Settings*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.contact_information[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  contact_information: prismic.GroupField<
+    Simplify<SettingsDocumentDataContactInformationItem>
+  >;
+
+  /**
+   * tagline field in *Settings*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.tagline
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  tagline: prismic.RichTextField;
 }
 
 /**
@@ -334,6 +373,7 @@ declare module "@prismicio/client" {
       SettingsDocumentDataOurServicesItem,
       SettingsDocumentDataCompanyItem,
       SettingsDocumentDataPoliciesItem,
+      SettingsDocumentDataContactInformationItem,
       AllDocumentTypes,
       HeroSlice,
       HeroSliceDefaultPrimary,

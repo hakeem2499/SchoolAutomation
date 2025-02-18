@@ -1,5 +1,5 @@
 "use client";
-import { asLink, Content, KeyTextField } from '@prismicio/client';
+import { asLink, Content, KeyTextField, LinkField } from '@prismicio/client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useState } from 'react';
@@ -26,7 +26,7 @@ const NavBar: React.FC<Props> = ({ settings }) => {
     };
 
     // Helper function to render navigation links
-    const renderNavLinks = (items: { label: KeyTextField; link_to_services?: any; link_to_company?: any }[], isServiceLink: boolean = false) => {
+    const renderNavLinks = (items: { label: KeyTextField; link_to_services?: LinkField; link_to_company?: LinkField }[], isServiceLink: boolean = false) => {
         return items.map((item) => (
             <PrismicNextLink
                 className='block px-2 text-2xl'

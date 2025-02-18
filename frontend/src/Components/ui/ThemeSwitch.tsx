@@ -11,6 +11,7 @@ export default function ControlledSwitches() {
 
     return (
         <Switch
+            
             checked={theme === "dark"} // Set the switch state based on the current theme
             onChange={handleChange}
             inputProps={{ "aria-label": "controlled" }}

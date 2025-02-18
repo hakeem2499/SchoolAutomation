@@ -86,6 +86,33 @@
             }
           }
         }
+      },
+      "contact_information": {
+        "type": "Group",
+        "config": {
+          "label": "Contact Information",
+          "repeat": true,
+          "fields": {
+            "information": {
+              "type": "StructuredText",
+              "config": {
+                "label": "information",
+                "placeholder": "",
+                "allowTargetBlank": false,
+                "single": "paragraph,strong"
+              }
+            }
+          }
+        }
+      },
+      "tagline": {
+        "type": "StructuredText",
+        "config": {
+          "label": "tagline",
+          "placeholder": "",
+          "allowTargetBlank": false,
+          "single": "paragraph,strong,em"
+        }
       }
     }
   }
