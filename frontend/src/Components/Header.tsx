@@ -8,7 +8,7 @@ export default async function Header () {
 
     const client = createClient();
     const settings = await client.getSingle('settings');
-    console.log(settings);
+    
 
 
   return (

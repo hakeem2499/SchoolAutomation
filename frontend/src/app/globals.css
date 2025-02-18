@@ -7,11 +7,20 @@
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+[data-theme="light"] {
+  --background-color: #f8f8f8;
+  --text-color: #000000;
+}
+
+[data-theme="dark"] {
+  --background-color: #0c0c0c;
+  --text-color: #ffffff;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
 }
 
 
@@ -41,6 +50,7 @@
   }
 }
 
+
 .burger {
   position: relative;
   width: 32px;
@@ -48,13 +58,21 @@
 }
 
 .burger,
-.burger::after,
-.burger::before {
+.burger::before,
+.burger::after {
   display: block;
   border-radius: 2px;
   height: 4px;
   background: #ffffff;
   transition: 0.3s;
+}
+
+.burger::before,
+.burger::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
 }
 
 .burger::before {
