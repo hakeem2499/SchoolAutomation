@@ -51,7 +51,7 @@ body {
 
 .burger {
   position: relative;
-  width: 32px;
+  width: 24px;
   border: 0;
 }
 
@@ -60,7 +60,7 @@ body {
 .burger::after {
   display: block;
   border-radius: 2px;
-  height: 4px;
+  height: 2px;
   background: #ffffff;
   transition: 0.3s;
 }

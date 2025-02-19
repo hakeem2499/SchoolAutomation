@@ -120,6 +120,24 @@
           "allowTargetBlank": false,
           "single": "paragraph,strong,em"
         }
+      },
+      "work_with_us": {
+        "type": "Link",
+        "config": {
+          "label": "Work With Us",
+          "placeholder": "",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": true,
+          "repeat": false
+        }
+      },
+      "work_with_us_label": {
+        "type": "Text",
+        "config": {
+          "label": "Work With Us label",
+          "placeholder": ""
+        }
       }
     }
   }

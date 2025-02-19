@@ -27,20 +27,18 @@ const Hero: FC<HeroProps> = ({ slice }) => {
       controls={false}
       width="1920"
       height="1080"
-      src="herovideoformediumscreen_1_dm8ypk" />
+      src="HeroNew_utsuq8" />
     </div><Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
         {isFilled.richText(slice.primary.heading) && (
-          <h1 className="  text-balance text-4xl  font-medium  md:text-7xl">
+          <h1 className="  text-balance text-4xl  font-medium text-brand  md:text-7xl">
             <PrismicText field={slice.primary.heading} />
           </h1>
 
         )}
-        <p className="text-5xl font-medium text-primary">
-          are you with us
-        </p>
+        
         
       </Bounded></>
   );

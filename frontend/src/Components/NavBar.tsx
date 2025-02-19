@@ -1,5 +1,5 @@
 "use client";
-import { asLink, Content, KeyTextField, LinkField } from '@prismicio/client';
+import { asLink, Content, isFilled, KeyTextField, LinkField } from '@prismicio/client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useState } from 'react';
@@ -7,6 +7,7 @@ import clsx from 'clsx';
 import { PrismicNextLink } from '@prismicio/next';
 import SideBar from './SideBar';
 import Image from "next/image";
+import ButtonLink from './ButtonLink';
 
 type Props = {
     settings: Content.SettingsDocument;
@@ -44,15 +45,15 @@ const NavBar: React.FC<Props> = ({ settings }) => {
 
     return (
         <nav className='md:py-4 px-4' aria-label='Main'>
-            <div className="mx-auto z-50 flex max-w-8xl flex-col justify-between font-medium text-white md:flex-row md:items-center">
+            <div className="mx-auto z-50 flex max-w-7xl flex-col justify-between font-medium text-white md:flex-row md:items-center">
                 {/* Logo and Mobile Menu Button */}
-                <div className="flex items-center py-2  justify-between">
+                <div className="flex items-center   justify-between">
                     <Link className="z-50" onClick={() => setOpen(false)} href="/">
                         <Image
 
                             src="/NdealNextBlack.svg"
                             alt="NdealLogo logo"
-                            width={120}
+                            width={150}
                             height={38}
                             priority
                         />
@@ -94,7 +95,7 @@ const NavBar: React.FC<Props> = ({ settings }) => {
                 </div>
 
                 {/* Desktop Navigation */}
-                <div className="hidden md:flex text-white mx-auto gap-8">
+                <div className="hidden md:flex items-center text-white mx-auto gap-8">
                     {/* Services Dropdown */}
                     <div className="relative">
                         <button
@@ -117,7 +118,7 @@ const NavBar: React.FC<Props> = ({ settings }) => {
 
                         {/* Services Dropdown Menu */}
                         {showServices && (
-                            <div className="absolute top-full  left-0 mt-2 w-full  bg-black text-white rounded-lg shadow-lg">
+                            <div className="absolute top-full flex flex-col gap-4 bg-brandWhite  left-0 mt-2 w-full min-w-[800px] p-8   text-black rounded-lg shadow-lg">
                                 {renderNavLinks(settings.data.our_services, true)}
                             </div>
                         )}
@@ -127,7 +128,15 @@ const NavBar: React.FC<Props> = ({ settings }) => {
                         {renderNavLinks(settings.data.company)}
                     </div>
 
+
+
                 </div>
+                <ButtonLink
+                    className="hero__button hidden lg:flex "
+                    field={settings.data.work_with_us}
+                >
+                    {settings.data.work_with_us_label}
+                </ButtonLink>
             </div>
         </nav>
     );
