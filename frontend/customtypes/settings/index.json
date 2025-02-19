@@ -101,6 +101,13 @@
                 "allowTargetBlank": false,
                 "single": "paragraph,strong"
               }
+            },
+            "label": {
+              "type": "Text",
+              "config": {
+                "label": "label",
+                "placeholder": ""
+              }
             }
           }
         }

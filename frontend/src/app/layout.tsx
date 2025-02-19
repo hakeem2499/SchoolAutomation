@@ -6,6 +6,7 @@ import { PrismicPreview } from "@prismicio/next";
 import { repositoryName } from "@/prismicio";
 import Header from "@/Components/Header";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import { Footer } from "@/Components/Footer";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -25,6 +26,8 @@ export default function RootLayout({
 
           <Header />
           <main>{children}</main>
+          <Footer/>
+          
         </ThemeProvider>
 
         <PrismicPreview repositoryName={repositoryName} />

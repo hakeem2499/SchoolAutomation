@@ -14,6 +14,7 @@
     "@prismicio/next": "^2.0.0",
     "@prismicio/react": "^3.0.0",
     "@tabler/icons-react": "^3.30.0",
+    "@tailwindcss/typography": "github:tailwindcss/typography",
     "clsx": "^2.1.1",
     "motion": "^12.4.3",
     "next": "15.1.7",

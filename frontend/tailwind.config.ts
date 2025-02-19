@@ -17,7 +17,10 @@ export default {
         primary:"#0c0c0c",
         secondary:"#171717"
       },
+      fontFamily: {
+        sans: ["var(--font-dm-sans)"],
+      },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 } satisfies Config;

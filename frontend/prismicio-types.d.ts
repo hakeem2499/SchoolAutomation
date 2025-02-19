@@ -182,6 +182,16 @@ export interface SettingsDocumentDataContactInformationItem {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   information: prismic.RichTextField;
+
+  /**
+   * label field in *Settings → Contact Information*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.contact_information[].label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  label: prismic.KeyTextField;
 }
 
 /**

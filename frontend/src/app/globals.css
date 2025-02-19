@@ -17,6 +17,7 @@
 body {
   background-color: var(--background-color);
   color: var(--text-color);
+  display: grid;
   transition: background-color 0.3s, color 0.3s;
 }
 
@@ -26,7 +27,7 @@ body {
 }
 
 .glass-container::before {
-  @apply absolute -inset-[10px] -z-10 rounded-xl border border-slate-100/20 bg-slate-200/10 backdrop-blur-md;
+  @apply absolute -inset-[10px] -z-10 rounded-sm border border-slate-100/20 bg-slate-200/10 backdrop-blur-md;
   content: "";
 }
 
