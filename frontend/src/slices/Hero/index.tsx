@@ -30,7 +30,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
             controls={false}
             width="1080"
             height="1920" // Portrait orientation for mobile
-            src="mobile-video-public-id" // Replace with your mobile video's public ID
+            src="HeroNewMobile_1_j75hqr" // Replace with your mobile video's public ID
           />
         </div>
 
@@ -44,7 +44,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
             controls={false}
             width="1920"
             height="1080" // Landscape orientation for desktop
-            src="desktop-video-public-id" // Replace with your desktop video's public ID
+            src="HeroNew_utsuq8" // Replace with your desktop video's public ID
           />
         </div>
       </div>
@@ -61,14 +61,14 @@ const Hero: FC<HeroProps> = ({ slice }) => {
         )}
 
         {isFilled.richText(slice.primary.body) && (
-          <div className="hero__body mx-auto mt-6 max-w-md text-balance text-slate-300 opacity-0">
+          <div className="hero__body mx-auto mt-6 max-w-md text-balance text-slate-300 ">
             <PrismicRichText field={slice.primary.body} />
           </div>
         )}
 
         {isFilled.link(slice.primary.link_to_services) && (
           <ButtonLink
-            className="hero__button mt-8 opacity-0"
+            className="hero__button mt-8 "
             field={slice.primary.link_to_services}
           >
             {slice.primary.label}

@@ -1,6 +1,7 @@
 import { createClient } from '@/prismicio';
 import NavBar from './NavBar';
 import React from 'react'
+import StickyNav from './ui/StickyNav';
 
 
 
@@ -13,7 +14,7 @@ export default async function Header () {
 
   return (
     <header className='bg-black'>
-    <NavBar settings={settings}/>
+    <StickyNav settings={settings}/>
     </header>
   )
 }
