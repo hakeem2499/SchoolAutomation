@@ -6,18 +6,14 @@ import clsx from 'clsx';
 import { PrismicNextLink } from '@prismicio/next';
 import Image from "next/image";
 import ButtonLink from '../ButtonLink';
-import { motion } from 'framer-motion';
-
-
-import React, { useState } from 'react'
-import Button from '../Button';
+import { motion, Variants } from 'framer-motion';
+import React, { useState } from 'react';
 
 type Props = {
     settings: Content.SettingsDocument;
 };
 
 const StickyNav: React.FC<Props> = ({ settings }) => {
-
     const [open, setOpen] = useState<boolean>(false);
     const [showServices, setShowServices] = useState<boolean>(false);
     const pathname = usePathname();
@@ -29,10 +25,15 @@ const StickyNav: React.FC<Props> = ({ settings }) => {
     };
 
     // Helper function to render navigation links
-    const renderNavLinks = (items: { label: KeyTextField; link_to_services?: LinkField; link_to_company?: LinkField }[], isServiceLink: boolean = false) => {
+    const renderNavLinks = (
+        items: { label: KeyTextField; link_to_services?: LinkField; link_to_company?: LinkField }[],
+        isServiceLink: boolean = false
+    ) => {
         return items.map((item) => (
             <PrismicNextLink
-                className='block border-b md:border-none hover:text-brand transition-colors duration-200  border-slate-400/20  text-2xl md:text-lg'
+                className={clsx(
+                    'block border-b md:border-none hover:text-brand transition-colors duration-200 border-slate-400/20 text-2xl md:text-lg'
+                )}
                 key={item.label}
                 field={isServiceLink ? item.link_to_services : item.link_to_company}
                 onClick={closeAllPopups}
@@ -46,45 +47,57 @@ const StickyNav: React.FC<Props> = ({ settings }) => {
             </PrismicNextLink>
         ));
     };
-    const menuVariants = {
+
+    // Animation variants for the menu
+    // Animation variants for the menu
+    const menuVariants: Variants = {
         hidden: { height: "5.6rem" },
         visible: { height: "29rem" },
-        transition: { duration: 0.3 }
+    };
+
+    const menuStaggeredVariant = {
+        hidden: { opacity: 0 },
+        visible: { opacity: 1 }
+
     }
-    const expandRowVariants = {
-        hidden: {
-            opacity: 0, y: 50
-        },
-        visible: (i: any) => ({
+
+    // Animation variants for expanding rows
+    const expandRowVariants: Variants = {
+        hidden: { opacity: 0, y: 50 },
+        visible: (i: number) => ({
             opacity: 1,
             y: 0,
-            transiton: { delay: i * 0.1, duration: 0.6 }
-        })
-    }
+            transition: { delay: i * 0.1, duration: 0.6 },
+        }),
+    };
+
     return (
-        <motion.div className='fixed top-0 w-full px-2 md:p-8 bg-primary text-white rounded-lg shadow-lg' variants={menuVariants}
+        <motion.div
             initial="hidden"
             animate={open ? 'visible' : 'hidden'}
-            whileHover="visible">
-            <div className="flex flex-col">
-                <div className="flex justify-between items-center">
+            variants={menuVariants}
+            className="fixed top-0 w-full px-2 md:p-8 bg-primary text-white rounded-lg shadow-lg"
 
-                    <div className="flex items-center">
-                        {/* insert Logo here */}
-                        <Link className="z-50" onClick={() => setOpen(false)} href="/">
-                            <Image
 
-                                src="/NdealNextBlack.svg"
-                                alt="NdealLogo logo"
-                                width={150}
-                                height={38}
-                                priority
-                            />
-                            <span className="sr-only">Ndeal Homepage</span>
-                        </Link>
-                    </div>
-                    {/* insert the Navigation for desktop here  menu for mobile navigation */}
-                    {/* desktop navs */}
+        >
+            <div className={clsx("flex flex-col", open ? 'h-auto' : 'h-10')}>
+                {/* Top Row: Logo, Desktop Navigation, and Menu Button */}
+                <div onMouseEnter={toggleOpen} onMouseLeave={toggleOpen}
+
+                    className="flex justify-between items-center">
+                    {/* Logo */}
+                    <Link className="z-50" onClick={() => setOpen(false)} href="/">
+                        <Image
+                            src="/NdealNextBlack.svg"
+                            alt="NdealLogo logo"
+                            width={150}
+                            height={38}
+                            priority
+                        />
+                        <span className="sr-only">Ndeal Homepage</span>
+                    </Link>
+
+                    {/* Desktop Navigation */}
                     <div className="hidden md:flex items-center space-x-5 text-center">
                         <button
                             onMouseEnter={() => setShowServices(true)}
@@ -98,30 +111,56 @@ const StickyNav: React.FC<Props> = ({ settings }) => {
                             {renderNavLinks(settings.data.company)}
                         </div>
                     </div>
-                    <div className='flex items-center'>
+
+                    {/* Work With Us Button and Mobile Menu Button */}
+                    <div className="flex items-center">
                         <ButtonLink
-                            className="hero__button hidden lg:flex "
+                            className="hero__button hidden lg:flex"
                             field={settings.data.work_with_us}
                         >
                             {settings.data.work_with_us_label}
                         </ButtonLink>
-                        <button className="block p-2 z-50 text-hidden text-3xl text-white md:hidden" onClick={toggleOpen}>
+                        <button
+                            className="block p-2 z-50 text-hidden text-3xl text-white md:hidden"
+                            onClick={toggleOpen}
+                            aria-label={open ? "Close menu" : "Open menu"}
+                        >
                             <span className={clsx('burger burger-3', open ? 'is-closed' : '')}></span>
                         </button>
                     </div>
                 </div>
-                <motion.div className=" flex-col hidden md:flex">
-                    <span className={clsx("h-px  bg-gray-300 w-full", open ? 'md:flex' : "hidden")}></span>
-                    <div className="flex items-center mt-10">
+                {/* Expanded Mobile Navigation */}
+                <motion.div
+                    className='md:hidden flex flex-col gap-4'
+                    variants={{
+                        visible: {
+                            transition: {
+                                staggerChildren: 0.4
+                            }
+                        }
+                    }}
+                    animate={open ? 'visible' : 'hidden'}
+                    initial="hidden">
+                    {renderNavLinks(settings.data.company).map((item, index) => (<motion.li key={index} variants={menuStaggeredVariant}>{item}</motion.li>))}
+
+                </motion.div>
+                {/* Expanded Content: Services or Work With Us Desktop Button */}
+                <motion.div className="flex-col  hidden md:flex">
+                    <div className="flex items-center  mt-10">
+
                         {showServices ? (
-                            <motion.div variants={expandRowVariants} custom={1} className="pl-4 flex flex-col gap-4 mt-2">
+                            <motion.div
+                                variants={expandRowVariants}
+                                custom={1}
+                                className="pl-4 flex flex-col gap-4 mt-2"
+                            >
                                 {renderNavLinks(settings.data.our_services, true)}
                             </motion.div>
                         ) : (
                             <motion.div variants={expandRowVariants} custom={2}>
 
                                 <ButtonLink
-                                    className="hero__button hidden lg:flex "
+                                    className="hero__button hidden lg:flex"
                                     field={settings.data.work_with_us}
                                 >
                                     {settings.data.work_with_us_label}
@@ -132,7 +171,7 @@ const StickyNav: React.FC<Props> = ({ settings }) => {
                 </motion.div>
             </div>
         </motion.div>
-    )
-}
+    );
+};
 
 export default StickyNav;
