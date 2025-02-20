@@ -1,0 +1,57 @@
+{
+  "id": "resources",
+  "type": "SharedSlice",
+  "name": "Resources",
+  "description": "Resources",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Heading",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "heading1,heading2,heading3,heading4"
+          }
+        },
+        "link": {
+          "type": "Link",
+          "config": {
+            "label": "Link",
+            "placeholder": "",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
+            "repeat": false
+          }
+        },
+        "label": {
+          "type": "Text",
+          "config": {
+            "label": "label",
+            "placeholder": ""
+          }
+        },
+        "resources": {
+          "type": "Link",
+          "config": {
+            "label": "Resources",
+            "select": "document",
+            "repeat": false,
+            "customtypes": [
+              "resource"
+            ]
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}
