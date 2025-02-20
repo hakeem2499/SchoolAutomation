@@ -23,20 +23,23 @@ const Hero: FC<HeroProps> = ({ slice }) => {
         {/* Mobile Video */}
         <div className="block md:hidden">
           <CldVideoPlayer
-            className="z-[-50]"
+            id="mobile"
+            className="z-[-50] "
             loop={true}
+
             autoplay={true}
             muted={true}
             controls={false}
             width="1080"
             height="1920" // Portrait orientation for mobile
-            src="HeroNewMobile_1_j75hqr" // Replace with your mobile video's public ID
+            src="HeroNewMobile_1_dfhbwg" // Replace with your mobile video's public ID
           />
         </div>
 
         {/* Desktop Video */}
         <div className="hidden md:block">
           <CldVideoPlayer
+            id="medium"
             className="z-[-50]"
             loop={true}
             autoplay={true}
@@ -51,29 +54,33 @@ const Hero: FC<HeroProps> = ({ slice }) => {
 
       {/* Hero Content */}
       <Bounded
+        className="min-h-screen"
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
       >
-        {isFilled.richText(slice.primary.heading) && (
-          <h1 className="text-balance text-4xl font-medium text-brand md:text-7xl">
-            <PrismicText field={slice.primary.heading} />
-          </h1>
-        )}
+        <div className="flex flex-col gap-4">
 
-        {isFilled.richText(slice.primary.body) && (
-          <div className="hero__body mx-auto mt-6 max-w-md text-balance text-slate-300 ">
-            <PrismicRichText field={slice.primary.body} />
-          </div>
-        )}
+          {isFilled.richText(slice.primary.heading) && (
+            <h1 className="text-balance text-4xl mt-[25%] md:mt-[15%]  font-semibold  text-brand md:text-7xl">
+              <PrismicText field={slice.primary.heading} />
+            </h1>
+          )}
 
-        {isFilled.link(slice.primary.link_to_services) && (
-          <ButtonLink
-            className="hero__button mt-8 "
-            field={slice.primary.link_to_services}
-          >
-            {slice.primary.label}
-          </ButtonLink>
-        )}
+          {isFilled.richText(slice.primary.body) && (
+            <div className="hero__body mt-6 max-w-5xl text-balance font-medium text-xl md:text-2xl  ">
+              <PrismicRichText field={slice.primary.body} />
+            </div>
+          )}
+
+          {isFilled.link(slice.primary.link_to_services) && (
+            <ButtonLink
+              className="hero__button mt-8 "
+              field={slice.primary.link_to_services}
+            >
+              {slice.primary.label}
+            </ButtonLink>
+          )}
+        </div>
       </Bounded>
     </>
   );

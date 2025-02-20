@@ -18,7 +18,8 @@ const StickyNav: React.FC<Props> = ({ settings }) => {
     const [showServices, setShowServices] = useState<boolean>(false);
     const pathname = usePathname();
 
-    const toggleOpen = () => setOpen(!open);
+    const toggleOpen = () => setOpen(true);
+    const mobileToggleOpen = () => setOpen(!open);
     const closeAllPopups = () => {
         setOpen(false);
         setShowServices(false);
@@ -82,7 +83,7 @@ const StickyNav: React.FC<Props> = ({ settings }) => {
         >
             <div className={clsx("flex flex-col", open ? 'h-auto' : 'h-10')}>
                 {/* Top Row: Logo, Desktop Navigation, and Menu Button */}
-                <div onMouseEnter={toggleOpen} onMouseLeave={toggleOpen}
+                <div onMouseEnter={toggleOpen} onMouseLeave={closeAllPopups}
 
                     className="flex justify-between items-center">
                     {/* Logo */}
@@ -122,7 +123,7 @@ const StickyNav: React.FC<Props> = ({ settings }) => {
                         </ButtonLink>
                         <button
                             className="block p-2 z-50 text-hidden text-3xl text-white md:hidden"
-                            onClick={toggleOpen}
+                            onClick={mobileToggleOpen}
                             aria-label={open ? "Close menu" : "Open menu"}
                         >
                             <span className={clsx('burger burger-3', open ? 'is-closed' : '')}></span>
@@ -131,7 +132,7 @@ const StickyNav: React.FC<Props> = ({ settings }) => {
                 </div>
                 {/* Expanded Mobile Navigation */}
                 <motion.div
-                    className='md:hidden flex flex-col gap-4'
+                    className={clsx('md:hidden flex flex-col gap-4', open ? "translate-y-[0]" : "translate-y-[-100%]")}
                     variants={{
                         visible: {
                             transition: {
