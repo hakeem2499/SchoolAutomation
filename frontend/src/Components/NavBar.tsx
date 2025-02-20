@@ -8,6 +8,7 @@ import { PrismicNextLink } from '@prismicio/next';
 import SideBar from './SideBar';
 import Image from "next/image";
 import ButtonLink from './ButtonLink';
+import {motion} from 'framer-motion';
 
 type Props = {
     settings: Content.SettingsDocument;
