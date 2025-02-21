@@ -89,13 +89,13 @@ body {
 
 .burger.burger-3.is-closed::before,
 .burger.burger-3.is-closed::after {
-  width: 20px;
+  width: 15px;
 }
 
 .burger.burger-3.is-closed::before {
-  transform: rotate(-45deg) translate(-4px, -2px);
+  transform: rotate(-45deg) translate(-6px, -2px);
 }
 
 .burger.burger-3.is-closed::after {
-  transform: rotate(45deg) translate(-4px, 2px);
+  transform: rotate(45deg) translate(-6px, 2px);
 }

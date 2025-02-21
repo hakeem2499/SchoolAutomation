@@ -40,7 +40,7 @@ const SideBar: React.FC<Props> = ({
                 {onClose && (
                     <button
                         onClick={onClose}
-                        className="  text-xl py-8 text-brand focus:outline-none"
+                        className="  text-xl py-8 text-brand mx-auto focus:outline-none"
                         aria-label="Close sidebar"
                     >
                         &larr; <span>Main menu</span>
@@ -48,7 +48,7 @@ const SideBar: React.FC<Props> = ({
                 )}
 
                 {/* Children with Custom Top Spacing */}
-                <div  className="flex p-4 flex-col flex-1  gap-8 mt-10"> {/* Use pt-20 for more spacing */}
+                <div  className="flex p-4 flex-col flex-1 w-full gap-8 mt-10"> {/* Use pt-20 for more spacing */}
                     {children}
                 </div>
             </div>

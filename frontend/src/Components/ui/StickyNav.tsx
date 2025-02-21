@@ -9,6 +9,7 @@ import ButtonLink from '../ButtonLink';
 import { motion, Variants } from 'framer-motion';
 import React, { useState } from 'react';
 import SideBar from '../SideBar';
+import ThemeToggleSwitch from './ThemeSwitch';
 
 type Props = {
     settings: Content.SettingsDocument;
@@ -25,6 +26,7 @@ const StickyNav: React.FC<Props> = ({ settings }) => {
     const closeAllPopups = () => {
         setOpen(false);
         setShowServices(false);
+        setShowSidebar(false);
     };
 
     const toggleSidebar = () => {
@@ -84,7 +86,7 @@ const StickyNav: React.FC<Props> = ({ settings }) => {
                 initial="hidden"
                 animate={open ? 'visible' : 'hidden'}
                 variants={menuVariants}
-                className="fixed top-0 w-full px-2 md:p-4 bg-primary text-white rounded-lg shadow-lg"
+                className="fixed top-0 w-full px-2 md:p-4 z-50 bg-primary text-white rounded-lg shadow-lg"
 
 
             >
@@ -106,13 +108,24 @@ const StickyNav: React.FC<Props> = ({ settings }) => {
                         </Link>
 
                         {/* Desktop Navigation */}
-                        <div className="hidden md:flex items-center space-x-5 text-center">
+                        <div className="hidden md:flex  items-center space-x-5 text-center">
                             <button
                                 onMouseEnter={() => setShowServices(true)}
                                 onMouseLeave={() => setShowServices(false)}
-                                className="text-lg"
+                                className="text-lg inline-flex items-center gap-1"
                             >
-                                Our Services
+                                <span>Our Services</span>
+                                <svg
+                                    className={`w-4 h-4 transition-transform ${showServices ? "rotate-180" : ""}`}
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                >
+                                    <path
+                                        fillRule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clipRule="evenodd"
+                                    />
+                                </svg>
                             </button>
                             {/* Company Links */}
                             <div className="flex gap-8">
@@ -121,13 +134,16 @@ const StickyNav: React.FC<Props> = ({ settings }) => {
                         </div>
 
                         {/* Work With Us Button and Mobile Menu Button */}
-                        <div className="flex items-center">
+
+                        <div className="flex md:gap-2 items-center">
+                            <ThemeToggleSwitch />
                             <ButtonLink
                                 className="hero__button hidden lg:flex"
                                 field={settings.data.work_with_us}
                             >
                                 {settings.data.work_with_us_label}
                             </ButtonLink>
+
                             <button
                                 className="block p-2 z-50 text-hidden text-3xl text-white md:hidden"
                                 onClick={mobileToggleOpen}
@@ -139,7 +155,7 @@ const StickyNav: React.FC<Props> = ({ settings }) => {
                     </div>
                     {/* Expanded Mobile Navigation */}
                     <motion.div
-                        className={clsx('md:hidden flex flex-col py-4 gap-6', open ? "translate-y-[0]" : "translate-y-[-100%]")}
+                        className={clsx('md:hidden flex flex-col py-4 gap-6 transition-transform duration-500', open ? "translate-y-[0%]" : "translate-y-[-100%]")}
                         variants={{
                             visible: {
                                 transition: {
@@ -151,7 +167,7 @@ const StickyNav: React.FC<Props> = ({ settings }) => {
                         initial="hidden">
                         <button
                             onClick={toggleSidebar}
-                            className="text-2xl text-brand text-left"
+                            className={clsx("text-2xl text-brand text-left", open ? "block" : "hidden")}
                         >
                             Our Services &rarr;
                         </button>
