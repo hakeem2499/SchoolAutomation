@@ -25,9 +25,9 @@
 					}
 				]
 			},
-			"case_studies": {
+			"case_study": {
 				"__TYPE__": "LinkContent",
-				"key": "646af95a-033d-461e-8144-ced594a0d744",
+				"key": "a5cc4c63-4290-4e1c-ac31-09457218fa50",
 				"value": {
 					"__TYPE__": "DocumentLink",
 					"id": "mock_document_id"

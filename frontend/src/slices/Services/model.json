@@ -39,10 +39,10 @@
             "placeholder": ""
           }
         },
-        "services": {
+        "service": {
           "type": "Link",
           "config": {
-            "label": "Services",
+            "label": "Service",
             "select": "document",
             "repeat": false,
             "customtypes": [

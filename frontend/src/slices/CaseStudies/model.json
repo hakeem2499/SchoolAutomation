@@ -30,10 +30,10 @@
             "single": "paragraph"
           }
         },
-        "case_studies": {
+        "case_study": {
           "type": "Link",
           "config": {
-            "label": "CaseStudies",
+            "label": "CaseStudy",
             "select": "document",
             "repeat": false,
             "customtypes": [

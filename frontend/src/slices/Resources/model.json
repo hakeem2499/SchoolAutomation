@@ -39,10 +39,10 @@
             "placeholder": ""
           }
         },
-        "resources": {
+        "resource": {
           "type": "Link",
           "config": {
-            "label": "Resources",
+            "label": "Resource",
             "select": "document",
             "repeat": false,
             "customtypes": [

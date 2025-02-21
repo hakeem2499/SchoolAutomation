@@ -213,6 +213,39 @@ type ServiceDocumentDataSlicesSlice = never;
  */
 interface ServiceDocumentData {
   /**
+   * Service field in *service*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: service.service
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  service: prismic.RichTextField;
+
+  /**
+   * Description field in *service*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: service.description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * icon field in *service*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: service.icon
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  icon: prismic.ImageField<never>;
+
+  /**
    * Slice Zone field in *service*
    *
    * - **Field Type**: Slice Zone
@@ -529,14 +562,14 @@ export interface CaseStudiesSliceDefaultPrimary {
   body: prismic.RichTextField;
 
   /**
-   * CaseStudies field in *CaseStudies → Default → Primary*
+   * CaseStudy field in *CaseStudies → Default → Primary*
    *
    * - **Field Type**: Content Relationship
    * - **Placeholder**: *None*
-   * - **API ID Path**: case_studies.default.primary.case_studies
+   * - **API ID Path**: case_studies.default.primary.case_study
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  case_studies: prismic.ContentRelationshipField<"case_study">;
+  case_study: prismic.ContentRelationshipField<"case_study">;
 }
 
 /**
@@ -869,14 +902,14 @@ export interface ResourcesSliceDefaultPrimary {
   label: prismic.KeyTextField;
 
   /**
-   * Resources field in *Resources → Default → Primary*
+   * Resource field in *Resources → Default → Primary*
    *
    * - **Field Type**: Content Relationship
    * - **Placeholder**: *None*
-   * - **API ID Path**: resources.default.primary.resources
+   * - **API ID Path**: resources.default.primary.resource
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  resources: prismic.ContentRelationshipField<"resource">;
+  resource: prismic.ContentRelationshipField<"resource">;
 }
 
 /**
@@ -944,14 +977,14 @@ export interface ServicesSliceDefaultPrimary {
   label: prismic.KeyTextField;
 
   /**
-   * Services field in *Services → Default → Primary*
+   * Service field in *Services → Default → Primary*
    *
    * - **Field Type**: Content Relationship
    * - **Placeholder**: *None*
-   * - **API ID Path**: services.default.primary.services
+   * - **API ID Path**: services.default.primary.service
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  services: prismic.ContentRelationshipField<"service">;
+  service: prismic.ContentRelationshipField<"service">;
 }
 
 /**

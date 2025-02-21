@@ -28,9 +28,9 @@
 				"value": "using",
 				"type": "Text"
 			},
-			"resources": {
+			"resource": {
 				"__TYPE__": "LinkContent",
-				"key": "bb0cc860-8c8d-4091-bb4e-de55a9e3334a",
+				"key": "2d72a9df-ec8c-45ac-973b-f974b26c5783",
 				"value": {
 					"__TYPE__": "DocumentLink",
 					"id": "mock_document_id"
