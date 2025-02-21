@@ -1,0 +1,56 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"cta_title": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading3",
+						"content": {
+							"text": "Attempt"
+						}
+					}
+				]
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Elit amet quis ut aliquip reprehenderit nulla amet ipsum eiusmod ea culpa deserunt."
+						}
+					}
+				]
+			},
+			"link": {
+				"key": "0b8f21fd-a1c4-4ace-b3be-420ddd870f96",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "http://twitter.com",
+					"text": "he"
+				}
+			},
+			"label": {
+				"__TYPE__": "FieldContent",
+				"value": "flies",
+				"type": "Text"
+			},
+			"description": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Dolore ullamco minim exercitation quis adipisicing labore ut consectetur proident anim. Reprehenderit amet sint sint ut pariatur non Lorem tempor voluptate laborum ut sint eiusmod."
+						}
+					}
+				]
+			}
+		},
+		"items": []
+	}
+]

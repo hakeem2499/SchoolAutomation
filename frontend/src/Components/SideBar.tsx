@@ -35,15 +35,15 @@ const SideBar: React.FC<Props> = ({
             />
 
             {/* Sidebar Content */}
-            <div className="relative flex flex-col w-full max-w-md bg-black h-full overflow-y-auto">
+            <div className="relative flex items-start flex-col w-full max-w-md bg-black h-full overflow-y-auto">
                 {/* Close Button */}
                 {onClose && (
                     <button
                         onClick={onClose}
-                        className="absolute top-4 right-4 text-2xl text-white focus:outline-none"
+                        className="  text-xl py-8 text-brand focus:outline-none"
                         aria-label="Close sidebar"
                     >
-                        &times;
+                        &larr; <span>Main menu</span>
                     </button>
                 )}
 

@@ -570,6 +570,91 @@ export type CaseStudiesSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *CtaSection → Default → Primary*
+ */
+export interface CtaSectionSliceDefaultPrimary {
+  /**
+   * Cta Title field in *CtaSection → Default → Primary*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cta_section.default.primary.cta_title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  cta_title: prismic.TitleField;
+
+  /**
+   * Body field in *CtaSection → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cta_section.default.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Link field in *CtaSection → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cta_section.default.primary.link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * label field in *CtaSection → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cta_section.default.primary.label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  label: prismic.KeyTextField;
+
+  /**
+   * description field in *CtaSection → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cta_section.default.primary.description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+}
+
+/**
+ * Default variation for CtaSection Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CtaSectionSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<CtaSectionSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *CtaSection*
+ */
+type CtaSectionSliceVariation = CtaSectionSliceDefault;
+
+/**
+ * CtaSection Shared Slice
+ *
+ * - **API ID**: `cta_section`
+ * - **Description**: CtaSection
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CtaSectionSlice = prismic.SharedSlice<
+  "cta_section",
+  CtaSectionSliceVariation
+>;
+
+/**
  * Primary content in *Hero → Default → Primary*
  */
 export interface HeroSliceDefaultPrimary {
@@ -646,6 +731,108 @@ type HeroSliceVariation = HeroSliceDefault;
  * - **Documentation**: https://prismic.io/docs/slice
  */
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
+
+/**
+ * Item in *ProcessTimeLine → Default → Primary → Process*
+ */
+export interface ProcessTimeLineSliceDefaultPrimaryProcessItem {
+  /**
+   * title field in *ProcessTimeLine → Default → Primary → Process*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: process_time_line.default.primary.process[].title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * image field in *ProcessTimeLine → Default → Primary → Process*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: process_time_line.default.primary.process[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Body field in *ProcessTimeLine → Default → Primary → Process*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: process_time_line.default.primary.process[].body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * label field in *ProcessTimeLine → Default → Primary → Process*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: process_time_line.default.primary.process[].label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  label: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *ProcessTimeLine → Default → Primary*
+ */
+export interface ProcessTimeLineSliceDefaultPrimary {
+  /**
+   * Heading field in *ProcessTimeLine → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: process_time_line.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Process field in *ProcessTimeLine → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: process_time_line.default.primary.process[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  process: prismic.GroupField<
+    Simplify<ProcessTimeLineSliceDefaultPrimaryProcessItem>
+  >;
+}
+
+/**
+ * Default variation for ProcessTimeLine Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ProcessTimeLineSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ProcessTimeLineSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ProcessTimeLine*
+ */
+type ProcessTimeLineSliceVariation = ProcessTimeLineSliceDefault;
+
+/**
+ * ProcessTimeLine Shared Slice
+ *
+ * - **API ID**: `process_time_line`
+ * - **Description**: ProcessTimeLine
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ProcessTimeLineSlice = prismic.SharedSlice<
+  "process_time_line",
+  ProcessTimeLineSliceVariation
+>;
 
 /**
  * Primary content in *Resources → Default → Primary*
@@ -797,6 +984,96 @@ export type ServicesSlice = prismic.SharedSlice<
   ServicesSliceVariation
 >;
 
+/**
+ * Item in *Statistics → Default → Primary → stats*
+ */
+export interface StatisticsSliceDefaultPrimaryStatsItem {
+  /**
+   * Body field in *Statistics → Default → Primary → stats*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: statistics.default.primary.stats[].body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * label field in *Statistics → Default → Primary → stats*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: statistics.default.primary.stats[].label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  label: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *Statistics → Default → Primary*
+ */
+export interface StatisticsSliceDefaultPrimary {
+  /**
+   * Heading field in *Statistics → Default → Primary*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: statistics.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  heading: prismic.TitleField;
+
+  /**
+   * Body field in *Statistics → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: statistics.default.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * stats field in *Statistics → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: statistics.default.primary.stats[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  stats: prismic.GroupField<Simplify<StatisticsSliceDefaultPrimaryStatsItem>>;
+}
+
+/**
+ * Default variation for Statistics Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type StatisticsSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<StatisticsSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Statistics*
+ */
+type StatisticsSliceVariation = StatisticsSliceDefault;
+
+/**
+ * Statistics Shared Slice
+ *
+ * - **API ID**: `statistics`
+ * - **Description**: Statistics
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type StatisticsSlice = prismic.SharedSlice<
+  "statistics",
+  StatisticsSliceVariation
+>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -841,10 +1118,19 @@ declare module "@prismicio/client" {
       CaseStudiesSliceDefaultPrimary,
       CaseStudiesSliceVariation,
       CaseStudiesSliceDefault,
+      CtaSectionSlice,
+      CtaSectionSliceDefaultPrimary,
+      CtaSectionSliceVariation,
+      CtaSectionSliceDefault,
       HeroSlice,
       HeroSliceDefaultPrimary,
       HeroSliceVariation,
       HeroSliceDefault,
+      ProcessTimeLineSlice,
+      ProcessTimeLineSliceDefaultPrimaryProcessItem,
+      ProcessTimeLineSliceDefaultPrimary,
+      ProcessTimeLineSliceVariation,
+      ProcessTimeLineSliceDefault,
       ResourcesSlice,
       ResourcesSliceDefaultPrimary,
       ResourcesSliceVariation,
@@ -853,6 +1139,11 @@ declare module "@prismicio/client" {
       ServicesSliceDefaultPrimary,
       ServicesSliceVariation,
       ServicesSliceDefault,
+      StatisticsSlice,
+      StatisticsSliceDefaultPrimaryStatsItem,
+      StatisticsSliceDefaultPrimary,
+      StatisticsSliceVariation,
+      StatisticsSliceDefault,
     };
   }
 }
