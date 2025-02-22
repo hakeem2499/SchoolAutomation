@@ -50,7 +50,7 @@ const Services: FC<ServicesProps> = async ({ slice }: ServicesProps): Promise<JS
         )}
       </div>
 
-      <div className="mt-30 grid md:grid-cols-2">
+      <div className="mt-10 grid md:grid-cols-2">
         {services.map((service, index) =>
           service && (
             <div key={service.id} className="flex flex-col md:p-2 lg:p-4 gap-4 md:gap-6 justify-center">
