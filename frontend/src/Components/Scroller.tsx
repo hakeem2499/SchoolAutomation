@@ -4,7 +4,7 @@ import { Content } from "@prismicio/client";
 import React, { useRef, useState, memo } from "react";
 
 interface ScrollerProps {
-  items: Content.all[];
+  items: React.ReactNode[];
   
 }
 

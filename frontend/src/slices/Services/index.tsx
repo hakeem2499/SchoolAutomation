@@ -36,6 +36,7 @@ const fetchServices = async (slice: Content.ServicesSlice) => {
  */
 const Services: FC<ServicesProps> = async ({ slice }: ServicesProps): Promise<JSX.Element> => {
   const services = await fetchServices(slice);
+  console.log("🚀 ~ constServices:FC<ServicesProps>= ~ services:", services)
 
   return (
     <Bounded
@@ -65,10 +66,10 @@ const Services: FC<ServicesProps> = async ({ slice }: ServicesProps): Promise<JS
 
                   <PrismicNextImage className="rounded-lg invert h-20 w-20" field={service.data.icon} />
                 </div>
-                <h2 className="text-balance text-brand text-2xl font-medium md:text-3xl">
+                <h4 className="text-balance text-brand text-2xl font-medium md:text-3xl">
 
                   <PrismicText field={service.data.service} />
-                </h2>
+                </h4>
                 <p className="font-medium">
 
                   <PrismicText field={service.data.description} />
