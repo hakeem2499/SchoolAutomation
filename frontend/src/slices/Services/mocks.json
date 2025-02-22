@@ -30,13 +30,26 @@
 				"type": "Text",
 				"value": "Our Services"
 			},
-			"service": {
-				"key": "2394baed-b516-4d9f-b62c-0ee3ab2c5417",
-				"__TYPE__": "LinkContent",
-				"value": {
-					"__TYPE__": "DocumentLink",
-					"id": "mock_document_id"
-				}
+			"services": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"service",
+								{
+									"__TYPE__": "LinkContent",
+									"key": "e225cf96-4437-4b0b-96e7-b61f003cdab6",
+									"value": {
+										"__TYPE__": "DocumentLink",
+										"id": "mock_document_id"
+									}
+								}
+							]
+						]
+					}
+				]
 			}
 		},
 		"items": []

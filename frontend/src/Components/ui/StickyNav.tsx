@@ -98,6 +98,7 @@ const StickyNav: React.FC<Props> = ({ settings }) => {
                         {/* Logo */}
                         <Link className="z-50" onClick={() => setOpen(false)} href="/">
                             <Image
+                                
                                 src="/NdealNextBlack.svg"
                                 alt="NdealLogo logo"
                                 width={150}

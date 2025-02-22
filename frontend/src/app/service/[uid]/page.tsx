@@ -1,35 +1,42 @@
-
-
 import Bounded from '@/Components/Bounded';
-import { createClient } from '@/prismicio'
+import { createClient } from '@/prismicio';
+import { components } from '@/slices';
+import { asText } from '@prismicio/client';
 import { PrismicNextImage } from '@prismicio/next';
 import { PrismicText, SliceZone } from '@prismicio/react';
+import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import React from 'react'
+import React from 'react';
 
-type Params = {
-    uid: string
-}
+type Params = { uid: string };
 
-export default async function Page({ params }: { params: Params }) {
+/**
+ * Fetches the service page data from Prismic.
+ */
+const fetchServicePage = async (uid: string) => {
     const client = createClient();
-    const page = await client.getByUID("service", params.uid)
-        .catch(() => notFound());
+    return await client.getByUID('service', uid).catch(() => notFound());
+};
+
+/**
+ * Service Page Component.
+ */
+export default async function Page({ params }: { params: Params }) {
+    const page = await fetchServicePage(params.uid);
 
     return (
         <Bounded>
-            <div className="relative grid place-items-center text-center">
-
+            <div className="relative mt-16 grid place-items-center text-center">
+                <p className="text-lg uppercase text-brand">Services</p>
                 <h1 className="text-7xl font-medium">
                     <PrismicText field={page.data.service} />
-                    <p className="text-lg text-yellow-500">Case Study</p>
                 </h1>
-                <p className="mb-4 mt-8 max-w-xl text-lg text-slate-300">
+                <p className="mb-4 mt-8 max-w-xl text-lg">
                     <PrismicText field={page.data.description} />
                 </p>
                 <PrismicNextImage
                     field={page.data.icon}
-                    className="rounded-lg"
+                    className="rounded-lg "
                     quality={100}
                 />
             </div>
@@ -37,5 +44,35 @@ export default async function Page({ params }: { params: Params }) {
                 <SliceZone slices={page.data.slices} components={components} />
             </div>
         </Bounded>
-    )
+    );
+}
+
+/**
+ * Generates metadata for the service page.
+ */
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+    const client = createClient();
+    const page = await client.getByUID('service', params.uid).catch(() => null);
+
+    if (!page) {
+        return {
+            title: 'Service Not Found',
+            description: 'The requested service does not exist.',
+        };
+    }
+
+    return {
+        title: `${page.data.meta_title || asText(page.data.service) + ' service'}`,
+        description: page.data.meta_description,
+    };
+}
+
+/**
+ * Generates static paths for all service pages.
+ */
+export async function generateStaticParams() {
+    const client = createClient();
+    const pages = await client.getAllByType('service');
+
+    return pages.map((page) => ({ uid: page.uid }));
 }

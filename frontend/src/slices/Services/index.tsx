@@ -12,19 +12,30 @@ import { createClient } from "@/prismicio";
 export type ServicesProps = SliceComponentProps<Content.ServicesSlice>;
 
 /**
+ * Fetches service documents based on the slice items.
+ */
+const fetchServices = async (slice: Content.ServicesSlice) => {
+  const client = createClient();
+
+  // Fetch all services in parallel
+  const services = await Promise.all(
+    slice.primary.services.map(async (item) => {
+      if (isFilled.contentRelationship(item.service)) {
+        return await client.getByID<Content.ServiceDocument>(item.service.id);
+      }
+      return null; // Return null for invalid items
+    })
+  );
+
+  // Filter out null values and return only valid services
+  return services.filter((service) => service !== null) as Content.ServiceDocument[];
+};
+
+/**
  * Component for "Services" Slices.
  */
 const Services: FC<ServicesProps> = async ({ slice }: ServicesProps): Promise<JSX.Element> => {
-  const client = createClient();
-
-  const services = await Promise.all(
-    slice.items.map(async (item: Content.ServicesSliceDefaultPrimary) => {
-      if (isFilled.contentRelationship(item.service)) {
-        return await client.getByID<Content.ServiceDocument>(item.service.id)
-      }
-    })
-  )
-  console.log("🚀 ~ constServices:FC<ServicesProps>= ~ services:", services)
+  const services = await fetchServices(slice);
 
   return (
     <Bounded
@@ -32,40 +43,45 @@ const Services: FC<ServicesProps> = async ({ slice }: ServicesProps): Promise<JS
       data-slice-variation={slice.variation}
     >
       <div className="flex justify-between w-full items-center">
-
         {isFilled.richText(slice.primary.heading) && (
-          <h2 className="hero__heading text-balance text-3xl font-medium  md:text-5xl">
+          <h2 className="hero__heading text-balance text-3xl font-medium md:text-5xl">
             <PrismicText field={slice.primary.heading} />
           </h2>
         )}
 
-
         {isFilled.link(slice.primary.link) && (
-          <ButtonLink
-            className="hero__button mt-8 "
-            field={slice.primary.link}
-          >
+          <ButtonLink className="hero__button mt-8" field={slice.primary.link}>
             {slice.primary.label}
           </ButtonLink>
         )}
       </div>
 
-      <div className="mt-10 grid md:grid-cols-2">
-        {services.map((service, index) =>
-          service && (
-            <div key={service.id} className="flex flex-col md:p-2 lg:p-4 gap-4 md:gap-6 justify-center">
-              <PrismicNextImage field={service.data.icon} />
-              <PrismicRichText field={service.data.service} />
-              <PrismicRichText field={service.data.description} />
-              <PrismicNextLink
-                document={service}
-                className="after:absolute after:inset-0 hover:underline"
-              >
-                Develop <PrismicText field={service.data.service} /> case
+      <div className="mt-10 grid md:gap-8 md:grid-cols-2">
+        {services.map(
+          (service) =>
+            service && (
+              <div key={service.id} className="flex bg-slate-950  text-white rounded-2xl flex-col md:p-2 lg:p-8 gap-4 md:gap-6 justify-center">
+                <div>
 
-              </PrismicNextLink>
-            </div>
-          ))}
+                  <PrismicNextImage className="rounded-lg invert h-20 w-20" field={service.data.icon} />
+                </div>
+                <h2 className="text-balance text-brand text-2xl font-medium md:text-3xl">
+
+                  <PrismicText field={service.data.service} />
+                </h2>
+                <p className="font-medium">
+
+                  <PrismicText field={service.data.description} />
+                </p>
+                <PrismicNextLink
+                  document={service}
+                  className="after:absolute text-brand after:inset-0 hover:underline"
+                >
+                  Develop <PrismicText field={service.data.service} /> case
+                </PrismicNextLink>
+              </div>
+            )
+        )}
       </div>
     </Bounded>
   );

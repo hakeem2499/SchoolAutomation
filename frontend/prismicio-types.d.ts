@@ -950,6 +950,21 @@ export type ResourcesSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Item in *Services → Default → Primary → Services*
+ */
+export interface ServicesSliceDefaultPrimaryServicesItem {
+  /**
+   * service field in *Services → Default → Primary → Services*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: services.default.primary.services[].service
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  service: prismic.ContentRelationshipField<"service">;
+}
+
+/**
  * Primary content in *Services → Default → Primary*
  */
 export interface ServicesSliceDefaultPrimary {
@@ -984,14 +999,16 @@ export interface ServicesSliceDefaultPrimary {
   label: prismic.KeyTextField;
 
   /**
-   * Service field in *Services → Default → Primary*
+   * Services field in *Services → Default → Primary*
    *
-   * - **Field Type**: Content Relationship
+   * - **Field Type**: Group
    * - **Placeholder**: *None*
-   * - **API ID Path**: services.default.primary.service
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   * - **API ID Path**: services.default.primary.services[]
+   * - **Documentation**: https://prismic.io/docs/field#group
    */
-  service: prismic.ContentRelationshipField<"service">;
+  services: prismic.GroupField<
+    Simplify<ServicesSliceDefaultPrimaryServicesItem>
+  >;
 }
 
 /**
@@ -1176,6 +1193,7 @@ declare module "@prismicio/client" {
       ResourcesSliceVariation,
       ResourcesSliceDefault,
       ServicesSlice,
+      ServicesSliceDefaultPrimaryServicesItem,
       ServicesSliceDefaultPrimary,
       ServicesSliceVariation,
       ServicesSliceDefault,
