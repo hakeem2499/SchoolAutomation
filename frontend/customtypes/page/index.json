@@ -24,6 +24,24 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "statistics": {
+              "type": "SharedSlice"
+            },
+            "services": {
+              "type": "SharedSlice"
+            },
+            "resources": {
+              "type": "SharedSlice"
+            },
+            "process_time_line": {
+              "type": "SharedSlice"
+            },
+            "cta_section": {
+              "type": "SharedSlice"
+            },
+            "case_studies": {
+              "type": "SharedSlice"
+            },
             "hero": {
               "type": "SharedSlice"
             }

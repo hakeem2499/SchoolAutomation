@@ -69,7 +69,14 @@ export type CaseStudyDocument<Lang extends string = string> =
     Lang
   >;
 
-type PageDocumentDataSlicesSlice = HeroSlice;
+type PageDocumentDataSlicesSlice =
+  | StatisticsSlice
+  | ServicesSlice
+  | ResourcesSlice
+  | ProcessTimeLineSlice
+  | CtaSectionSlice
+  | CaseStudiesSlice
+  | HeroSlice;
 
 /**
  * Content for Page documents

@@ -9,7 +9,7 @@
 					{
 						"type": "heading2",
 						"content": {
-							"text": "One day with you",
+							"text": "Our Services",
 							"spans": []
 						},
 						"direction": "ltr"
@@ -31,8 +31,8 @@
 				"value": "Our Services"
 			},
 			"service": {
-				"__TYPE__": "LinkContent",
 				"key": "2394baed-b516-4d9f-b62c-0ee3ab2c5417",
+				"__TYPE__": "LinkContent",
 				"value": {
 					"__TYPE__": "DocumentLink",
 					"id": "mock_document_id"

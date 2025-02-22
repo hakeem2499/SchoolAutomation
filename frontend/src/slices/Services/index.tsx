@@ -2,7 +2,7 @@ import { FC, JSX } from "react";
 import { Content, isFilled } from "@prismicio/client";
 import { PrismicRichText, PrismicText, SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/Components/Bounded";
-import { PrismicNextLink } from "@prismicio/next";
+import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import ButtonLink from "@/Components/ButtonLink";
 import { createClient } from "@/prismicio";
 
@@ -18,9 +18,13 @@ const Services: FC<ServicesProps> = async ({ slice }: ServicesProps): Promise<JS
   const client = createClient();
 
   const services = await Promise.all(
-    slice.items.map(async (item:any) => {
-      if (isFilled.contentRelationship(item.service)) { return await client.getByID<Content.ServiceDocument>(item.service.id,); }
-    }),);
+    slice.items.map(async (item: Content.ServicesSliceDefaultPrimary) => {
+      if (isFilled.contentRelationship(item.service)) {
+        return await client.getByID<Content.ServiceDocument>(item.service.id)
+      }
+    })
+  )
+  console.log("🚀 ~ constServices:FC<ServicesProps>= ~ services:", services)
 
   return (
     <Bounded
@@ -50,7 +54,16 @@ const Services: FC<ServicesProps> = async ({ slice }: ServicesProps): Promise<JS
         {services.map((service, index) =>
           service && (
             <div key={service.id} className="flex flex-col md:p-2 lg:p-4 gap-4 md:gap-6 justify-center">
-               
+              <PrismicNextImage field={service.data.icon} />
+              <PrismicRichText field={service.data.service} />
+              <PrismicRichText field={service.data.description} />
+              <PrismicNextLink
+                document={service}
+                className="after:absolute after:inset-0 hover:underline"
+              >
+                Develop <PrismicText field={service.data.service} /> case
+
+              </PrismicNextLink>
             </div>
           ))}
       </div>
