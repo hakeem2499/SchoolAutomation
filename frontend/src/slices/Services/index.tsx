@@ -42,15 +42,15 @@ const Services: FC<ServicesProps> = async ({ slice }: ServicesProps): Promise<JS
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      <div className="flex justify-between w-full items-center">
+      <div className="flex justify-between py-4 w-full items-center">
         {isFilled.richText(slice.primary.heading) && (
-          <h2 className="hero__heading text-balance text-3xl font-medium md:text-5xl">
+          <h2 className="hero__heading text-balance text-2xl font-semibold md:font-medium md:text-5xl">
             <PrismicText field={slice.primary.heading} />
           </h2>
         )}
 
         {isFilled.link(slice.primary.link) && (
-          <ButtonLink className="hero__button mt-8" field={slice.primary.link}>
+          <ButtonLink className="text-xs md:text-base" field={slice.primary.link}>
             {slice.primary.label}
           </ButtonLink>
         )}
@@ -60,7 +60,7 @@ const Services: FC<ServicesProps> = async ({ slice }: ServicesProps): Promise<JS
         {services.map(
           (service) =>
             service && (
-              <div key={service.id} className="flex bg-slate-950  text-white rounded-2xl flex-col md:p-2 lg:p-8 gap-4 md:gap-6 justify-center">
+              <div key={service.id} className="flex bg-slate-950  text-white rounded-2xl flex-col p-4 lg:p-8 gap-4 md:gap-6 justify-center">
                 <div>
 
                   <PrismicNextImage className="rounded-lg invert h-20 w-20" field={service.data.icon} />
@@ -75,7 +75,7 @@ const Services: FC<ServicesProps> = async ({ slice }: ServicesProps): Promise<JS
                 </p>
                 <PrismicNextLink
                   document={service}
-                  className="after:absolute text-brand after:inset-0 hover:underline"
+                  className="after:absolute  text-brand after:inset-0 hover:underline"
                 >
                   Develop <PrismicText field={service.data.service} /> case
                 </PrismicNextLink>

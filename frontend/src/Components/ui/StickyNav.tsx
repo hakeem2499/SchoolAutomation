@@ -86,7 +86,7 @@ const StickyNav: React.FC<Props> = ({ settings }) => {
                 initial="hidden"
                 animate={open ? 'visible' : 'hidden'}
                 variants={menuVariants}
-                className="fixed top-0 w-full px-2 md:p-4 z-50 bg-primary text-white rounded-lg shadow-lg"
+                className="fixed top-0 w-full px-2 md:p-4 z-50 bg-primary text-white rounded-b-lg shadow-lg"
 
 
             >

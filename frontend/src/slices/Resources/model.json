@@ -39,15 +39,24 @@
             "placeholder": ""
           }
         },
-        "resource": {
-          "type": "Link",
+        "resources": {
+          "type": "Group",
           "config": {
-            "label": "Resource",
-            "select": "document",
-            "repeat": false,
-            "customtypes": [
-              "resource"
-            ]
+            "label": "Resources",
+            "repeat": true,
+            "fields": {
+              "resource": {
+                "type": "Link",
+                "config": {
+                  "label": "resource",
+                  "select": "document",
+                  "repeat": false,
+                  "customtypes": [
+                    "resource"
+                  ]
+                }
+              }
+            }
           }
         }
       },

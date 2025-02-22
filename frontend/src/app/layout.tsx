@@ -1,4 +1,3 @@
-
 import "./globals.css";
 import { DM_Sans } from "next/font/google";
 
@@ -21,15 +20,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={dmSans.variable}>
-      <body className="">
+      <body className="font-sans">
         <ThemeProvider>
-
           <Header />
           <main>{children}</main>
-          <Footer/>
-          
+          <Footer />
         </ThemeProvider>
-
         <PrismicPreview repositoryName={repositoryName} />
       </body>
     </html>

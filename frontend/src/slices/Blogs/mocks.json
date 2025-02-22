@@ -9,36 +9,33 @@
 					{
 						"type": "heading1",
 						"content": {
-							"text": "Journey"
+							"text": "Bottom"
 						}
 					}
 				]
 			},
-			"link": {
-				"key": "f69843b1-40da-494f-8700-be3a369db753",
-				"__TYPE__": "LinkContent",
-				"value": {
-					"__TYPE__": "ExternalLink",
-					"url": "http://twitter.com",
-					"text": "industry"
-				}
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Ullamco magna irure magna. Irure pariatur voluptate cupidatat sunt cillum dolor officia culpa ad occaecat non laborum. Labore magna laborum adipisicing ullamco officia ad do aliqua mollit pariatur quis proident occaecat eu Lorem."
+						}
+					}
+				]
 			},
-			"label": {
-				"__TYPE__": "FieldContent",
-				"value": "using",
-				"type": "Text"
-			},
-			"resources": {
+			"blogs": {
 				"__TYPE__": "GroupContentType",
 				"value": [
 					{
 						"__TYPE__": "GroupItemContent",
 						"value": [
 							[
-								"resource",
+								"blog",
 								{
 									"__TYPE__": "LinkContent",
-									"key": "c2d3b16f-4d1f-4dcf-8ed0-915f6baba4fe",
+									"key": "81f35125-1f4c-425e-8f95-a9ba3614f61a",
 									"value": {
 										"__TYPE__": "DocumentLink",
 										"id": "mock_document_id"

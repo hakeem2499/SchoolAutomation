@@ -14,24 +14,40 @@
 					}
 				]
 			},
-			"body": {
-				"__TYPE__": "StructuredTextContent",
+			"casestudies": {
+				"__TYPE__": "GroupContentType",
 				"value": [
 					{
-						"type": "paragraph",
-						"content": {
-							"text": "Eiusmod tempor est dolor incididunt eiusmod occaecat veniam cillum nulla nostrud nostrud cillum non sit est."
-						}
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"case_study",
+								{
+									"key": "06297c57-70a0-4cff-8329-36b701ac9329",
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "DocumentLink",
+										"id": "mock_document_id"
+									}
+								}
+							]
+						]
 					}
 				]
 			},
-			"case_study": {
+			"link_to_case_studies": {
+				"key": "fcf8c940-85f8-49ae-8a05-b6839a3bbebb",
 				"__TYPE__": "LinkContent",
-				"key": "a5cc4c63-4290-4e1c-ac31-09457218fa50",
 				"value": {
-					"__TYPE__": "DocumentLink",
-					"id": "mock_document_id"
+					"__TYPE__": "ExternalLink",
+					"url": "http://twitter.com",
+					"text": "deeply"
 				}
+			},
+			"link_label": {
+				"__TYPE__": "FieldContent",
+				"value": "hearing",
+				"type": "Text"
 			}
 		},
 		"items": []

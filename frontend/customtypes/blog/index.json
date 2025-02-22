@@ -1,7 +1,7 @@
 {
   "format": "page",
-  "id": "case_study",
-  "label": "Case Study",
+  "id": "blog",
+  "label": "Blog",
   "repeatable": true,
   "status": true,
   "json": {
@@ -12,13 +12,13 @@
           "label": "UID"
         }
       },
-      "heading": {
+      "title": {
         "type": "StructuredText",
         "config": {
-          "label": "Heading",
+          "label": "Title",
           "placeholder": "",
-          "allowTargetBlank": true,
-          "single": "heading1,heading2,heading3"
+          "allowTargetBlank": false,
+          "single": "heading2,heading1,heading3"
         }
       },
       "description": {
