@@ -1081,6 +1081,16 @@ export interface ProcessTimeLineSliceDefaultPrimary {
   heading: prismic.RichTextField;
 
   /**
+   * Description field in *ProcessTimeLine → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: process_time_line.default.primary.description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+
+  /**
    * Process field in *ProcessTimeLine → Default → Primary*
    *
    * - **Field Type**: Group

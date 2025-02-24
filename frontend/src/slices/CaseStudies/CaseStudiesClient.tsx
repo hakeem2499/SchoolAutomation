@@ -1,13 +1,12 @@
 "use client"; // Mark this as a Client Component
 
-import { FC, useRef, useState } from "react";
+import { FC, useRef, useState, useEffect } from "react";
 import { Content, isFilled } from "@prismicio/client";
 import { PrismicText } from "@prismicio/react";
 import Bounded from "@/Components/Bounded";
 import ButtonLink from "@/Components/ButtonLink";
 import { PrismicNextImage } from "@prismicio/next";
 import styles from "./index.module.css";
-
 
 interface CaseStudiesClientProps {
   slice: Content.CaseStudiesSlice;
@@ -19,14 +18,28 @@ const CaseStudiesClient: FC<CaseStudiesClientProps> = ({ slice, caseStudies }) =
   const [isAtStart, setIsAtStart] = useState<boolean>(true);
   const [isAtEnd, setIsAtEnd] = useState<boolean>(false);
 
-  // Handle scroll events
-  const handleScroll = () => {
-    if (scrollerRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollerRef.current;
-      setIsAtStart(scrollLeft === 0);
-      setIsAtEnd(scrollLeft + clientWidth >= scrollWidth);
+  // Update scroll state on mount and when caseStudies change
+  useEffect(() => {
+    const scroller = scrollerRef.current;
+    if (scroller) {
+      const handleScroll = () => {
+        const { scrollLeft, scrollWidth, clientWidth } = scroller;
+        setIsAtStart(scrollLeft <= 0); // Account for potential rounding errors
+        setIsAtEnd(scrollLeft + clientWidth >= scrollWidth - 1); // Account for potential rounding errors
+      };
+
+      // Initial check
+      handleScroll();
+
+      // Add event listener
+      scroller.addEventListener("scroll", handleScroll);
+
+      // Cleanup
+      return () => {
+        scroller.removeEventListener("scroll", handleScroll);
+      };
     }
-  };
+  }, [caseStudies]);
 
   // Scroll by a specific offset
   const scrollBy = (offset: number) => {
@@ -54,7 +67,7 @@ const CaseStudiesClient: FC<CaseStudiesClientProps> = ({ slice, caseStudies }) =
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      <div className="flex flex-col justify-between py-4 w-full items-center">
+      <div className="flex gap-4 flex-col justify-between py-4 w-full items-center">
         {isFilled.richText(slice.primary.heading) && (
           <h2 className="hero__heading text-balance text-2xl font-semibold md:font-medium md:text-5xl">
             <PrismicText field={slice.primary.heading} />
@@ -71,7 +84,6 @@ const CaseStudiesClient: FC<CaseStudiesClientProps> = ({ slice, caseStudies }) =
         <div
           className={styles.scroller}
           ref={scrollerRef}
-          onScroll={handleScroll}
           aria-live="polite"
         >
           {caseStudies.map(
@@ -80,7 +92,7 @@ const CaseStudiesClient: FC<CaseStudiesClientProps> = ({ slice, caseStudies }) =
                 <div key={case_study.id} className={styles.scrollerItem}>
                   <div className="w-full md:w-1/2">
                     <PrismicNextImage
-                      className="rounded-lg invert "
+                      className="rounded-lg invert"
                       field={case_study.data.image}
                     />
                   </div>
@@ -106,7 +118,7 @@ const CaseStudiesClient: FC<CaseStudiesClientProps> = ({ slice, caseStudies }) =
             Left
           </button>
           <button
-            className=""
+            className={styles.scrollerButton}
             onClick={() => scrollBy(scrollerRef.current!.clientWidth * 0.9)}
             disabled={isAtEnd}
             aria-label="Next"

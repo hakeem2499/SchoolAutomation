@@ -85,6 +85,17 @@
 						]
 					}
 				]
+			},
+			"description": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Aliquip elit culpa adipisicing reprehenderit culpa consequat."
+						}
+					}
+				]
 			}
 		},
 		"items": []

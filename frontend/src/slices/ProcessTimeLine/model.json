@@ -21,6 +21,15 @@
             "single": "heading2,heading3,heading4,heading5,strong"
           }
         },
+        "description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Description",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "paragraph,strong"
+          }
+        },
         "process": {
           "type": "Group",
           "config": {
