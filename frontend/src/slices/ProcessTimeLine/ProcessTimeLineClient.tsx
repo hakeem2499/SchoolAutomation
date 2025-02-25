@@ -9,7 +9,7 @@ import {
 
 import Bounded from '@/Components/Bounded';
 import { useEffect, useRef, useState } from 'react';
-import { Content } from '@prismicio/client';
+import { Content, isFilled } from '@prismicio/client';
 import { PrismicRichText, PrismicText } from "@prismicio/react";
 import { PrismicNextImage } from "@prismicio/next";
 
@@ -40,13 +40,18 @@ export default function ProcessTimeLineClient({ slice }: { slice: Content.Proces
                 className="w-full   font-sans md:px-10"
                 ref={containerRef}
             >
-                <div className="max-w-7xl mx-auto py-20 px-4 md:px-8 lg:px-10">
-                    <h2 className="text-2xl md:text-4xl mb-4 text-brand max-w-4xl">
-                        <PrismicText field={slice.primary.heading} />
-                    </h2>
-                    <p className=" text-sm md:text-base max-w-sm">
-                        <PrismicRichText field={slice.primary.description} />
-                    </p>
+                <div className="max-w-7xl  mx-auto py-20 px-4 md:px-8 lg:px-10">
+                    {isFilled.richText(slice.primary.heading) && (
+                        <h2 className="text-3xl md:text-5xl mb-4 font-semibold text-brand max-w-4xl">
+                            <PrismicText field={slice.primary.heading} />
+                        </h2>
+                    )}
+                    {isFilled.richText(slice.primary.description) && (
+
+                        <p className=" text-xl font-medium  max-w-3xl">
+                            <PrismicText field={slice.primary.description} />
+                        </p>
+                    )}
                 </div>
 
                 <div ref={ref} className="relative max-w-7xl mx-auto pb-20">

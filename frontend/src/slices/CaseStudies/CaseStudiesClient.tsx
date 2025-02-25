@@ -7,6 +7,7 @@ import Bounded from "@/Components/Bounded";
 import ButtonLink from "@/Components/ButtonLink";
 import { PrismicNextImage } from "@prismicio/next";
 import styles from "./index.module.css";
+import { CarouselControl } from "../Resources/ResourcesClient";
 
 interface CaseStudiesClientProps {
   slice: Content.CaseStudiesSlice;
@@ -80,7 +81,7 @@ const CaseStudiesClient: FC<CaseStudiesClientProps> = ({ slice, caseStudies }) =
           </ButtonLink>
         )}
       </div>
-      <div className="flex flex-col gap-4 items-center">
+      <div className="grid overflow-hidden gap-4 items-center">
         <div
           className={styles.scroller}
           ref={scrollerRef}
@@ -109,22 +110,23 @@ const CaseStudiesClient: FC<CaseStudiesClientProps> = ({ slice, caseStudies }) =
           )}
         </div>
         <div className="flex justify-center gap-4 items-center">
-          <button
-            className={styles.scrollerButton}
-            onClick={() => scrollBy(-scrollerRef.current!.clientWidth * 0.9)}
+          <CarouselControl
+            type="previous"
+            title="Go to previous slide"
+            handleClick={() => scrollBy(-scrollerRef.current!.clientWidth * 0.9)}
             disabled={isAtStart}
             aria-label="Previous"
-          >
-            Left
-          </button>
-          <button
-            className={styles.scrollerButton}
-            onClick={() => scrollBy(scrollerRef.current!.clientWidth * 0.9)}
+          />
+
+
+          <CarouselControl
+            type="next"
+            title="Go to next slide"
+            handleClick={() => scrollBy(scrollerRef.current!.clientWidth * 0.9)}
             disabled={isAtEnd}
             aria-label="Next"
-          >
-            Right
-          </button>
+          />
+
         </div>
       </div>
     </Bounded>

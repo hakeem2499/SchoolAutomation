@@ -1,6 +1,7 @@
 "use client";
 import * as React from "react";
 import { useTheme } from "../../contexts/ThemeContext"; // Adjust the import path
+import { motion, AnimatePresence } from "framer-motion"; // Import Framer Motion
 
 function DarkMoon(props: React.SVGProps<SVGSVGElement>) {
     return (
@@ -27,9 +28,18 @@ export default function ThemeToggleSwitch() {
             onClick={toggleTheme}
             aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
         >
-            <span className="rounded-full  text-black">
-                {theme === "dark" ? <LightStar /> : <DarkMoon />}
-            </span>
+            <AnimatePresence mode="wait">
+                <motion.span
+                    key={theme}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="rounded-full text-black"
+                >
+                    {theme === "dark" ? <LightStar /> : <DarkMoon />}
+                </motion.span>
+            </AnimatePresence>
         </button>
     );
 }

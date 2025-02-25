@@ -9,8 +9,14 @@
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
-
+    padding: 1rem;;
     gap: 1rem;
+    scrollbar-width: none;
+    
+}
+
+.scroller::-webkit-scrollbar {
+    display: none;
 }
 
 .scrollerItem {
