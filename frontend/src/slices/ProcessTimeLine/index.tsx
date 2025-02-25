@@ -2,6 +2,7 @@ import { FC, JSX } from "react";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/Components/Bounded";
+import ProcessTimeLineClient from "./ProcessTimeLineClient";
 
 /**
  * Props for `ProcessTimeLine`.
@@ -18,7 +19,7 @@ const ProcessTimeLine: FC<ProcessTimeLineProps> = ({ slice }: ProcessTimeLinePro
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      <ProcessTimeLineClient/>
+      <ProcessTimeLineClient slice={slice}/>
     </Bounded>
   );
 };

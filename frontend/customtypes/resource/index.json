@@ -1,6 +1,9 @@
 {
   "format": "page",
   "id": "resource",
+  "label": "Resource",
+  "repeatable": true,
+  "status": true,
   "json": {
     "Main": {
       "uid": {
@@ -9,12 +12,47 @@
           "label": "UID"
         }
       },
+      "resource": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Resource",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "single": "paragraph,strong,heading5,heading4"
+        }
+      },
+      "title": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Title",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "single": "paragraph,strong"
+        }
+      },
+      "image": {
+        "type": "Image",
+        "config": {
+          "label": "Image",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "description": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Description",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "single": "paragraph,strong"
+        }
+      },
       "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
         "config": {
           "choices": {}
-        },
-        "fieldset": "Slice Zone",
-        "type": "Slices"
+        }
       }
     },
     "SEO & Metadata": {
@@ -44,8 +82,5 @@
         "type": "Image"
       }
     }
-  },
-  "label": "Resource",
-  "repeatable": true,
-  "status": true
+  }
 }
