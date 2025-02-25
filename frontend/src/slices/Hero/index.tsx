@@ -32,7 +32,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
             controls={false}
             width="1080"
             height="1920" // Portrait orientation for mobile
-            src="HeroNewMobile_1_dfhbwg" // Replace with your mobile video's public ID
+            src="HeroVideoMobileReal_brsnlr" // Replace with your mobile video's public ID
           />
         </div>
 
@@ -47,7 +47,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
             controls={false}
             width="1920"
             height="1080" // Landscape orientation for desktop
-            src="HeroNew_utsuq8" // Replace with your desktop video's public ID
+            src="HeroVideoMediumReal_y0lszw" // Replace with your desktop video's public ID
           />
         </div>
       </div>
