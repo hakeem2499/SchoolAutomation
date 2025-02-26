@@ -65,7 +65,7 @@ const ContactForm = () => {
       if (response.ok) {
         alert("Thank you for contacting us! We'll get back to you soon.");
         success = true;
-        let url = `/dashboard/success?name=${Name}&success=${success}`;
+        let url = `/contact/success?name=${Name}&success=${success}`;
         router.push(url);
         reset(); // Reset form fields
         setStep(1); // Reset to the first step
