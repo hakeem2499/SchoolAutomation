@@ -13,7 +13,7 @@ export default async function Header () {
 
 
   return (
-    <header className='bg-black'>
+    <header>
     <StickyNav settings={settings}/>
     </header>
   )

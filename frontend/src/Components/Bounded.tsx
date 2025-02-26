@@ -21,7 +21,7 @@ export default function Bounded({
       )}
       {...restProps}
     >
-      <div className="mx-auto flex w-full max-w-6xl  flex-col items-center">
+      <div className="mx-auto flex w-full max-w-6xl py-4  flex-col items-center">
         {children}
       </div>
     </Comp>

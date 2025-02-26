@@ -10,7 +10,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
+        background: "#000000",
         foreground: "var(--foreground)",
         brand: "#ff8c00",
         brandWhite: "#f8f8f8",

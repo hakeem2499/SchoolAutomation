@@ -39,11 +39,14 @@ const Services: FC<ServicesProps> = async ({ slice }: ServicesProps): Promise<JS
   console.log("🚀 ~ constServices:FC<ServicesProps>= ~ services:", services)
 
   return (
+
     <Bounded
+
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      <div className="flex justify-between py-4 w-full items-center">
+      
+      <div className="flex justify-between lg:mt-16 w-full items-center">
         {isFilled.richText(slice.primary.heading) && (
           <h2 className="hero__heading text-balance text-2xl font-semibold md:font-medium md:text-5xl">
             <PrismicText field={slice.primary.heading} />
@@ -76,7 +79,7 @@ const Services: FC<ServicesProps> = async ({ slice }: ServicesProps): Promise<JS
                 </p>
                 <PrismicNextLink
                   document={service}
-                  className="after:absolute  text-brand after:inset-0 hover:underline"
+                  className=" text-brand hover:underline"
                 >
                   Develop <PrismicText field={service.data.service} /> case
                 </PrismicNextLink>

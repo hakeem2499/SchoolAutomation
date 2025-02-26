@@ -24,7 +24,7 @@
     flex: 0 0 90%;
     /* 90% of the container width */
     padding: 1rem;
-    @apply flex flex-col md:flex-row;
+    @apply flex flex-col md:flex-row bg-slate-900;
     align-items: center;
     justify-content: space-between;
     border: 1px solid var(--color-primary);

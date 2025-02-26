@@ -24,7 +24,7 @@ export async function Footer() {
     };
 
     return (
-        <footer className="flex flex-col w-full items-center gap-8 lg:gap-10 justify-between px-2  py-4">
+        <footer className="flex flex-col w-full mt-16 lg:mt-24 items-center gap-8 lg:gap-10 justify-between px-2  py-4">
             {/* Navigation Section */}
             <nav aria-label='footer' className="grid grid-cols-2 md:grid-cols-3 gap-8 w-full  max-w-6xl py-4 mx-auto md:px-2">
                 {/* Column 1: Company Links */}

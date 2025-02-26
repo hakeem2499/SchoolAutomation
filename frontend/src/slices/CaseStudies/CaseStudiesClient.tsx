@@ -5,7 +5,7 @@ import { Content, isFilled } from "@prismicio/client";
 import { PrismicText } from "@prismicio/react";
 import Bounded from "@/Components/Bounded";
 import ButtonLink from "@/Components/ButtonLink";
-import { PrismicNextImage } from "@prismicio/next";
+import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import styles from "./index.module.css";
 import { CarouselControl } from "../Resources/ResourcesClient";
 
@@ -68,7 +68,7 @@ const CaseStudiesClient: FC<CaseStudiesClientProps> = ({ slice, caseStudies }) =
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      <div className="flex gap-4 flex-col justify-between py-4 w-full items-center">
+      <div className="flex gap-4 md:gap-6 lg:gap-8 lg:mb-8 flex-col justify-between py-4 w-full items-center">
         {isFilled.richText(slice.primary.heading) && (
           <h2 className="hero__heading text-balance text-2xl font-semibold md:font-medium md:text-5xl">
             <PrismicText field={slice.primary.heading} />
@@ -97,13 +97,16 @@ const CaseStudiesClient: FC<CaseStudiesClientProps> = ({ slice, caseStudies }) =
                       field={case_study.data.image}
                     />
                   </div>
-                  <div className="flex w-full md:w-1/2 flex-col">
+                  <div className="flex w-full gap-4 md:w-1/2 flex-col">
                     <h4 className="text-balance text-brand text-2xl font-medium md:text-3xl">
                       <PrismicText field={case_study.data.heading} />
                     </h4>
                     <p className="font-medium">
                       <PrismicText field={case_study.data.description} />
                     </p>
+                    <PrismicNextLink className="text-brand hover:text-inherit hover:underline transition-colors duration-200" document={case_study} >
+                      Learn More
+                    </PrismicNextLink>
                   </div>
                 </div>
               )

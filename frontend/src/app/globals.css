@@ -61,7 +61,7 @@ body {
   display: block;
   border-radius: 2px;
   height: 2px;
-  background: #ffffff;
+  background: var(--text-color);
   transition: 0.3s;
 }
 
