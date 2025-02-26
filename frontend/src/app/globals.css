@@ -100,7 +100,7 @@ body {
   transform: rotate(45deg) translate(-6px, 2px);
 }
 
-input {
+input, textarea {
   background-color: var(--background-color);
 	@apply mt-1 block w-full md:w-[500px] px-3 py-3 border border-gray-500 focus:border-brand  rounded-md shadow-sm focus:outline-none  ;
 }
