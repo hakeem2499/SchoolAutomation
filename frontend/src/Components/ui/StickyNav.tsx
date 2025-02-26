@@ -62,7 +62,7 @@ const StickyNav: React.FC<Props> = ({ settings }) => {
     // Animation variants for the menu
     const menuVariants: Variants = {
         hidden: { height: "5.6rem" },
-        visible: { height: "29rem" },
+        visible: { height: "24rem" },
     };
 
     const menuStaggeredVariant = {
