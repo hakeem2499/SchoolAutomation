@@ -42,15 +42,31 @@ const ContactForm = () => {
   };
 
   // Handle form submission
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    console.log("Form Data Submitted:", data);
-    alert("Thank you for contacting us! We'll get back to you soon.");
-    // Reset form and step
-    setStep(1);
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+  
+      if (response.ok) {
+        alert("Thank you for contacting us! We'll get back to you soon.");
+        // Reset form and step
+        setStep(1);
+      } else {
+        alert("Failed to submit the form. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("An error occurred. Please try again.");
+    }
   };
 
   return (
-    <Bounded className="w-full min-h-screen mx-auto text-black mt-24 p-6 rounded-lg shadow-lg">
+    <Bounded className="w-full min-h-screen mx-auto  mt-24 p-6 rounded-lg shadow-lg">
       <h2 className="text-2xl font-bold mb-6 text-center">Contact Us</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <AnimatePresence mode="wait">
@@ -61,17 +77,17 @@ const ContactForm = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -50 }}
               transition={{ duration: 0.3 }}
-              className="space-y-4"
+              className="space-y-4 w-full "
             >
               <div>
-                <label htmlFor="fullName" className="block text-sm font-medium ">
+                <label htmlFor="fullName" className="block text-sm  font-medium ">
                   Full Name
                 </label>
                 <input
                   type="text"
                   id="fullName"
                   {...register("fullName", { required: "Full name is required" })}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-brand"
+                  
                 />
                 {errors.fullName && (
                   <p className="text-red-500 text-sm mt-1">{errors.fullName.message}</p>
@@ -97,7 +113,7 @@ const ContactForm = () => {
               className="space-y-4"
             >
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="email" className="block text-sm font-medium ">
                   Email
                 </label>
                 <input
@@ -110,14 +126,14 @@ const ContactForm = () => {
                       message: "Invalid email address",
                     },
                   })}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-brand"
+                  
                 />
                 {errors.email && (
                   <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
                 )}
               </div>
               <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="phone" className="block text-sm font-medium ">
                   Phone Number
                 </label>
                 <input
@@ -130,7 +146,7 @@ const ContactForm = () => {
                       message: "Invalid phone number",
                     },
                   })}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-brand"
+                  
                 />
                 {errors.phone && (
                   <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>
@@ -140,7 +156,7 @@ const ContactForm = () => {
                 <button
                   type="button"
                   onClick={prevStep}
-                  className="bg-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-400 transition-colors"
+                  className="bg-gray-300  py-2 px-4 rounded-md hover:bg-gray-400 transition-colors"
                 >
                   Back
                 </button>
@@ -165,28 +181,28 @@ const ContactForm = () => {
               className="space-y-4"
             >
               <div>
-                <label htmlFor="companyName" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="companyName" className="block text-sm font-medium ">
                   Company Name
                 </label>
                 <input
                   type="text"
                   id="companyName"
                   {...register("companyName", { required: "Company name is required" })}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-brand"
+                  
                 />
                 {errors.companyName && (
                   <p className="text-red-500 text-sm mt-1">{errors.companyName.message}</p>
                 )}
               </div>
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="message" className="block text-sm font-medium ">
                   Share more about what we can do for you
                 </label>
                 <textarea
                   id="message"
                   {...register("message", { required: "Message is required" })}
                   rows={4}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-brand"
+                  
                 />
                 {errors.message && (
                   <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>
@@ -196,7 +212,7 @@ const ContactForm = () => {
                 <button
                   type="button"
                   onClick={prevStep}
-                  className="bg-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-400 transition-colors"
+                  className="bg-gray-300  py-2 px-4 rounded-md hover:bg-gray-400 transition-colors"
                 >
                   Back
                 </button>
