@@ -114,7 +114,7 @@ const StickyNav: React.FC<Props> = ({ settings }) => {
                             <div className="hidden md:flex items-center space-x-5 text-center">
                                 <button
                                     onMouseEnter={() => setShowServices(true)}
-                                    onMouseLeave={() => setShowServices(false)}
+                                    
                                     className="text-lg inline-flex items-center gap-1"
                                 >
                                     <span>Our Services</span>
@@ -131,7 +131,7 @@ const StickyNav: React.FC<Props> = ({ settings }) => {
                                     </svg>
                                 </button>
                                 {/* Company Links */}
-                                <div className="flex gap-8">
+                                <div onMouseEnter={() => setShowServices(false) } className="flex gap-8">
                                     {renderNavLinks(settings.data.company)}
                                 </div>
                             </div>

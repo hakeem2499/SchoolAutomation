@@ -42,7 +42,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
         <div className="block md:hidden">
           <CldVideoPlayer
             id="mobile"
-            className="z-[-50]"
+            className="z-[-50] opacity-70"
             loop={true}
             autoplay={true}
             muted={true}
@@ -59,7 +59,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
         <div className="hidden md:block">
           <CldVideoPlayer
             id="medium"
-            className="z-[-50]"
+            className="z-[-50] opacity-50"
             loop={true}
             autoplay={true}
             muted={true}

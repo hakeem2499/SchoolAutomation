@@ -104,3 +104,33 @@ input, textarea {
   background-color: var(--background-color);
 	@apply mt-1 block w-full md:w-[500px] px-3 py-3 border border-gray-500 focus:border-brand  rounded-md shadow-sm focus:outline-none  ;
 }
+
+.anchor-link {
+	
+	position: relative;
+}
+
+.anchor-link::after {
+	content: '';
+	position: absolute;
+	height: 1px;
+	left: 0;
+	bottom: 0rem;
+  
+	width: 100%;
+	background: var(--text-color);
+	transform: scaleX(0);
+  transform-origin: left;
+	transition: transform 100ms ease-in-out;
+}
+
+.anchor-link:hover::after {
+	transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anchor-link {
+    /* Remove transitions or reduce their duration */
+    transition: none;
+  }
+}
