@@ -67,7 +67,7 @@ const Services: FC<ServicesProps> = async ({ slice }: ServicesProps): Promise<JS
               <div key={service.id} className="flex bg-slate-950  text-white rounded-2xl flex-col p-4 lg:p-8 gap-4 md:gap-6 justify-center">
                 <div>
 
-                  <PrismicNextImage className="rounded-lg invert h-20 w-20" field={service.data.icon} />
+                  <PrismicNextImage  className="rounded-lg  h-20 w-20" field={service.data.icon} />
                 </div>
                 <h4 className="text-balance text-brand text-2xl font-medium md:text-3xl">
 
@@ -81,7 +81,7 @@ const Services: FC<ServicesProps> = async ({ slice }: ServicesProps): Promise<JS
                   document={service}
                   className=" text-brand hover:underline"
                 >
-                  Develop <PrismicText field={service.data.service} /> case
+                   {service.data.label} 
                 </PrismicNextLink>
               </div>
             )

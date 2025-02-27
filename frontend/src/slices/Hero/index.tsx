@@ -6,6 +6,7 @@ import { CldVideoPlayer } from 'next-cloudinary';
 import 'next-cloudinary/dist/cld-video-player.css';
 import Bounded from "@/Components/Bounded";
 import ButtonLink from "@/Components/ButtonLink";
+import { SpotlightHero } from "@/Components/ui/SpotLightHero";
 
 /**
  * Props for `Hero`.
@@ -56,7 +57,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
         </div>
 
         {/* Desktop Video */}
-        <div className="hidden md:block">
+        {/* <div className="hidden md:block">
           <CldVideoPlayer
             id="medium"
             className="z-[-50] opacity-50"
@@ -70,8 +71,8 @@ const Hero: FC<HeroProps> = ({ slice }) => {
             src="HeroVideoMediumReal_y0lszw" //  desktop video's public ID
             onDataLoad={handleVideoLoad} // Trigger when video is loaded
           />
-        </div>
-        
+        </div> */}
+        <SpotlightHero/>
       </div>
 
       {/* Hero Content */}

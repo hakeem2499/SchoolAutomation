@@ -11,7 +11,7 @@ export default {
     extend: {
       colors: {
         background: "#000000",
-        foreground: "var(--foreground)",
+        foreground: "var(--text-color)",
         brand: "#ff8c00",
         brandWhite: "#f8f8f8",
         primary:"#0c0c0c",
@@ -31,9 +31,20 @@ export default {
 						transform: 'translateZ(0)'
 					}
 				},
+        spotlight: {
+          "0%": {
+            opacity: '0',
+            transform: "translate(-72%, -62%) scale(0.5)",
+          },
+          "100%": {
+            opacity: '1',
+            transform: "translate(-50%,-40%) scale(1)",
+          },
+        },
       },
       animation:{
         fadeInUp: 'fadeInUp 0.5s ease-out forwards',
+        spotlight: "spotlight 2s ease .75s 1 forwards",
       }
 
     },

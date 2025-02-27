@@ -384,7 +384,10 @@ export type ResourceDocument<Lang extends string = string> =
     Lang
   >;
 
-type ServiceDocumentDataSlicesSlice = never;
+type ServiceDocumentDataSlicesSlice =
+  | RichTextSlice
+  | ShowCaseSlice
+  | ApproachSlice;
 
 /**
  * Content for service documents
@@ -726,6 +729,98 @@ export type AllDocumentTypes =
   | ResourceDocument
   | ServiceDocument
   | SettingsDocument;
+
+/**
+ * Item in *Approach → Default → Primary → approaches*
+ */
+export interface ApproachSliceDefaultPrimaryApproachesItem {
+  /**
+   * Image field in *Approach → Default → Primary → approaches*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: approach.default.primary.approaches[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Heading field in *Approach → Default → Primary → approaches*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: approach.default.primary.approaches[].heading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  heading: prismic.RichTextField;
+
+  /**
+   * Body field in *Approach → Default → Primary → approaches*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: approach.default.primary.approaches[].body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *Approach → Default → Primary*
+ */
+export interface ApproachSliceDefaultPrimary {
+  /**
+   * Heading field in *Approach → Default → Primary*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: approach.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  heading: prismic.TitleField;
+
+  /**
+   * approaches field in *Approach → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: approach.default.primary.approaches[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  approaches: prismic.GroupField<
+    Simplify<ApproachSliceDefaultPrimaryApproachesItem>
+  >;
+}
+
+/**
+ * Default variation for Approach Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ApproachSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ApproachSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Approach*
+ */
+type ApproachSliceVariation = ApproachSliceDefault;
+
+/**
+ * Approach Shared Slice
+ *
+ * - **API ID**: `approach`
+ * - **Description**: Approach
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ApproachSlice = prismic.SharedSlice<
+  "approach",
+  ApproachSliceVariation
+>;
 
 /**
  * Item in *Blogs → Default → Primary → Blogs*
@@ -1270,6 +1365,51 @@ export type ResourcesSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *RichText → Default → Primary*
+ */
+export interface RichTextSliceDefaultPrimary {
+  /**
+   * content field in *RichText → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: rich_text.default.primary.content
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  content: prismic.RichTextField;
+}
+
+/**
+ * Default variation for RichText Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type RichTextSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<RichTextSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *RichText*
+ */
+type RichTextSliceVariation = RichTextSliceDefault;
+
+/**
+ * RichText Shared Slice
+ *
+ * - **API ID**: `rich_text`
+ * - **Description**: RichText
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type RichTextSlice = prismic.SharedSlice<
+  "rich_text",
+  RichTextSliceVariation
+>;
+
+/**
  * Item in *Services → Default → Primary → Services*
  */
 export interface ServicesSliceDefaultPrimaryServicesItem {
@@ -1359,6 +1499,71 @@ type ServicesSliceVariation = ServicesSliceDefault;
 export type ServicesSlice = prismic.SharedSlice<
   "services",
   ServicesSliceVariation
+>;
+
+/**
+ * Primary content in *ShowCase → Default → Primary*
+ */
+export interface ShowCaseSliceDefaultPrimary {
+  /**
+   * body field in *ShowCase → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: show_case.default.primary.body
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  body: prismic.RichTextField;
+
+  /**
+   * Heading field in *ShowCase → Default → Primary*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: *None*
+   * - **API ID Path**: show_case.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  heading: prismic.TitleField;
+
+  /**
+   * Image field in *ShowCase → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: show_case.default.primary.image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+}
+
+/**
+ * Default variation for ShowCase Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ShowCaseSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ShowCaseSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ShowCase*
+ */
+type ShowCaseSliceVariation = ShowCaseSliceDefault;
+
+/**
+ * ShowCase Shared Slice
+ *
+ * - **API ID**: `show_case`
+ * - **Description**: ShowCase
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ShowCaseSlice = prismic.SharedSlice<
+  "show_case",
+  ShowCaseSliceVariation
 >;
 
 /**
@@ -1494,6 +1699,11 @@ declare module "@prismicio/client" {
       SettingsDocumentDataPoliciesItem,
       SettingsDocumentDataContactInformationItem,
       AllDocumentTypes,
+      ApproachSlice,
+      ApproachSliceDefaultPrimaryApproachesItem,
+      ApproachSliceDefaultPrimary,
+      ApproachSliceVariation,
+      ApproachSliceDefault,
       BlogsSlice,
       BlogsSliceDefaultPrimaryBlogsItem,
       BlogsSliceDefaultPrimary,
@@ -1522,11 +1732,19 @@ declare module "@prismicio/client" {
       ResourcesSliceDefaultPrimary,
       ResourcesSliceVariation,
       ResourcesSliceDefault,
+      RichTextSlice,
+      RichTextSliceDefaultPrimary,
+      RichTextSliceVariation,
+      RichTextSliceDefault,
       ServicesSlice,
       ServicesSliceDefaultPrimaryServicesItem,
       ServicesSliceDefaultPrimary,
       ServicesSliceVariation,
       ServicesSliceDefault,
+      ShowCaseSlice,
+      ShowCaseSliceDefaultPrimary,
+      ShowCaseSliceVariation,
+      ShowCaseSliceDefault,
       StatisticsSlice,
       StatisticsSliceDefaultPrimaryStatsItem,
       StatisticsSliceDefaultPrimary,

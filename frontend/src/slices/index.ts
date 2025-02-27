@@ -3,12 +3,15 @@
 import dynamic from "next/dynamic";
 
 export const components = {
+  approach: dynamic(() => import("./Approach")),
   blogs: dynamic(() => import("./Blogs")),
   case_studies: dynamic(() => import("./CaseStudies")),
   cta_section: dynamic(() => import("./CtaSection")),
   hero: dynamic(() => import("./Hero")),
   process_time_line: dynamic(() => import("./ProcessTimeLine")),
   resources: dynamic(() => import("./Resources")),
+  rich_text: dynamic(() => import("./RichText")),
   services: dynamic(() => import("./Services")),
+  show_case: dynamic(() => import("./ShowCase")),
   statistics: dynamic(() => import("./Statistics")),
 };
