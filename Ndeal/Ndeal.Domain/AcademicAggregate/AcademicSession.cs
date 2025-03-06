@@ -36,7 +36,7 @@ public class AcademicSession(
         if (startDate > endDate)
         {
             return Result.Failure<Semester>(
-                new Error("Semester.InvalidDate", "StartDate cannot be after end date")
+                Error.Conflict("Semester.InvalidDate", "StartDate cannot be after end date")
             );
         }
 
@@ -56,7 +56,7 @@ public class AcademicSession(
         if (startDate > endDate)
         {
             return Result.Failure<Semester>(
-                new Error("Semester.InvalidDate", "StartDate cannot be after end date")
+                Error.Conflict("Semester.InvalidDate", "StartDate cannot be after end date")
             );
         }
 

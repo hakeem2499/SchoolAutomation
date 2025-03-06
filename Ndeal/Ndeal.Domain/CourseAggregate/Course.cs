@@ -15,7 +15,8 @@ public class Course : AggregateRoot<CourseId>
     private readonly List<StudentRegistration> _studentRegistrations = new();
     private readonly List<TeacherAssignment> _teacherAssignments = new();
 
-    public Course(
+    // Private constructor for creation via factory method
+    private Course(
         CourseId id,
         DepartmentId departmentId,
         string courseCode,
@@ -30,6 +31,7 @@ public class Course : AggregateRoot<CourseId>
         CourseUnitRating = courseUnitRating;
     }
 
+    // Properties with private setters for encapsulation
     public string CourseCode { get; private set; }
     public DepartmentId DepartmentId { get; private set; }
     public string CourseName { get; private set; }
@@ -40,13 +42,43 @@ public class Course : AggregateRoot<CourseId>
         _studentRegistrations.AsReadOnly();
     public IReadOnlyList<TeacherAssignment> TeacherAssignments => _teacherAssignments.AsReadOnly();
 
-    public static Course Create(
+    // Factory method with validation
+    public static Result<Course> Create(
         string courseCode,
         string courseName,
         DepartmentId departmentId,
         CourseUnitRating courseUnitRating
     )
     {
+        // Validation
+        if (string.IsNullOrWhiteSpace(courseCode))
+        {
+            return Result.Failure<Course>(
+                Error.Validation("CourseCode.Required", "Course code is required.")
+            );
+        }
+
+        if (string.IsNullOrWhiteSpace(courseName))
+        {
+            return Result.Failure<Course>(
+                Error.Validation("CourseName.Required", "Course name is required.")
+            );
+        }
+
+        if (departmentId is null)
+        {
+            return Result.Failure<Course>(
+                Error.Validation("DepartmentId.Required", "Department ID is required.")
+            );
+        }
+
+        if (courseUnitRating is null)
+        {
+            return Result.Failure<Course>(
+                Error.Validation("CourseUnitRating.Required", "Course unit rating is required.")
+            );
+        }
+
         var course = new Course(
             CourseId.NewCourseId(),
             departmentId,
@@ -55,58 +87,109 @@ public class Course : AggregateRoot<CourseId>
             courseUnitRating
         );
 
-        return course;
+        // Optional: Raise a domain event
+        // course.Raise(new CourseCreatedEvent(course.Id, courseCode, courseName));
+        return Result.Success(course);
     }
 
-    // This is a method for updating a course
-    public void UpdateCourse(
+    // Update method with Result and validation
+    public Result UpdateCourse(
         string courseCode,
         string courseName,
         DepartmentId departmentId,
         CourseUnitRating courseUnitRating
     )
     {
+        if (string.IsNullOrWhiteSpace(courseCode))
+        {
+            return Result.Failure(
+                Error.Validation("CourseCode.Required", "Course code is required.")
+            );
+        }
+
+        if (string.IsNullOrWhiteSpace(courseName))
+        {
+            return Result.Failure(
+                Error.Validation("CourseName.Required", "Course name is required.")
+            );
+        }
+
+        if (departmentId is null)
+        {
+            return Result.Failure(
+                Error.Validation("DepartmentId.Required", "Department ID is required.")
+            );
+        }
+
+        if (courseUnitRating is null)
+        {
+            return Result.Failure(
+                Error.Validation("CourseUnitRating.Required", "Course unit rating is required.")
+            );
+        }
+
         CourseCode = courseCode;
         DepartmentId = departmentId;
         CourseName = courseName;
         CourseUnitRating = courseUnitRating;
+
+        // Optional: Raise a domain event
+        // Raise(new CourseUpdatedEvent(Id, courseCode, courseName));
+        return Result.Success();
     }
 
     public Result AddCourseOutline(string title, string description, string duration)
     {
-        // Add validation here (e.g., check for duplicate titles, valid duration format)
+        if (string.IsNullOrWhiteSpace(title))
+        {
+            return Result.Failure(
+                Error.Validation("Title.Required", "Course outline title is required.")
+            );
+        }
+
         if (_courseOutlines.Any(co => co.CourseOutlineTitle == title))
         {
-            Result.Failure(
+            return Result.Failure(
                 Error.Conflict(
-                    "CourseOutline.AlreadyExists",
-                    "A course with this course outline already exists"
+                    "CourseOutline.Duplicate",
+                    $"A course outline with title '{title}' already exists."
                 )
             );
         }
 
-        Result<CourseOutline> courseOutline = CourseOutline.Create(
+        Result<CourseOutline> courseOutlineResult = CourseOutline.Create(
             Id,
             title,
             description,
             duration
-        ); //  pass courseId directly which is gotten from then entity class
-        _courseOutlines.Add(courseOutline.Value);
-        return Result.Success();
+        );
+        if (courseOutlineResult.IsFailure)
+        {
+            return courseOutlineResult; // Propagate creation failure
+        }
 
-        //Raise(new CourseOutlineAddedEvent(Id, courseOutline.Id, title)); // Raise Domain Event
+        _courseOutlines.Add(courseOutlineResult.Value);
+        // Raise(new CourseOutlineAddedEvent(Id, courseOutlineResult.Value.Id, title));
+        return Result.Success();
     }
 
     public Result RemoveCourseOutline(CourseOutlineId courseOutlineId)
     {
-        CourseOutline? courseOutline = _courseOutlines.SingleOrDefault(co =>
+        Result<CourseOutline> courseOutline = _courseOutlines.SingleOrDefault(co =>
             co.Id == courseOutlineId
-        ); // Or RemoveAll if needed
-        if (courseOutline != null)
+        );
+        if (courseOutline is null)
         {
-            _courseOutlines.Remove(courseOutline);
-            //Raise(new CourseOutlineRemovedEvent(Id, courseOutlineId)); // Raise Domain Event
+            return Result.Failure(
+                Error.NotFound(
+                    "CourseOutline.NotFound",
+                    $"Course outline with ID {courseOutlineId} not found."
+                )
+            );
         }
+
+        _courseOutlines.Remove(courseOutline.Value);
+        // Raise(new CourseOutlineRemovedEvent(Id, courseOutlineId));
         return Result.Success();
     }
 
@@ -118,78 +201,167 @@ public class Course : AggregateRoot<CourseId>
         int maxScore
     )
     {
-        // Add validation (e.g., maxScore > 0, dueDate in the future)
+        if (string.IsNullOrWhiteSpace(title))
+        {
+            return Result.Failure(
+                Error.Validation("Title.Required", "Assignment title is required.")
+            );
+        }
 
-        Result<Assignment> assignment = Assignment.Create(
+        if (dueDate < DateTime.UtcNow)
+        {
+            return Result.Failure(
+                Error.Validation("DueDate.Invalid", "Due date must be in the future.")
+            );
+        }
+
+        if (maxScore <= 0)
+        {
+            return Result.Failure(
+                Error.Validation("MaxScore.Invalid", "Max score must be greater than zero.")
+            );
+        }
+
+        if (teacherId is null)
+        {
+            return Result.Failure(
+                Error.Validation("TeacherId.Required", "Teacher ID is required.")
+            );
+        }
+
+        Result<Assignment> assignmentResult = Assignment.Create(
             title,
             description,
             dueDate,
             Id,
             teacherId,
             maxScore
-        ); // No need to pass courseId
-        _assignments.Add(assignment.Value);
+        );
+        if (assignmentResult.IsFailure)
+        {
+            return assignmentResult;
+        }
+
+        _assignments.Add(assignmentResult.Value);
+        // Raise(new AssignmentAddedEvent(Id, assignmentResult.Value.Id, title));
         return Result.Success();
     }
 
-    // ... other methods (similar improvements)
-
-    public void RegisterStudent(StudentId studentId, DepartmentId departmentId)
+    public Result RegisterStudent(StudentId studentId, DepartmentId departmentId)
     {
-        // ... any other validation logic (e.g., checking prerequisites, course capacity)
+        if (studentId is null)
+        {
+            return Result.Failure(
+                Error.Validation("StudentId.Required", "Student ID is required.")
+            );
+        }
 
-        var studentRegistration = StudentRegistration.Create(studentId, Id, departmentId); // Use this.Id
-        _studentRegistrations.Add(studentRegistration);
+        if (departmentId is null)
+        {
+            return Result.Failure(
+                Error.Validation("DepartmentId.Required", "Department ID is required.")
+            );
+        }
 
-        //Raise(new StudentRegisteredEvent(Id, studentId)); // Raise Domain Event
+        if (_studentRegistrations.Any(sr => sr.StudentId == studentId))
+        {
+            return Result.Failure(
+                Error.Conflict(
+                    "Student.AlreadyRegistered",
+                    $"Student {studentId} is already registered."
+                )
+            );
+        }
+
+        var registration = StudentRegistration.Create(studentId, Id, departmentId);
+        _studentRegistrations.Add(registration);
+        // Raise(new StudentRegisteredEvent(Id, studentId));
+        return Result.Success();
     }
 
     public Result AssignTeacher(TeacherId teacherId)
     {
-        Result<TeacherAssignment> teacherAssignment = TeacherAssignment.Create(teacherId, Id); // Use this.Id
-        _teacherAssignments.Add(teacherAssignment.Value);
+        if (teacherId is null)
+        {
+            return Result.Failure(
+                Error.Validation("TeacherId.Required", "Teacher ID is required.")
+            );
+        }
+
+        if (_teacherAssignments.Any(ta => ta.TeacherId == teacherId))
+        {
+            return Result.Failure(
+                Error.Conflict(
+                    "Teacher.AlreadyAssigned",
+                    $"Teacher {teacherId} is already assigned."
+                )
+            );
+        }
+
+        Result<TeacherAssignment> teacherAssignmentResult = TeacherAssignment.Create(teacherId, Id);
+        if (teacherAssignmentResult.IsFailure)
+        {
+            return teacherAssignmentResult;
+        }
+
+        _teacherAssignments.Add(teacherAssignmentResult.Value);
+        // Raise(new TeacherAssignedEvent(Id, teacherId));
         return Result.Success();
-
-        // Raise(new TeacherAssignedEvent(Id, teacherId)); // Raise Domain Event
     }
-
-    // ... other methods
-
-    // // Example Domain Events
-    // public record CourseOutlineAddedEvent(
-    //     CourseId CourseId,
-    //     CourseOutlineId CourseOutlineId,
-    //     string Title
-    // ) : IDomainEvent;
 
     public Result RemoveStudent(StudentId studentId)
     {
-        StudentRegistration? studentRegistration = _studentRegistrations.SingleOrDefault(sr =>
-            sr.StudentId == studentId
-        );
-        if (studentRegistration is null)
+        if (studentId is null)
         {
             return Result.Failure(
-                Error.NotFound("Student.Notfound", "This student is not found in the database")
+                Error.Validation("StudentId.Required", "Student ID is required.")
             );
         }
-        _studentRegistrations.Remove(studentRegistration);
+
+        Result<StudentRegistration> registration = _studentRegistrations.SingleOrDefault(sr =>
+            sr.StudentId == studentId
+        );
+        if (registration == null)
+        {
+            return Result.Failure(
+                Error.NotFound(
+                    "Student.NotFound",
+                    $"Student {studentId} not registered in this course."
+                )
+            );
+        }
+
+        _studentRegistrations.Remove(registration.Value);
+        // Raise(new StudentRemovedEvent(Id, studentId));
         return Result.Success();
     }
 
-    // This is a method for removing a teacher from a course
-    public void RemoveTeacher(TeacherId teacherId)
+    public Result RemoveTeacher(TeacherId teacherId)
     {
-        TeacherAssignment? teacherAssignment = _teacherAssignments.SingleOrDefault(ta =>
+        if (teacherId is null)
+        {
+            return Result.Failure(
+                Error.Validation("TeacherId.Required", "Teacher ID is required.")
+            );
+        }
+
+        Result<TeacherAssignment> assignment = _teacherAssignments.SingleOrDefault(ta =>
             ta.TeacherId == teacherId
         );
-        if (teacherAssignment is not null)
+        if (assignment == null)
         {
-            _teacherAssignments.Remove(teacherAssignment);
+            return Result.Failure(
+                Error.NotFound(
+                    "Teacher.NotFound",
+                    $"Teacher {teacherId} not assigned to this course."
+                )
+            );
         }
-    }
 
-    // For assignment Scores
+        _teacherAssignments.Remove(assignment.Value);
+        // Raise(new TeacherRemovedEvent(Id, teacherId));
+        return Result.Success();
+    }
 
     public Result AddAssignmentScoreToAssignment(
         StudentId studentId,
@@ -197,68 +369,124 @@ public class Course : AggregateRoot<CourseId>
         int score
     )
     {
-        Assignment? assignment = _assignments.FirstOrDefault(x => x.Id == assignmentId);
-        if (assignment is null)
+        if (studentId is null)
         {
             return Result.Failure(
-                Error.NotFound("assignment.Missing", "This assignment could not be found")
+                Error.Validation("StudentId.Required", "Student ID is required.")
             );
         }
 
-        Result<AssignmentScore> assignmentScore = AssignmentScore.Create(
-            assignment,
-            studentId,
-            score
-        );
-        assignment.AddAssignmentScore(assignmentScore.Value); // call the assignment instance to add the assignment not the assignment class
-        return Result.Success();
+        if (assignmentId is null)
+        {
+            return Result.Failure(
+                Error.Validation("AssignmentId.Required", "Assignment ID is required.")
+            );
+        }
 
-        //Consider raising a domain event here.
+        if (score < 0)
+        {
+            return Result.Failure(Error.Validation("Score.Invalid", "Score cannot be negative."));
+        }
+
+        Assignment? assignment = _assignments.FirstOrDefault(a => a.Id == assignmentId);
+        if (assignment == null)
+        {
+            return Result.Failure(
+                Error.NotFound("Assignment.NotFound", $"Assignment {assignmentId} not found.")
+            );
+        }
+
+        Result<AssignmentScore> scoreResult = AssignmentScore.Create(assignment, studentId, score);
+        if (scoreResult.IsFailure)
+        {
+            return scoreResult;
+        }
+
+        assignment.AddAssignmentScore(scoreResult.Value);
+        // Raise(new AssignmentScoreAddedEvent(Id, assignmentId, studentId, score));
+        return Result.Success();
     }
 
-    public void UpdateAssignmentScore(StudentId studentId, AssignmentId assignmentId, int score)
+    public Result UpdateAssignmentScore(StudentId studentId, AssignmentId assignmentId, int score)
     {
-        Assignment? assignment =
-            _assignments.FirstOrDefault(x => x.Id == assignmentId)
-            ?? throw new InvalidOperationException(
-                $"Assignment {assignmentId} not found for this course."
+        if (studentId is null)
+        {
+            return Result.Failure(
+                Error.Validation("StudentId.Required", "Student ID is required.")
             );
+        }
 
-        AssignmentScore? assignmentScore =
-            assignment.AssignmentScores.FirstOrDefault(x => x.StudentId == studentId)
-            ?? throw new InvalidOperationException(
-                $"Score for student {studentId} not found for this assignment."
+        if (assignmentId is null)
+        {
+            return Result.Failure(
+                Error.Validation("AssignmentId.Required", "Assignment ID is required.")
             );
+        }
+
+        if (score < 0)
+        {
+            return Result.Failure(Error.Validation("Score.Invalid", "Score cannot be negative."));
+        }
+
+        Assignment? assignment = _assignments.FirstOrDefault(a => a.Id == assignmentId);
+        if (assignment == null)
+        {
+            return Result.Failure(
+                Error.NotFound("Assignment.NotFound", $"Assignment {assignmentId} not found.")
+            );
+        }
+
+        AssignmentScore? assignmentScore = assignment.AssignmentScores.FirstOrDefault(s =>
+            s.StudentId == studentId
+        );
+        if (assignmentScore == null)
+        {
+            return Result.Failure(
+                Error.NotFound("Score.NotFound", $"Score for student {studentId} not found.")
+            );
+        }
 
         assignmentScore.UpdateScore(score);
-        // raise a domain event here.
+        // Raise(new AssignmentScoreUpdatedEvent(Id, assignmentId, studentId, score));
+        return Result.Success();
     }
 
-    public void RemoveAssignmentScore(StudentId studentId, AssignmentId assignmentId)
+    public Result RemoveAssignmentScore(StudentId studentId, AssignmentId assignmentId)
     {
-        Assignment? assignment =
-            _assignments.FirstOrDefault(x => x.Id == assignmentId)
-            ?? throw new InvalidOperationException(
-                $"Assignment {assignmentId} not found for this course."
+        if (studentId is null)
+        {
+            return Result.Failure(
+                Error.Validation("StudentId.Required", "Student ID is required.")
             );
+        }
 
-        AssignmentScore? assignmentScore =
-            assignment.AssignmentScores.FirstOrDefault(x => x.StudentId == studentId)
-            ?? throw new InvalidOperationException(
-                $"Score for student {studentId} not found for this assignment."
+        if (assignmentId is null)
+        {
+            return Result.Failure(
+                Error.Validation("AssignmentId.Required", "Assignment ID is required.")
             );
+        }
+
+        Assignment? assignment = _assignments.FirstOrDefault(a => a.Id == assignmentId);
+        if (assignment == null)
+        {
+            return Result.Failure(
+                Error.NotFound("Assignment.NotFound", $"Assignment {assignmentId} not found.")
+            );
+        }
+
+        AssignmentScore? assignmentScore = assignment.AssignmentScores.FirstOrDefault(s =>
+            s.StudentId == studentId
+        );
+        if (assignmentScore == null)
+        {
+            return Result.Failure(
+                Error.NotFound("Score.NotFound", $"Score for student {studentId} not found.")
+            );
+        }
 
         assignment.RemoveAssignmentScore(assignmentScore);
-        // raise a domain event here.
+        // Raise(new AssignmentScoreRemovedEvent(Id, assignmentId, studentId));
+        return Result.Success();
     }
-
-    // public record CourseOutlineRemovedEvent(CourseId CourseId, CourseOutlineId CourseOutlineId)
-    //     : IDomainEvent;
-
-    // public record AssignmentAddedEvent(CourseId CourseId, AssignmentId AssignmentId, string Title)
-    //     : IDomainEvent;
-
-    // public record StudentRegisteredEvent(CourseId CourseId, StudentId StudentId) : IDomainEvent;
-
-    // public record TeacherAssignedEvent(CourseId CourseId, TeacherId TeacherId) : IDomainEvent;
 }
