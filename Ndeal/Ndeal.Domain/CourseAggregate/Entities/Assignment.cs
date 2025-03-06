@@ -6,7 +6,7 @@ using SharedKernel;
 
 namespace Ndeal.Domain.CourseAggregate.Entities;
 
-public class Assignment : Entity<AssignmentId>
+public sealed class Assignment : Entity<AssignmentId>
 {
     private readonly List<AssignmentScore> _assignmentScores = new();
 
@@ -22,7 +22,7 @@ public class Assignment : Entity<AssignmentId>
     public IReadOnlyList<AssignmentScore> AssignmentScores => _assignmentScores.AsReadOnly();
 
     // Private constructor (for Entity Framework or other ORMs)
-    private Assignment(
+    internal Assignment(
         AssignmentId id,
         string title,
         string description,
@@ -44,7 +44,7 @@ public class Assignment : Entity<AssignmentId>
     }
 
     // Factory method for creating new Assignments (recommended approach)
-    internal static Assignment Create(
+    internal static Result<Assignment> Create(
         string title,
         string description,
         DateTime dueDate,
@@ -54,7 +54,7 @@ public class Assignment : Entity<AssignmentId>
         DateTime? createdAt = null // Optional createdAt
     )
     {
-        return new Assignment(
+        var assignment = new Assignment(
             AssignmentId.NewAssignmentId(),
             title,
             description,
@@ -64,6 +64,7 @@ public class Assignment : Entity<AssignmentId>
             teacherId,
             maxScore
         );
+        return assignment;
     }
 
     internal AssignmentScore AddAssignmentScore(AssignmentScore assignmentScore)

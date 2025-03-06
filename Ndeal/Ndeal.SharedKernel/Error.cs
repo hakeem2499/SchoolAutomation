@@ -8,6 +8,8 @@ public record Error
         "Null Value was provided",
         ErrorType.Failure
     );
+    private string v1;
+    private string v2;
 
     public Error(string code, string description, ErrorType type)
     {
@@ -16,11 +18,17 @@ public record Error
         Type = type;
     }
 
+    public Error(string v1, string v2)
+    {
+        this.v1 = v1;
+        this.v2 = v2;
+    }
+
     public string Code { get; }
     public string Description { get; }
     public ErrorType Type { get; }
 
-    public static Error Failue(string code, string description) =>
+    public static Error Failure(string code, string description) =>
         new Error(code, description, ErrorType.Failure);
 
     public static Error Problem(string code, string description) =>

@@ -27,19 +27,25 @@ public class AssignmentScore : Entity<AssignmentScoreId>
     public AssessmentScore Score { get; private set; }
     public int MaxScore { get; private set; }
 
-    internal static AssignmentScore Create(Assignment assignment, StudentId studentId, int score)
+    internal static Result<AssignmentScore> Create(
+        Assignment assignment,
+        StudentId studentId,
+        int score
+    )
     {
         AssessmentScore assessmentScore = new(score, assignment.MaxScore);
-        return new AssignmentScore(
+        var assignmentScore = new AssignmentScore(
             AssignmentScoreId.NewAssignmentScoreId(),
             assignment,
             studentId,
             assessmentScore
         );
+        return assignmentScore;
     }
 
-    internal void UpdateScore(int score)
+    internal Result UpdateScore(int score)
     {
         Score = new AssessmentScore(score, MaxScore);
+        return Result.Success();
     }
 }
