@@ -1,5 +1,7 @@
+// Domain/CourseSessionAggregate/Entities/Attendance.cs
 using Ndeal.Domain.CourseSessionAggregate.ValueObjects;
 using Ndeal.Domain.StudentAggregate.ValueObjects;
+using Ndeal.SharedKernel;
 using SharedKernel;
 
 namespace Ndeal.Domain.CourseSessionAggregate.Entities;
@@ -8,39 +10,77 @@ public class Attendance : Entity<AttendanceId>
 {
     public StudentId StudentId { get; private set; }
     public CourseSessionId CourseSessionId { get; private set; }
-    public AttendanceRecord AttendanceRecord { get; private set; }
+    public DateTime Date { get; private set; }
+    public AttendanceStatus Status { get; private set; }
 
     private Attendance(
         AttendanceId id,
         StudentId studentId,
         CourseSessionId courseSessionId,
-        AttendanceRecord attendanceRecord
+        DateTime date,
+        AttendanceStatus status
     )
         : base(id)
     {
         StudentId = studentId;
         CourseSessionId = courseSessionId;
-        AttendanceRecord = attendanceRecord;
+        Date = date.Date;
+        Status = status;
     }
 
-    public static Attendance Create(
+    public enum AttendanceStatus
+    {
+        Present,
+        Absent,
+        Late,
+        Excused,
+    }
+
+    public static Result<Attendance> Create(
         StudentId studentId,
         CourseSessionId courseSessionId,
         DateTime date,
-        AttendanceRecord.AttendanceStatus status
+        AttendanceStatus status
     )
     {
-        var attendanceRecord = new AttendanceRecord(date, status);
-        return new Attendance(
+        if (studentId is null)
+        {
+            return Result.Failure<Attendance>(
+                Error.Validation("StudentId.Required", "Student ID is required.")
+            );
+        }
+
+        if (courseSessionId is null)
+        {
+            return Result.Failure<Attendance>(
+                Error.Validation("CourseSessionId.Required", "Course session ID is required.")
+            );
+        }
+
+        if (!Enum.IsDefined(typeof(AttendanceStatus), status))
+        {
+            return Result.Failure<Attendance>(
+                Error.Validation("Status.Invalid", "Invalid attendance status.")
+            );
+        }
+
+        var attendance = new Attendance(
             AttendanceId.NewAttendanceId(),
             studentId,
             courseSessionId,
-            attendanceRecord
+            date,
+            status
         );
+        return Result.Success(attendance);
     }
 
-    public void UpdateStatus(AttendanceRecord.AttendanceStatus newStatus)
+    public void UpdateStatus(AttendanceStatus status)
     {
-        AttendanceRecord = new AttendanceRecord(AttendanceRecord.Date, newStatus); // Create a new AttendanceRecord
+        if (!Enum.IsDefined(typeof(AttendanceStatus), status))
+        {
+            throw new ArgumentException("Invalid attendance status.", nameof(status));
+        }
+
+        Status = status;
     }
 }
