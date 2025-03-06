@@ -423,7 +423,7 @@ public class AssessmentResult : Entity<AssessmentResultId>
             );
         }
 
-        studentGrade.UpdateGrade(totalScore); // Assuming UpdateGrade exists in StudentGrade
+        studentGrade.UpdateTotalScore(totalScore); // Assuming UpdateGrade exists in StudentGrade
         // Raise(new StudentGradeUpdatedEvent(Id, studentGrade.Id, studentId, totalScore));
         return Result.Success();
     }

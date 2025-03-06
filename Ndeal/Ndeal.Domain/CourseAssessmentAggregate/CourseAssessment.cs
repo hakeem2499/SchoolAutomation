@@ -42,14 +42,14 @@ public class CourseAssessment : AggregateRoot<CourseAssessmentId>
         string name
     )
     {
-        if (courseId == null)
+        if (courseId is null)
         {
             return Result.Failure<CourseAssessment>(
                 Error.Validation("CourseId.Required", "Course ID is required.")
             );
         }
 
-        if (semesterId == null)
+        if (semesterId is null)
         {
             return Result.Failure<CourseAssessment>(
                 Error.Validation("SemesterId.Required", "Semester ID is required.")
@@ -124,7 +124,7 @@ public class CourseAssessment : AggregateRoot<CourseAssessmentId>
 
     public Result UpdateTest(TestId testId, int resultWeight, int maxScore, string name)
     {
-        if (testId == null)
+        if (testId is null)
         {
             return Result.Failure(Error.Validation("TestId.Required", "Test ID is required."));
         }
@@ -148,7 +148,7 @@ public class CourseAssessment : AggregateRoot<CourseAssessmentId>
             return Result.Failure(Error.Validation("Name.Required", "Test name is required."));
         }
 
-        var test = _tests.FirstOrDefault(t => t.Id == testId);
+        Test? test = _tests.FirstOrDefault(t => t.Id == testId);
         if (test == null)
         {
             return Result.Failure(Error.NotFound("Test.NotFound", $"Test {testId} not found."));
@@ -161,13 +161,13 @@ public class CourseAssessment : AggregateRoot<CourseAssessmentId>
 
     public Result RemoveTest(TestId testId)
     {
-        if (testId == null)
+        if (testId is null)
         {
             return Result.Failure(Error.Validation("TestId.Required", "Test ID is required."));
         }
 
-        var test = _tests.FirstOrDefault(t => t.Id == testId);
-        if (test == null)
+        Test? test = _tests.FirstOrDefault(t => t.Id == testId);
+        if (test is null)
         {
             return Result.Failure(Error.NotFound("Test.NotFound", $"Test {testId} not found."));
         }
@@ -208,7 +208,7 @@ public class CourseAssessment : AggregateRoot<CourseAssessmentId>
             return Result.Failure(Error.Validation("Name.Required", "Exam name is required."));
         }
 
-        var examResult = Exam.CreateExam(Id, resultWeight, maxScore, name);
+        Result<Exam> examResult = Exam.CreateExam(Id, resultWeight, maxScore, name);
         if (examResult.IsFailure)
         {
             return examResult;
@@ -221,7 +221,7 @@ public class CourseAssessment : AggregateRoot<CourseAssessmentId>
 
     public Result UpdateExam(int resultWeight, int maxScore, string name)
     {
-        if (Exam == null)
+        if (Exam is null)
         {
             return Result.Failure(
                 Error.NotFound("Exam.NotFound", "No exam exists for this assessment.")
@@ -254,7 +254,7 @@ public class CourseAssessment : AggregateRoot<CourseAssessmentId>
 
     public Result RemoveExam()
     {
-        if (Exam == null)
+        if (Exam is null)
         {
             return Result.Failure(Error.NotFound("Exam.NotFound", "No exam exists to remove."));
         }
@@ -276,7 +276,7 @@ public class CourseAssessment : AggregateRoot<CourseAssessmentId>
             );
         }
 
-        if (departmentId == null)
+        if (departmentId is null)
         {
             return Result.Failure(
                 Error.Validation("DepartmentId.Required", "Department ID is required.")
@@ -297,7 +297,7 @@ public class CourseAssessment : AggregateRoot<CourseAssessmentId>
             );
         }
 
-        var result = AssessmentResult.CreateAssessmentResult(Id, departmentId, maxScore, name);
+        Result<AssessmentResult> result = AssessmentResult.Create(Id, departmentId, maxScore, name);
         if (result.IsFailure)
         {
             return result;
@@ -310,19 +310,19 @@ public class CourseAssessment : AggregateRoot<CourseAssessmentId>
 
     public Result AddTestResult(StudentId studentId, TestId testId, decimal score)
     {
-        if (studentId == null)
+        if (studentId is null)
         {
             return Result.Failure(
                 Error.Validation("StudentId.Required", "Student ID is required.")
             );
         }
 
-        if (testId == null)
+        if (testId is null)
         {
             return Result.Failure(Error.Validation("TestId.Required", "Test ID is required."));
         }
 
-        if (AssessmentResult == null)
+        if (AssessmentResult is null)
         {
             return Result.Failure(
                 Error.NotFound("AssessmentResult.NotFound", "No assessment result exists.")
@@ -334,8 +334,8 @@ public class CourseAssessment : AggregateRoot<CourseAssessmentId>
             return Result.Failure(Error.Validation("Score.Invalid", "Score cannot be negative."));
         }
 
-        var test = _tests.FirstOrDefault(t => t.Id == testId);
-        if (test == null)
+        Test? test = _tests.FirstOrDefault(t => t.Id == testId);
+        if (test is null)
         {
             return Result.Failure(Error.NotFound("Test.NotFound", $"Test {testId} not found."));
         }
@@ -358,7 +358,7 @@ public class CourseAssessment : AggregateRoot<CourseAssessmentId>
 
     public Result AddExamResult(StudentId studentId, decimal score)
     {
-        if (studentId == null)
+        if (studentId is null)
         {
             return Result.Failure(
                 Error.Validation("StudentId.Required", "Student ID is required.")
@@ -400,7 +400,7 @@ public class CourseAssessment : AggregateRoot<CourseAssessmentId>
 
     public Result AddStudentGrade(StudentId studentId)
     {
-        if (studentId == null)
+        if (studentId is null)
         {
             return Result.Failure(
                 Error.Validation("StudentId.Required", "Student ID is required.")
