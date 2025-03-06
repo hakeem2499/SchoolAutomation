@@ -5,141 +5,417 @@ using Ndeal.Domain.CourseAssessmentAggregate.ValueObjects;
 using Ndeal.Domain.DepartmentAggregate.ValueObjects;
 using Ndeal.Domain.StudentAggregate.ValueObjects;
 using Ndeal.SharedKernel;
+using SharedKernel;
 
 namespace Ndeal.Domain.CourseAssessmentAggregate;
 
-public class CourseAssessment(
-    CourseAssessmentId id,
-    CourseId courseId,
-    SemesterId semesterId,
-    string name
-) : AggregateRoot<CourseAssessmentId>(id)
+public class CourseAssessment : AggregateRoot<CourseAssessmentId>
 {
     private readonly List<Test> _tests = new();
 
-    public CourseId CourseId { get; private set; } = courseId;
-    public SemesterId SemesterId { get; private set; } = semesterId;
-    public string Name { get; private set; } = name;
+    // Private constructor for controlled creation
+    private CourseAssessment(
+        CourseAssessmentId id,
+        CourseId courseId,
+        SemesterId semesterId,
+        string name
+    )
+        : base(id)
+    {
+        CourseId = courseId;
+        SemesterId = semesterId;
+        Name = name;
+    }
 
+    // Properties with private setters for encapsulation
+    public CourseId CourseId { get; private set; }
+    public SemesterId SemesterId { get; private set; }
+    public string Name { get; private set; }
     public IReadOnlyList<Test> Tests => _tests.AsReadOnly();
     public Exam? Exam { get; private set; }
-
     public AssessmentResult? AssessmentResult { get; private set; }
 
-    public static CourseAssessment CreateCourseAssessment(
+    // Factory method with validation
+    public static Result<CourseAssessment> Create(
         CourseId courseId,
         SemesterId semesterId,
         string name
     )
     {
-        return new CourseAssessment(
+        if (courseId == null)
+        {
+            return Result.Failure<CourseAssessment>(
+                Error.Validation("CourseId.Required", "Course ID is required.")
+            );
+        }
+
+        if (semesterId == null)
+        {
+            return Result.Failure<CourseAssessment>(
+                Error.Validation("SemesterId.Required", "Semester ID is required.")
+            );
+        }
+
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            return Result.Failure<CourseAssessment>(
+                Error.Validation("Name.Required", "Assessment name is required.")
+            );
+        }
+
+        var assessment = new CourseAssessment(
             CourseAssessmentId.NewCourseAssessmentId(),
             courseId,
             semesterId,
             name
         );
+        // Optional: Raise a domain event
+        // assessment.Raise(new CourseAssessmentCreatedEvent(assessment.Id, courseId, semesterId, name));
+        return Result.Success(assessment);
     }
 
-    public void AddTest(
-        CourseAssessmentId courseAssessmentId,
-        int resultWeight,
-        int maxScore,
-        string name
-    )
+    // Update method for basic properties
+    public Result UpdateDetails(string name)
     {
-        var test = Test.CreateTest(courseAssessmentId, resultWeight, maxScore, name);
-        _tests.Add(test);
-    }
-
-    public void AddExam(
-        CourseAssessmentId courseAssessmentId,
-        int resultWeight,
-        int maxScore,
-        string name
-    )
-    {
-        if (Exam is not null)
+        if (string.IsNullOrWhiteSpace(name))
         {
-            throw new InvalidOperationException("Exam already exists.");
+            return Result.Failure(
+                Error.Validation("Name.Required", "Assessment name is required.")
+            );
         }
 
-        var exam = Exam.CreateExam(courseAssessmentId, resultWeight, maxScore, name);
-        Exam = exam;
+        Name = name;
+        // Optional: Raise a domain event
+        // Raise(new CourseAssessmentUpdatedEvent(Id, CourseId, SemesterId, name));
+        return Result.Success();
     }
 
-    public void UpdateExam(int resultWeight, int maxScore, string name)
+    public Result AddTest(int resultWeight, int maxScore, string name)
     {
-        if (Exam is null)
+        if (resultWeight <= 0)
         {
-            throw new InvalidOperationException("Exam does not exist.");
+            return Result.Failure(
+                Error.Validation("ResultWeight.Invalid", "Result weight must be greater than zero.")
+            );
+        }
+
+        if (maxScore <= 0)
+        {
+            return Result.Failure(
+                Error.Validation("MaxScore.Invalid", "Max score must be greater than zero.")
+            );
+        }
+
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            return Result.Failure(Error.Validation("Name.Required", "Test name is required."));
+        }
+
+        Result<Test> testResult = Test.CreateTest(Id, resultWeight, maxScore, name);
+        if (testResult.IsFailure)
+        {
+            return testResult;
+        }
+
+        _tests.Add(testResult.Value);
+        // Raise(new TestAddedEvent(Id, testResult.Value.Id, name));
+        return Result.Success();
+    }
+
+    public Result UpdateTest(TestId testId, int resultWeight, int maxScore, string name)
+    {
+        if (testId == null)
+        {
+            return Result.Failure(Error.Validation("TestId.Required", "Test ID is required."));
+        }
+
+        if (resultWeight <= 0)
+        {
+            return Result.Failure(
+                Error.Validation("ResultWeight.Invalid", "Result weight must be greater than zero.")
+            );
+        }
+
+        if (maxScore <= 0)
+        {
+            return Result.Failure(
+                Error.Validation("MaxScore.Invalid", "Max score must be greater than zero.")
+            );
+        }
+
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            return Result.Failure(Error.Validation("Name.Required", "Test name is required."));
+        }
+
+        var test = _tests.FirstOrDefault(t => t.Id == testId);
+        if (test == null)
+        {
+            return Result.Failure(Error.NotFound("Test.NotFound", $"Test {testId} not found."));
+        }
+
+        test.UpdateTest(resultWeight, maxScore, name);
+        // Raise(new TestUpdatedEvent(Id, testId, name));
+        return Result.Success();
+    }
+
+    public Result RemoveTest(TestId testId)
+    {
+        if (testId == null)
+        {
+            return Result.Failure(Error.Validation("TestId.Required", "Test ID is required."));
+        }
+
+        var test = _tests.FirstOrDefault(t => t.Id == testId);
+        if (test == null)
+        {
+            return Result.Failure(Error.NotFound("Test.NotFound", $"Test {testId} not found."));
+        }
+
+        _tests.Remove(test);
+        // Raise(new TestRemovedEvent(Id, testId));
+        return Result.Success();
+    }
+
+    public Result AddExam(int resultWeight, int maxScore, string name)
+    {
+        if (Exam != null)
+        {
+            return Result.Failure(
+                Error.Conflict(
+                    "Exam.AlreadyExists",
+                    "An exam is already assigned to this assessment."
+                )
+            );
+        }
+
+        if (resultWeight <= 0)
+        {
+            return Result.Failure(
+                Error.Validation("ResultWeight.Invalid", "Result weight must be greater than zero.")
+            );
+        }
+
+        if (maxScore <= 0)
+        {
+            return Result.Failure(
+                Error.Validation("MaxScore.Invalid", "Max score must be greater than zero.")
+            );
+        }
+
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            return Result.Failure(Error.Validation("Name.Required", "Exam name is required."));
+        }
+
+        var examResult = Exam.CreateExam(Id, resultWeight, maxScore, name);
+        if (examResult.IsFailure)
+        {
+            return examResult;
+        }
+
+        Exam = examResult.Value;
+        // Raise(new ExamAddedEvent(Id, examResult.Value.Id, name));
+        return Result.Success();
+    }
+
+    public Result UpdateExam(int resultWeight, int maxScore, string name)
+    {
+        if (Exam == null)
+        {
+            return Result.Failure(
+                Error.NotFound("Exam.NotFound", "No exam exists for this assessment.")
+            );
+        }
+
+        if (resultWeight <= 0)
+        {
+            return Result.Failure(
+                Error.Validation("ResultWeight.Invalid", "Result weight must be greater than zero.")
+            );
+        }
+
+        if (maxScore <= 0)
+        {
+            return Result.Failure(
+                Error.Validation("MaxScore.Invalid", "Max score must be greater than zero.")
+            );
+        }
+
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            return Result.Failure(Error.Validation("Name.Required", "Exam name is required."));
         }
 
         Exam.UpdateExam(resultWeight, maxScore, name);
+        // Raise(new ExamUpdatedEvent(Id, Exam.Id, name));
+        return Result.Success();
     }
 
-    public void UpdateTest(TestId testId, int resultWeight, int maxScore, string name)
+    public Result RemoveExam()
     {
-        Test? test =
-            _tests.FirstOrDefault(t => t.Id == testId)
-            ?? throw new InvalidOperationException("Test does not exist.");
-
-        test.UpdateTest(resultWeight, maxScore, name);
-    }
-
-    public void AddAssessmentResult(DepartmentId departmentId, int maxScore, string name)
-    {
-        if (AssessmentResult is not null)
+        if (Exam == null)
         {
-            throw new InvalidOperationException("Assessment result already exists.");
+            return Result.Failure(Error.NotFound("Exam.NotFound", "No exam exists to remove."));
         }
 
-        var assessmentResult = AssessmentResult.CreateAssessmentResult(
-            Id,
-            departmentId,
-            maxScore,
-            name
-        );
-        AssessmentResult = assessmentResult;
+        Exam = null;
+        // Raise(new ExamRemovedEvent(Id));
+        return Result.Success();
     }
 
-    public void AddTestResult(StudentId studentId, TestId testId, decimal score)
+    public Result AddAssessmentResult(DepartmentId departmentId, int maxScore, string name)
     {
-        if (AssessmentResult is null)
+        if (AssessmentResult != null)
         {
-            throw new InvalidOperationException("Assessment result does not exist.");
+            return Result.Failure(
+                Error.Conflict(
+                    "AssessmentResult.AlreadyExists",
+                    "An assessment result already exists."
+                )
+            );
         }
-        Test test =
-            _tests.FirstOrDefault(t => t.Id == testId)
-            ?? throw new InvalidOperationException("Test does not exist.");
+
+        if (departmentId == null)
+        {
+            return Result.Failure(
+                Error.Validation("DepartmentId.Required", "Department ID is required.")
+            );
+        }
+
+        if (maxScore <= 0)
+        {
+            return Result.Failure(
+                Error.Validation("MaxScore.Invalid", "Max score must be greater than zero.")
+            );
+        }
+
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            return Result.Failure(
+                Error.Validation("Name.Required", "Assessment result name is required.")
+            );
+        }
+
+        var result = AssessmentResult.CreateAssessmentResult(Id, departmentId, maxScore, name);
+        if (result.IsFailure)
+        {
+            return result;
+        }
+
+        AssessmentResult = result.Value;
+        // Raise(new AssessmentResultAddedEvent(Id, departmentId, name));
+        return Result.Success();
+    }
+
+    public Result AddTestResult(StudentId studentId, TestId testId, decimal score)
+    {
+        if (studentId == null)
+        {
+            return Result.Failure(
+                Error.Validation("StudentId.Required", "Student ID is required.")
+            );
+        }
+
+        if (testId == null)
+        {
+            return Result.Failure(Error.Validation("TestId.Required", "Test ID is required."));
+        }
+
+        if (AssessmentResult == null)
+        {
+            return Result.Failure(
+                Error.NotFound("AssessmentResult.NotFound", "No assessment result exists.")
+            );
+        }
+
+        if (score < 0)
+        {
+            return Result.Failure(Error.Validation("Score.Invalid", "Score cannot be negative."));
+        }
+
+        var test = _tests.FirstOrDefault(t => t.Id == testId);
+        if (test == null)
+        {
+            return Result.Failure(Error.NotFound("Test.NotFound", $"Test {testId} not found."));
+        }
+
+        if (score > test.MaxScore)
+        {
+            return Result.Failure(
+                Error.Validation(
+                    "Score.ExceedsMax",
+                    $"Score {score} exceeds max score {test.MaxScore}."
+                )
+            );
+        }
+
         decimal testMarkObtained = score / test.MaxScore * test.ResultWeight;
-
         AssessmentResult.AddTestResult(studentId, testId, testMarkObtained);
+        // Raise(new TestResultAddedEvent(Id, studentId, testId, testMarkObtained));
+        return Result.Success();
     }
 
-    public void AddExamResult(StudentId studentId, decimal score)
+    public Result AddExamResult(StudentId studentId, decimal score)
     {
-        if (AssessmentResult is null)
+        if (studentId == null)
         {
-            throw new InvalidOperationException("Assessment result does not exist.");
+            return Result.Failure(
+                Error.Validation("StudentId.Required", "Student ID is required.")
+            );
         }
 
-        if (Exam is null)
+        if (AssessmentResult == null)
         {
-            throw new InvalidOperationException("Exam does not exist.");
+            return Result.Failure(
+                Error.NotFound("AssessmentResult.NotFound", "No assessment result exists.")
+            );
+        }
+
+        if (Exam == null)
+        {
+            return Result.Failure(Error.NotFound("Exam.NotFound", "No exam exists."));
+        }
+
+        if (score < 0)
+        {
+            return Result.Failure(Error.Validation("Score.Invalid", "Score cannot be negative."));
+        }
+
+        if (score > Exam.MaxScore)
+        {
+            return Result.Failure(
+                Error.Validation(
+                    "Score.ExceedsMax",
+                    $"Score {score} exceeds max score {Exam.MaxScore}."
+                )
+            );
         }
 
         decimal examMarkObtained = score / Exam.MaxScore * Exam.ResultWeight;
-
         AssessmentResult.AddExamResult(studentId, Exam.Id, examMarkObtained);
+        // Raise(new ExamResultAddedEvent(Id, studentId, Exam.Id, examMarkObtained));
+        return Result.Success();
     }
 
-    public void AddStudentGrade(StudentId studentId)
+    public Result AddStudentGrade(StudentId studentId)
     {
-        if (AssessmentResult is null)
+        if (studentId == null)
         {
-            throw new InvalidOperationException("Assessment result does not exist.");
+            return Result.Failure(
+                Error.Validation("StudentId.Required", "Student ID is required.")
+            );
+        }
+
+        if (AssessmentResult == null)
+        {
+            return Result.Failure(
+                Error.NotFound("AssessmentResult.NotFound", "No assessment result exists.")
+            );
         }
 
         AssessmentResult.AddStudentGrade(studentId);
+        // Raise(new StudentGradeAddedEvent(Id, studentId));
+        return Result.Success();
     }
 }
